@@ -679,7 +679,7 @@ input[type=submit]:hover {
 	-o-flex-wrap: wrap;
 	flex-wrap: wrap; 
 }
-.friends .thumb {
+.thumb {
 	min-width: 30%;
     height: 100px;
     margin: 0 10px 10px 0;
@@ -689,11 +689,11 @@ input[type=submit]:hover {
     text-align: right;
     overflow: hidden;
 }
-.friends .thumb div {
+.thumb div {
 	background-size: cover;
 	height: 100%;
 }
-.friends .thumb img {
+.thumb img {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -702,15 +702,15 @@ input[type=submit]:hover {
 	width: auto;
 	height: 100%;
 }
-.friends .thumb .overlay {
+.thumb .overlay {
 	z-index: 10;
 	opacity: 0.4;
 	transition: all 0.3s ease;
 }
-.friends .thumb:hover .overlay, .friends .thumb:hover .name {
+.thumb:hover .overlay, .thumb:hover .name {
 	opacity: 0.9;
 }
-.friends .thumb .name {
+.thumb .name {
 	position: absolute;
     bottom: 3px;
     right: 5px;
