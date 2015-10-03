@@ -14,6 +14,10 @@
 		}
 		a {
 			text-decoration: none;
+			transition: all 0.25s ease;
+		}
+		a:hover {
+			color: #6C7A89;
 		}
 		nav {
 			background-color: rgba(255,255,255,0.7);
@@ -24,6 +28,7 @@
 		}
 			div.username h1, div.middleLogo h1 {
 				display: inline-block;
+				padding-top: 20px;
 			}
 		div.middleLogo {
 			width: 60%;
@@ -39,31 +44,116 @@
 		/* Content Styling */
 		
 		div.gridContainer {
-			padding: 5% 2% 0;
-		}
-		div.gridContainer > div {
-			height: 500px;
-			background-color: rgba(255,255,255,0.7);
+			padding: 1% 2% 0;
 		}
 		div.main {
 			width: 65%;
 			margin-right: 5%;
+			padding: 20px;
 		}
 		div.sidebar {
 			width: 30%;
+			padding: 20px;
+			box-sizing: border-box;
 		}
+
+		/* Profile Info Styling */
+
+		.profile-info {
+			margin-bottom: 20px;
+			padding: 20px 0;
+		}
+		.profile-image {
+			width: 20%;
+			height: 150px;
+			background-size: cover;
+			background-position: center;
+			display: inline-block;
+		}
+		.profile-header {
+			width: 60%;
+			margin-left: 20px;
+		}
+			.profile-header h1, .profile-header h3 {
+				padding: 0;
+			}
+			.profile-header .say-something {
+				margin-top: 10px;
+			}
 
 		/* Post Styling */
 
 		.post {
-			height: 250px;
-		}
-		.author {
-			width: 10%;
-		}
-		.thumb div {
-			width: 100%;
 			height: auto;
+			margin-bottom: 25px;
+			padding: 15px 20px;
+			background-color: rgba(255,255,255,0.7);
+			-webkit-flex-wrap: wrap;
+			-moz-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			-o-flex-wrap: wrap;
+			flex-wrap: wrap;
+		}
+		.post > a {
+			width: 55%;
+		}
+		.title {
+			width: 100%;
+			height: 40px;
+		}
+			.title h2 {
+				width: 50%;
+				margin: 0;
+			}
+			.title h2:last-child {
+				text-align: center;
+			}
+		.panorama {
+			background-size: cover;
+			background-position: center;
+			width: 100%;
+			height: 200px;
+		}
+		.content {
+			width: 45%;
+			padding: 10px 20px;
+			box-sizing: border-box;
+		}
+
+		/* About Widget */
+
+		.widget.about {
+			background-color: rgba(255,255,255,0.7);
+			padding: 15px 20px;
+		}
+		.about-basics {
+			width: 50%;
+			-webkit-flex-wrap: wrap;
+			-moz-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			-o-flex-wrap: wrap;
+			flex-wrap: wrap;
+		}
+			.about-basics > div {
+				width: 100%;
+			}
+
+		/* Friends Widget Tweaks */
+		.widget {
+			width: 100%;
+			padding: 5px 0;
+			margin: 0;
+			border-radius: 0;
+			box-sizing: border-box;
+		}
+		.friends {
+			justify-content: space-between;
+		}
+		.thumb {
+			margin: 0 0 10px;
+		}
+		.thumb:nth-child(5) {
+			margin: 0 15px 10px;
 		}
 	</style>
 </head>
@@ -85,17 +175,77 @@
 	</nav>
 	<div class="gridContainer flex">
 		<div class="main">
-			<div class="post flex">
-				<div class="author">
-					<a href class="thumb">
-						<div style="background-image:url(img/eric.jpg)"></div>
-					</a>
+			<div class="profile-info flex">
+				<div class="profile-image" style="background-image:url(img/matthew.jpg)"></div>
+				<div class="profile-header">
+					<h1>Matthew Ong</h1>
+					<h3>matthew_ong</h3>
+					<p class="say-something">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 				</div>
-				<div class="content"></div>
-				<div class="map"></div>
+			</div>
+			<div class="post flex">
+				<div class="title flex">
+					<h2>Lorem Ipsum</h2><h2>9/26/15</h2>
+				</div>
+				<a href><div class="panorama" style="background-image: url(img/panorama2.jpg)"></div></a>
+				<div class="content">
+					<span class="with">With <a href>Preska</a> and <a href>Zak</a></span>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi auctor, massa non ultricies suscipit, ex nisl accumsan mi, a consequat odio purus amet.</p>
+				</div>
+			</div>
+			<div class="post flex">
+				<div class="title flex">
+					<h2>Dolor Sit Amet</h2><h2>9/29/15</h2>
+				</div>
+				<a href><div class="panorama" style="background-image: url(img/panorama3.jpg)"></div></a>
+				<div class="content">
+					<span class="with">With <a href>Eric</a></span>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et nulla sem. Donec ultricies turpis ac ipsum fermentum, sit amet sagittis lectus sed.</p>
+				</div>
+			</div>
+			<div class="post flex">
+				<div class="title flex">
+					<h2>Libero Vero Quos</h2><h2>10/2/15</h2>
+				</div>
+				<a href><div class="panorama" style="background-image: url(img/panorama4.jpg)"></div></a>
+				<div class="content">
+					<span class="with">With <a href>Marianne</a> and <a href>Aneesh</a></span>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat arcu in ante sollicitudin eleifend sit amet eu lacus. Pellentesque at posuere.</p>
+				</div>
 			</div>
 		</div>
-		<div class="sidebar"></div>
+		<div class="sidebar">
+			<div class="about widget">
+				<h1>About</h1>
+				<div class="flex">
+					<div class="about-basics flex">
+						<div>
+							<h3>Lives in:</h3>
+							<span>Urbana-Champaign</span>
+						</div>
+						<div>
+							<h3>Joined On:</h3>
+							<span>8/16/2015</span>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="about-passage">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora animi dolorem fugiat, similique velit eligendi atque, earum perferendis corporis quibusdam! Nisi animi, ut reiciendis explicabo aperiam sed porro nesciunt, maxime.</p>
+				</div>
+			</div>
+			<div class="widget">
+				<h3>Friends</h3>
+				<div class="group flex friends">
+					<a class="thumb" href><div style="background-image: url(img/preska.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Preska</span></div></a>
+					<a class="thumb" href><div style="background-image: url(img/samara.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Samara</span></div></a>
+					<a class="thumb" href><div style="background-image: url(img/zak.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Zak</span></div></a>
+					<a class="thumb" href><div style="background-image: url(img/aneesh.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Aneesh</span></div></a>
+					<a class="thumb" href><div style="background-image: url(img/eric.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Eric</span></div></a>
+					<a class="thumb" href><div style="background-image: url(img/marianne.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Marianne</span></div></a>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
