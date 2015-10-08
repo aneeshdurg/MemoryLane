@@ -4,11 +4,12 @@
 
 <head>
 <title>Memory Lane</title>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css">
-<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+<link rel="stylesheet" href="{% static "font-awesome/css/font-awesome.min.css" %}">
+<link rel="icon" href="favicon.ico" type="{% static "image/x-icon" %}"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="favicon.ico" type="{% static "image/x-icon" %}"/>
 </head>
 
 <body>
@@ -49,7 +50,7 @@
             <p class="panoramaLeft">{{memory.name}}</p>
             <p class="panoramaRight">{{memory.date_created}}</p>
         </div>
-        <img src="img/panorama.jpg" class="panoramaResize">
+        <img src="{% static "img/panorama.jpg" %}" class="panoramaResize">
         
         <div class="mapDiv">
             <p class="textRemember">I remember...</p>
@@ -90,7 +91,7 @@
         </div>
         
         <div class="map">
-            <img src="img/map.jpg" class="mapImage">
+            <img src="{% static "img/map.jpg" %}" class="mapImage">
         </div>
         
     </div>
