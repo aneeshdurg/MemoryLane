@@ -23,8 +23,8 @@ def signup(request):
 def settings(request):
 	return render(request, 'settings.html', {})
 
-def post(request):
-	memory = get_object_or_404(Memory, pk=1)
+def post(request, memory_id):
+	memory = get_object_or_404(Memory, pk=memory_id)
 	author = get_object_or_404(User, pk=memory.author)
 	return render(request, 'post.html', {'memory': memory, 'author': author})
 

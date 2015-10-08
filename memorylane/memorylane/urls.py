@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^settings/', views.settings, name='settings'),
     url(r'^signup/', views.signup, name='signup'),
-    url(r'^post/', views.post, name="post"),
+    url(r'^post/(?P<memory_id>[0-9]+)/$', views.post, name="post"),
     url(r'^passwordreset/', views.passwordreset, name="passwordreset"),
     url(r'^login/', views.login, name="login"),
     url(r'^friends/', views.friends, name="friends"),
