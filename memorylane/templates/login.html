@@ -3,16 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Log In - Memory Lane</title>
-	<link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
-	<link rel="icon" href="favicon.ico" type="image/x-icon"/>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+	<link rel="stylesheet" href="{% static "font-awesome/css/font-awesome.min.css" %}">
+	<link rel="icon" href="favicon.ico" type="{% static "image/x-icon" %}"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link rel="shortcut icon" href="favicon.ico" type="{% static "image/x-icon" %}"/>
 </head>
 <body>
 	<a href="/signup/" class="signup">
 		<div class="button">Sign Up</div>
 	</a>
 	<div class="login">
-		<img src="{{ STATIC_URL }}img/logo.png" alt="Memory Lane" title="Memory Lane" class="logo">
+		<img src="{% static "img/logo.png" %}" alt="Memory Lane" title="Memory Lane" class="logo">
 		<span>You had to be there.</span>
 		<div class="group loginContainer">
 			<form action="">
