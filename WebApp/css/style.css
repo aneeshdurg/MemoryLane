@@ -3,18 +3,8 @@ body{
 	font-family: Argh, Arial;
 	color: #282828;
 	/*background-color: #dadfe1;*/
-<<<<<<< HEAD
 	background-color:  #e5ebe4;
 	
-=======
-	background-color:  #0082ac;	
-}
-h1 {
-	margin: 0;
-}
-h2,h3 {
-	margin: 10px 0 5px;
->>>>>>> eefb37fe84fbed7957ee6ea2ff0fcc49e8a0d920
 }
 
 a {
@@ -29,8 +19,6 @@ a {
 	float: left;
 	padding-right: 10px;
 }
-<<<<<<< HEAD
-=======
 h1
 {
 	margin: 0px;
@@ -46,7 +34,6 @@ h3
 	margin: 0px;
 	padding-top: 10px;
 }
->>>>>>> 527cfc477d242960d2107c88ede240b5a0021c14
 
 /*HEADER*/
 
@@ -208,16 +195,8 @@ a.lnk-flat:active{
 	background: #ddd !important;
 	color: #333 !important;
 	border-color: #999 #999 #666 !important;
-<<<<<<< HEAD
-=======
-
->>>>>>> 527cfc477d242960d2107c88ede240b5a0021c14
 
 
-}
-a.lnk-flat:hover{
-	background-color: transparent !important;
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#f8f8f8),color-stop(1,#ddd));
 }
 a.lnk-flat:hover{
 	background-color: transparent !important;
@@ -231,20 +210,12 @@ a.lnk-flat:hover{
 	border-color:#bbb #bbb #999;
 	overflow: hidden;
 	vertical-align: middle;
-<<<<<<< HEAD
-	border-radius: 3px;
-=======
 	
->>>>>>> 527cfc477d242960d2107c88ede240b5a0021c14
 	height:24px;
 	padding: 0 8px;
 	line-height: 24px;
 	border: 1px solid #d9d9d9;
-<<<<<<< HEAD
-	-webkit-border-radius: 0 4px 4px 0;
-=======
 	-webkit-border-radius: 4px;
->>>>>>> 527cfc477d242960d2107c88ede240b5a0021c14
 	margin: 0!important;
 	-webkit-appearance: none;
 	background-color: #d9d9d9;
@@ -539,19 +510,7 @@ a.signup {
 
 
 .field {
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-	
-=======
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> newpost
->>>>>>> 527cfc477d242960d2107c88ede240b5a0021c14
->>>>>>> eefb37fe84fbed7957ee6ea2ff0fcc49e8a0d920
 	border-width: 0;
 	text-align: left;
 	margin: 10px 0;
@@ -870,7 +829,7 @@ input[type=submit]:hover {
 	-o-flex-wrap: wrap;
 	flex-wrap: wrap; 
 }
-.thumb {
+.friends .thumb {
 	min-width: 30%;
     height: 100px;
     margin: 0 10px 10px 0;
@@ -880,11 +839,11 @@ input[type=submit]:hover {
     text-align: right;
     overflow: hidden;
 }
-.thumb div {
+.friends .thumb div {
 	background-size: cover;
 	height: 100%;
 }
-.thumb img {
+.friends .thumb img {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -893,15 +852,15 @@ input[type=submit]:hover {
 	width: auto;
 	height: 100%;
 }
-.thumb .overlay {
+.friends .thumb .overlay {
 	z-index: 10;
 	opacity: 0.4;
 	transition: all 0.3s ease;
 }
-.thumb:hover .overlay, .thumb:hover .name {
+.friends .thumb:hover .overlay, .friends .thumb:hover .name {
 	opacity: 0.9;
 }
-.thumb .name {
+.friends .thumb .name {
 	position: absolute;
     bottom: 3px;
     right: 5px;
