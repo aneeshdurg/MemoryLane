@@ -1,134 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<title>Memory Lane</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-<link rel="icon" href="favicon.ico" type="image/x-icon"/>
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+	<meta charset="UTF-8">
+	<title>New Post - Memory Lane</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+	<style>
+		body {
+			background-color: #dadfe1;
+			margin: 0;
+		}
+		a {
+			text-decoration: none;
+			transition: all 0.25s ease;
+		}
+		a:hover {
+			color: #6C7A89;
+		}
+		nav {
+			background-color: rgba(255,255,255,0.4);
+			padding: 0 15px;
+		}
+		div.username, div.settings {
+			width: 30%;
+		}
+			div.username h1, div.middleLogo h1 {
+				display: inline-block;
+				padding-top: 20px;
+			}
+		div.middleLogo {
+			width: 60%;
+			text-align: center;
+		}
+		div.settings {
+			padding: 1%;
+			font-size: 32px;
+			text-align: right;
+			box-sizing: border-box;
+		}
+		p.autosave-post{
+			color: #999;
+		}
+
+		/* Content Styling */
+		
+		div.gridContainer {
+			padding: 1% 2% 0;
+		}
+		div.main {
+			width: 65%;
+			margin-right: 5%;
+			padding: 20px;
+		}
+		div.sidebar {
+			width: 30%;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+
+		/* Post Styling */
+
+		.post {
+			height: auto;
+			margin-bottom: 25px;
+			padding: 15px 20px;
+			background-color: rgba(255,255,255,0.4);
+			box-shadow: 0 0 10px rgba(0,0,0,0.25);
+			-webkit-flex-wrap: wrap;
+			-moz-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			-o-flex-wrap: wrap;
+			flex-wrap: wrap;
+		}
+		.post > a {
+			width: 55%;
+		}
+		.title {
+			width: 100%;
+			height: 40px;
+		}
+			.title h2 {
+				width: 50%;
+				margin: 0;
+			}
+			.title h2:last-child {
+				text-align: right;
+			}
+		.panorama {
+			background-size: cover;
+			background-position: center;
+			width: 100%;
+			height: 200px;
+		}
+		.content {
+			width: 45%;
+			padding: 10px 20px;
+			box-sizing: border-box;
+		}
+			.content .with {
+				font-style: italic;
+			}
+
+		/* About Widget */
+
+		.about-basics {
+			width: 50%;
+			-webkit-flex-wrap: wrap;
+			-moz-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			-o-flex-wrap: wrap;
+			flex-wrap: wrap;
+		}
+			.about-basics > div {
+				width: 100%;
+			}
+
+		/* Friends Widget Tweaks */
+		.widget {
+			width: 100%;
+			background-color: rgba(255,255,255,0.4);
+			box-shadow: 0 0 10px rgba(0,0,0,0.25);
+			padding: 15px 20px;
+			margin: 0 0 20px;
+			border-radius: 0;
+			box-sizing: border-box;
+		}
+			.widget h2 {
+				margin-top: 0;
+			}
+		.friends {
+			justify-content: space-between;
+			margin-top: 5px;
+		}
+		.thumb {
+			margin: 0 0 10px;
+		}
+			.thumb div {
+				background-position: center;
+			}
+			.thumb:nth-child(5) {
+				margin: 0 13px 10px;
+			}
+
+
+		/* Alternate Post Styling */
+		.post.abs {
+			padding: 0;
+			margin-bottom: 35px;
+		}
+		.post.abs > a {
+			width: 70%;
+		}
+		.post.abs .panorama {
+			height: 220px;
+			position: relative;
+		}
+			.post.abs .panorama .overlay {
+				position: absolute;
+			    height: 100%;
+			    width: 100%;
+			    background-image: url(img/post-overlay.png);
+			    opacity: 0;
+			    color: #ecf0f1;
+			    transition: all 0.25s ease;
+			}
+				.post.abs .panorama:hover .overlay {
+					opacity: 0.7;
+				}
+			.post.abs .panorama .overlay p {
+				margin: 0;
+				width: 100%;
+			    text-align: center;
+			    position: absolute;
+			    top: 50%;
+			    left: 50%;
+			    transform: translateX(-50%) translateY(-50%);
+			}
+			.post.abs .panorama .title {
+				background: url(img/post-shadow.png);
+			    padding: 7px 10px;
+			    color: #ecf0f1;
+			    text-shadow: 0 0 4px rgba(0,0,0,0.75);
+			    box-sizing: border-box;
+			    transition: all 0.25s ease;
+			}
+				.post.abs .panorama:hover .title {
+					opacity: 0;
+				}
+		.post.abs .map {
+			width: 30%;
+		    float: none;
+		    background-image: url(img/map.png);
+		    background-position: center;
+		    background-size: cover;
+		    padding: 0;
+		    position: relative;
+		}
+			.post.abs .map .location {
+				text-shadow: 0 0 4px rgba(0,0,0,.9);
+			    position: absolute;
+			    bottom: 0;
+			    right: 0;
+			    padding-right: 5px;
+			    width: 100%;
+			    text-align: right;
+			    color: #ecf0f1;
+			    background-image: url(img/location-shadow.png);
+			    background-size: auto 100%;
+			}
+			.post.abs .map .location i {
+				padding-right: 5px;
+			}
+	</style>
 </head>
-
-	<body>
-
-
-		<div class="header">
-			<div class="profileheader">
-				<a href="#" class="profilelink"><h2 class="profilename">MATTHEW_ONG</h2></a>
-			</div>
-		<div class="settingheader">
-			<a href="#" class="profilelink"><h2 class="headercog"><i class="fa fa-cog"></i></h2></a>
-			</div>	
-			 <form class="searchbox" style="float:right;">
-        		<input type="search" placeholder="Search......" name="search" class="searchbox-input" onkeyup="buttonUp();" required>
-      
-			<div class="logo">
-				<a href="#" class="profilelink">
-					<h1 class="headermaintext" style="font-family: Snell Roundhand ; color: #072"; > Memory Lane 
-					</h1>
-				</a>
-				
-			</div>
-
-		</div>	
-			
-			<hr>
-
-		<div id="content">
-			<h1> New Memory </h1>
-			<div class="grid-16-8 clearfix">
-				<div class="memory">
-					<form id="form_note" method="post">
-						<div style="display: none;">
-							<input >
-						</div>
-						<p class="autosave-tip">
-							Automatically saved
-							<span> 09/29/15 17:17:17</span>
-						</p>
-
-						
-
-						<div class="row note-title">
-							<label class="field" for="note_title" > Title: </label>
-							<div>
-								<input tabindex="1" id="note_title" name="note_title" type="text" value autofocus>
-							</div>
-						</div>
-
-						
-							<div id="isay-act-field" class= "row isay-act">
-							
-							<div class="tagField">
-								<a href="javascript:void(0);" tabindex="2" data-action="topic" class="topic-btn" title="tags"> #tags</a>
-								
-									<div class="upload-section">
-										<p class="drag-tip"> Drag in to upload</p>
-										<a href ="javascript: void 0;" class="upload-btn"> Upload picture</a>
-								
-									</div>
-									<a href="javascript: void(0);" class="bn-x isay-cancel style="display: none;"">x</a>
-								
-							</div>
-						
-						</div>
-					
-
-
-						<div class="row note=text">
-
-							<ul class="control-panel">
-								<li class="link-btn">
-									<a class="lnk-flat" href="#link" title="add link" style="text-decoration: none;"> add link</a>
-								</li>
-							</ul>
-
-							<label class="field" for ="note_text" style="color: white;" > Memory: </label>
-							
-							<textarea cols="30" rows="5" tabindex="2" id="note_text" name="note_text" placeholder="I remember..." required ></textarea>
-						</div>
-
-						<div class="row note-privacy">
-							<label class="field" > Privacy setting: </label>
-							<label>
-								<input tabindex="4" name="note_privacy" type="radio" value="P" checked>
-								<span> Everyone can read this.</span>
-							</label>
-							<label>
-								<input tabindex="5" name="note_privacy" type="radio" value="S" checked>
-								<span> Only my friends can read this. </span>
-							
-							</label>
-
-							<label>
-								<input tabindex="6" name="note_privacy" type="radio" value="X" checked>
-								<span> Only I can read this. </span>
-							</label>
-						</div>
-						
-						<div class="row footer">
-							<div class="error-msg board"></div>
-							<span class="bn-flat">
-								<input tabindex="9" id="preview_note" value ="Preview " type="button" class="bn-flat">
-							</span>
-
-							<input tabindex="10" id="preview_note" value="Memorize" type="submit" class="btn" name="note_submit" style="color: white; background-color:#83bf73;">
-							
-							<span class="bn-flat cancel-note">
-								<input tabindex="11" id="cancel_note" value="Cancel" type="submit" class="bn-flat" name=""cancel_note>
-							</span>
-							
-						</div>
-						<div id="">
-					</form>
-					<div id="preview"></div>
-				</div>
-				<div class="aside"></div>
-				<div class="extra"></div>
-			</div>
+<body>
+	<nav class="flex">
+		<div class="username">
+			<a href>
+				<h1>matthew_ong</h1>
+			</a>
 		</div>
-	</body>
+		<div class="middleLogo">
+			<a href>
+				<h1>Memory Lane</h1>
+			</a>
+		</div>
+		<div class="settings">
+			<a href><i class="fa fa-cog"></i></a>
+		</div>
+	</nav>
+		<div class="main">
+			<h1>New Memory</h1>
+			<p class="autosave-post">Draft saved <b>8:32:27 10/08/15</b></p>
+			<div class="title-post">
+				<form>
+					<h2>Title:
+						<input type="text" name="title" size="30" maxlength="100" />
+					</h2>
+				</form>
+			</div>
+			<div class="upload-photo">
+				<div class="tagField">
+					<form>
+					<h4>#tags:
+						<input type="text" name="tags" size="10" maxlength="30" />
+					</h4>
+					</form>
+					<div class="upload-section">
+						<a href ="javascript: void 0;" class="upload-btn">Drag photo here or click box to upload from files</a>
+					</div>
+					<p class="tags-appear">#memorylane #lorem #ipsum</p>
+				</div>	
+			</div>
+			<div class="memory-text">
+				<form>
+					<h2>Memory:<br/>
+						<textarea cols="30" rows="5" tabindex="2" id="note_text" name="note_text" placeholder="I remember..." required ></textarea>
+					</h2>
+				</form>
+			</div>
+			<button type="submit" form="form1" value="Submit">Submit</button>
+		</div>
+</body>
 </html>
-
-
-
