@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" class="graybg">
+<head>
+	<meta charset="UTF-8">
+	<title>Profile - Memory Lane</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+	<style>
+		body {
+			background-color: #dadfe1;
+			margin: 0;
+		}
+		a {
+			text-decoration: none;
+			transition: all 0.25s ease;
+		}
+		a:hover {
+			color: #6C7A89;
+		}
+		nav {
+			background-color: rgba(255,255,255,0.4);
+			padding: 0 15px;
+		}
+		div.username, div.settings {
+			width: 30%;
+		}
+			div.username h1, div.middleLogo h1 {
+				display: inline-block;
+				padding-top: 20px;
+			}
+		div.middleLogo {
+			width: 60%;
+			text-align: center;
+		}
+		div.settings {
+			padding: 1%;
+			font-size: 32px;
+			text-align: right;
+			box-sizing: border-box;
+		}
+
+		/* Content Styling */
+		
+		div.gridContainer {
+			padding: 1% 2% 0;
+		}
+		div.main {
+			width: 65%;
+			margin-right: 5%;
+			padding: 20px;
+		}
+		div.sidebar {
+			width: 30%;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+
+		/* Profile Info Styling */
+
+		.profile-info {
+			margin-bottom: 20px;
+			padding: 0 0 20px;
+		}
+		.profile-image {
+			width: 20%;
+			height: 150px;
+			background-size: cover;
+			background-position: center;
+			box-shadow: 0 0 10px rgba(0,0,0,0.25);
+			display: inline-block;
+		}
+		.profile-header {
+			width: 60%;
+			margin-left: 20px;
+		}
+			.profile-header h1, .profile-header h3 {
+				padding: 0;
+			}
+			.profile-header .say-something {
+				margin-top: 10px;
+			}
+
+		/* Post Styling */
+
+		.post {
+			height: auto;
+			margin-bottom: 25px;
+			padding: 15px 20px;
+			background-color: rgba(255,255,255,0.4);
+			box-shadow: 0 0 10px rgba(0,0,0,0.25);
+			-webkit-flex-wrap: wrap;
+			-moz-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			-o-flex-wrap: wrap;
+			flex-wrap: wrap;
+		}
+		.post > a {
+			width: 55%;
+		}
+		.title {
+			width: 100%;
+			height: 40px;
+		}
+			.title h2 {
+				width: 50%;
+				margin: 0;
+			}
+			.title h2:last-child {
+				text-align: right;
+			}
+		.panorama {
+			background-size: cover;
+			background-position: center;
+			width: 100%;
+			height: 200px;
+		}
+		.content {
+			width: 45%;
+			padding: 10px 20px;
+			box-sizing: border-box;
+		}
+			.content .with {
+				font-style: italic;
+			}
+
+		/* About Widget */
+
+		.about-basics {
+			width: 50%;
+			-webkit-flex-wrap: wrap;
+			-moz-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			-o-flex-wrap: wrap;
+			flex-wrap: wrap;
+		}
+			.about-basics > div {
+				width: 100%;
+			}
+
+		/* Friends Widget Tweaks */
+		.widget {
+			width: 100%;
+			background-color: rgba(255,255,255,0.4);
+			box-shadow: 0 0 10px rgba(0,0,0,0.25);
+			padding: 15px 20px;
+			margin: 0 0 20px;
+			border-radius: 0;
+			box-sizing: border-box;
+		}
+			.widget h2 {
+				margin-top: 0;
+			}
+		.friends {
+			justify-content: space-between;
+			margin-top: 5px;
+		}
+		.thumb {
+			margin: 0 0 10px;
+		}
+			.thumb div {
+				background-position: center;
+			}
+			.thumb:nth-child(5) {
+				margin: 0 13px 10px;
+			}
+
+
+		/* Alternate Post Styling */
+		.post.abs {
+			padding: 0;
+			margin-bottom: 30px;
+		}
+		.post.abs > a {
+			width: 70%;
+		}
+		.post.abs .panorama {
+			height: 220px;
+			position: relative;
+		}
+			.post.abs .panorama .overlay {
+				position: absolute;
+			    height: 100%;
+			    width: 100%;
+			    background-image: url(img/post-overlay.png);
+			    opacity: 0;
+			    color: #ecf0f1;
+			    transition: all 0.25s ease;
+			}
+				.post.abs .panorama:hover .overlay {
+					opacity: 0.7;
+				}
+			.post.abs .panorama .overlay p {
+				margin: 0;
+				width: 100%;
+			    text-align: center;
+			    position: absolute;
+			    top: 50%;
+			    left: 50%;
+			    transform: translateX(-50%) translateY(-50%);
+			}
+			.post.abs .panorama .title {
+				background: url(img/post-shadow.png);
+			    padding: 7px 10px;
+			    color: #ecf0f1;
+			    text-shadow: 0 0 4px rgba(0,0,0,0.75);
+			    box-sizing: border-box;
+			    transition: all 0.25s ease;
+			}
+				.post.abs .panorama:hover .title {
+					opacity: 0;
+				}
+		.post.abs .map {
+			width: 30%;
+		    float: none;
+		    background-image: url(img/map.png);
+		    background-position: center;
+		    background-size: cover;
+		    padding: 0;
+		    position: relative;
+		}
+			.post.abs .map .location {
+				text-shadow: 0 0 4px rgba(0,0,0,.9);
+			    position: absolute;
+			    bottom: 0;
+			    right: 0;
+			    padding-right: 5px;
+			    width: 100%;
+			    text-align: right;
+			    color: #ecf0f1;
+			    background-image: url(img/location-shadow.png);
+			    background-size: auto 100%;
+			}
+	</style>
+</head>
+<body>
+	<nav class="flex">
+		<div class="username">
+			<a href>
+				<h1>matthew_ong</h1>
+			</a>
+		</div>
+		<div class="middleLogo">
+			<a href>
+				<h1>Memory Lane</h1>
+			</a>
+		</div>
+		<div class="settings">
+			<a href><i class="fa fa-cog"></i></a>
+		</div>
+	</nav>
+	<div class="gridContainer flex">
+		<div class="main">
+			<div class="profile-info flex">
+				<div class="profile-image" style="background-image:url(img/matthew.jpg)"></div>
+				<div class="profile-header">
+					<h1>Matthew Ong</h1>
+					<h3>matthew_ong</h3>
+					<p class="say-something">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				</div>
+			</div>
+			<div class="post flex">
+				<div class="title flex">
+					<h2>Lorem Ipsum</h2><h2>9/26/15</h2>
+				</div>
+				<a href><div class="panorama" style="background-image: url(img/panorama2.jpg)"></div></a>
+				<div class="content">
+					<span class="with">With <a href>Preska</a> and <a href>Zak</a></span>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi auctor, massa non ultricies suscipit, ex nisl accumsan mi, a consequat odio purus amet.</p>
+				</div>
+			</div>
+			<div class="post flex">
+				<div class="title flex">
+					<h2>Dolor Sit Amet</h2><h2>9/29/15</h2>
+				</div>
+				<a href><div class="panorama" style="background-image: url(img/panorama3.jpg)"></div></a>
+				<div class="content">
+					<span class="with">With <a href>Eric</a></span>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et nulla sem. Donec ultricies turpis ac ipsum fermentum, sit amet sagittis lectus sed.</p>
+				</div>
+			</div>
+			<div class="post flex">
+				<div class="title flex">
+					<h2>Libero Vero Quos</h2><h2>10/2/15</h2>
+				</div>
+				<a href><div class="panorama" style="background-image: url(img/panorama4.jpg)"></div></a>
+				<div class="content">
+					<span class="with">With <a href>Marianne</a> and <a href>Aneesh</a></span>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat arcu in ante sollicitudin eleifend sit amet eu lacus. Pellentesque at posuere.</p>
+				</div>
+			</div>
+		</div>
+		<div class="sidebar">
+			<div class="about widget">
+				<h1>About</h1>
+				<div class="flex">
+					<div class="about-basics flex">
+						<div>
+							<h3>Lives in:</h3>
+							<span>Urbana-Champaign</span>
+						</div>
+						<div>
+							<h3>Joined On:</h3>
+							<span>8/16/2015</span>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="about-passage">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora animi dolorem fugiat, similique velit eligendi atque, earum perferendis corporis quibusdam! Nisi animi, ut reiciendis explicabo aperiam sed porro nesciunt, maxime.</p>
+				</div>
+			</div>
+			<div class="widget">
+				<h2>Friends</h2>
+				<div class="group flex friends">
+					<a class="thumb" href><div style="background-image: url(img/preska.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Preska</span></div></a>
+					<a class="thumb" href><div style="background-image: url(img/samara.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Samara</span></div></a>
+					<a class="thumb" href><div style="background-image: url(img/zak.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Zak</span></div></a>
+					<a class="thumb" href><div style="background-image: url(img/aneesh.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Aneesh</span></div></a>
+					<a class="thumb" href><div style="background-image: url(img/eric.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Eric</span></div></a>
+					<a class="thumb" href><div style="background-image: url(img/marianne.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Marianne</span></div></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
