@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="graybg">
-<head>
-	<meta charset="UTF-8">
-	<title>Log In - Memory Lane</title>
-	{% load staticfiles %}
-	<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
-	<link rel="stylesheet" href="{% static "font-awesome/css/font-awesome.min.css" %}">
-	<link rel="icon" href="favicon.ico" type="{% static "image/x-icon" %}"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<link rel="shortcut icon" href="favicon.ico" type="{% static "image/x-icon" %}"/>
-</head>
+
+{% load staticfiles%}
+{% include 'head.html' %}
+
 <body>
 	<a href="/signup/" class="signup">
 		<div class="button">Sign Up</div>
