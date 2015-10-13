@@ -236,11 +236,17 @@
 				padding-right: 5px;
 			}
 	</style>
+	<script>
+		function changetext(){
+			document.getElementById("signature").style="display:none"
+			document.getElementById("edit-signature").style.display="block";
+		}
+	</script>
 </head>
 <body>
 	<nav class="flex">
 		<div class="username">
-			<a href>
+			<a href="profile-mod.html">
 				<h1>matthew_ong</h1>
 			</a>
 		</div>
@@ -250,7 +256,7 @@
 			</a>
 		</div>
 		<div class="settings">
-			<a href><i class="fa fa-cog"></i></a>
+			<a href="settings.html"><i class="fa fa-cog"></i></a>
 		</div>
 	</nav>
 	<div class="gridContainer flex">
@@ -258,15 +264,30 @@
 			<div class="profile-info flex">
 				<div class="profile-image" style="background-image:url(img/matthew.jpg)"></div>
 				<div class="profile-header">
-					<h1>Matthew Ong</h1>
-					<h3>matthew_ong</h3>
-					<p class="say-something">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					<a href="profile-mod.html"><h1>Matthew Ong</h1></a>
+					<a href="newpost.html"><h3>@matthew_ong</h3></a>
+					<div id="edit_signature" class="edit_signature">
+							<div id="signature" style.display="block">
+								<p class="say-something">Lorem ipsum dolor sit amet.(<a href="javascript:changetext();">edit</a>)
+							</div>
+							<div id="edit-signature" style="display:none">
+								<form method="post">
+									<div>
+										<input type="hidden" name>
+									</div>
+									<input name="signature" type="text" maxlength="50" value="Lorem ipsum dolor sit amet.">
+									<input class="submit" type="button" value="save">
+									<input class="cancel" type="button" value="cancel">
+								</form>
+							</div>
+						</p>
+					</div>
 				</div>
 			</div>
 			<div class="post flex abs">
 				<a href="post.html"><div class="panorama" style="background-image: url(img/panorama2.jpg)">
 					<div class="overlay">
-						<p>Donec in mollis ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed venenatis nisi. Cras quis nibh in tortor finibus hendrerit in vel arcu...</p>
+						<p>Donec in mollis ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed venenatis nisi. Cras quis nibh in tortor finibus hendrerit in vel arcu... </p>
 					</div>
 					<div class="title flex">
 						<h2>Lorem Ipsum</h2><h2>9/26/15</h2>
@@ -330,7 +351,7 @@
 				</div>
 			</div>
 			<div class="widget">
-				<h2>Friends</h2>
+				<a href="friends.html"><h2>Friends</h2></a>
 				<div class="group flex friends">
 					<a class="thumb" href><div style="background-image: url(img/preska.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Preska</span></div></a>
 					<a class="thumb" href><div style="background-image: url(img/samara.jpg)"><img class="overlay" src="img/overlay.png"><span class="name">Samara</span></div></a>
