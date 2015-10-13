@@ -260,23 +260,6 @@ input[type=submit]:hover {
 	margin-left: 21%;
 }
 
-.authorElement{
-	display: inline-block;
-	margin-right: 10px;
-	/*float: left;*/
-
-}
-
-.proPicResize{
-	width: 70px;
-	height: auto;
-	border: 2px solid transparent;
-}
-
-.proPicName{
-	text-align: center;
-	margin-top: 2px;
-}
 
 .panoramaElement{
 	display: inline-block;
@@ -289,22 +272,17 @@ input[type=submit]:hover {
 }
 
 .panoramaResize{
-	width: 100%;
+	width: 96%;
 	height: auto;
 	border-top: 2px solid transparent;
 	display: inline-block;
-    background-color: black;
-    padding: 0;
+    background-color: transparent;
+    padding: 20px;
+    padding-right: 20px;
 }
 
 .panoramaHeader{
 	width:100%;
-}
-.mapDiv {
-	float: left; 
-	width: 700px; 
-	padding: 15px; 
-	line-height: 130%;
 }
 .panoramaRight {
 	float:right; 
@@ -313,7 +291,6 @@ input[type=submit]:hover {
 	font-family: Argh; 
 	font-size: 20px;
 }
-
 .textBody {
 	font-size: 18px;
 }
@@ -369,86 +346,6 @@ input[type=submit]:hover {
 
 
 /*NEWS FEED MAIN ELEMENT*/
-.containerNF{
-	display: block;
-	width: 75%;
-	height: 19%;
-	margin-left: 21%;
-	margin-bottom: 2%;
-}
-
-.authorElementNF{
-	display: inline-block;
-	float: left;
-	height: 100%;
-}
-
-.proPicResizeNF{
-	width: 70px;
-	height: auto;
-	border: 2px solid black;
-}
-
-.proPicNameNF{
-	text-align: center;
-}
-
-.panoramaElementNF{
-	display: inline-block;
-	line-height: 0;
-	margin-left: .5%;
-	width: 55%;
-	height: 100%;
-	border: 2px solid black;
-	font-size: 1em;
-}
-
-.panoramaResizeNF{
-	width: 100%;
-	height: auto;
-	border-top: 2px solid black;
-	display: inline-block;
-    background-color: black;
-    padding: 0;
-     -webkit-transition: all .75s linear;
-       -moz-transition: all .75s linear;
-        -ms-transition: all .75s linear;
-         -o-transition: all .75s linear;
-            transition: all .75s linear;
-}
-
-.panoramaHeaderNF{
-	width:100%;
-	height: 10%;
-	clear:both;
-}
-
-.mapsElementNF{
-	position: relative;
-	display: inline-block;
-	line-height: 0;
-	margin-left: .5%;
-	width: 16%;
-	height: 100%;
-	border: 2px solid transparent;
-}
-
-.mapsResizeNF{
-	width: 100%;
-	height: 100%;
-}
-
-.panoramaResizeNF:hover{
-    opacity: .4;
-}
-
-.imgWrapNF{
-	background-color: transparent;
-}
-
-
-
-
 
 /* FRIENDS WIDGET */
 .widget {
