@@ -239,14 +239,6 @@ input[type=submit]:hover {
     to   { opacity: 1; transform: translateY(0px); }
 }
 
-
-
-
-
-
-
-
-
 /* MATTHEW SECTION*/
 .container{
 	display: block;
@@ -254,7 +246,6 @@ input[type=submit]:hover {
 	height: 25%;
 	margin-left: 21%;
 }
-
 
 .panoramaElement{
 	display: inline-block;
