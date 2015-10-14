@@ -41,7 +41,6 @@ input{
 	font-style: inherit;
 	font-weight: inherit;
 	vertical-align: middle;
-	margin-right: 3px;
 	outline: none;
 }
 
@@ -58,12 +57,6 @@ input{
 }
 
 
-/* Updated Clearfix */
-.group:after {
-	content: "";
-	display: table;
-	clear: both;
-}
 .flex {
 	display: -ms-flex!important;
 	display: -webkit-flex!important;
@@ -254,30 +247,24 @@ input[type=submit]:hover {
 	line-height: 0;
 	margin-left: 0;
 	width: 100%;
-	border: 2px solid transparent;
-	margin-top: 15px;
-	background-color: white;
+	background-color: rgba(255,255,255,0.4);
 }
 
 .panoramaResize{
-	width: 96%;
+	width: 100%;
 	height: auto;
-	border-top: 2px solid transparent;
-	display: inline-block;
-    background-color: transparent;
-    padding: 20px;
-    padding-right: 20px;
+	margin-bottom: 20px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
 .panoramaHeader{
 	width:100%;
+	margin-bottom: 5px;
+	justify-content: space-between;
 }
-.panoramaRight {
-	float:right; 
-	margin-right: 2%; 
-	font-weight: 700; 
-	font-family: Argh; 
-	font-size: 20px;
+.panoramaLeft, .panoramaRight {
+	font-size: 24px;
+	font-weight: 700;
 }
 .textBody {
 	font-size: 18px;
@@ -288,29 +275,24 @@ input[type=submit]:hover {
 }
 
 .textRemember {
-	font-weight: 700; 
-	font-family: Argh; 
+	font-weight: 700;
 	font-size: 25px; 
 	line-height: 110%; 
-	margin-bottom: 0;
+	margin: 0;
 }
 
-.panoramaLeft {
-	float:left; 
-	margin-left: 2%; 
-	font-weight: 700; 
-	font-family: Argh; 
-	font-size: 20px;
+.content {
+	width: 60%;
+	box-sizing: border-box;
 }
+	.content .with {
+		font-style: italic;
+	}
 
 .map {
 	float: right; 
-	width: 33%; 
-	padding: 15px;
+	width: 35%;
 }
-
-
-
 
 .mapImage {
 	width: 100%;
@@ -396,20 +378,25 @@ nav {
 	padding: 0 15px;
 }
 div.username, div.settings {
-	width: 30%;
+	width: 25%;
 }
 	div.username h1, div.middleLogo h1 {
 		display: inline-block;
 		padding-top: 20px;
 	}
 div.middleLogo {
-	width: 60%;
+	width: 50%;
 	text-align: center;
 }
 div.settings {
-	padding: 1% 0 1% 2.5%;
+	padding: 1% 0;
 	font-size: 32px;
 	text-align: right;
+	-webkit-justify-content: flex-end;
+	-moz-justify-content: flex-end;
+	-ms-justify-content: flex-end;
+	-o-justify-content: flex-end;
+	justify-content: flex-end;
 	box-sizing: border-box;
 }
 	.search { 
@@ -419,6 +406,7 @@ div.settings {
 	}
 	.search input { 
 		padding: 3px 25px 0 0;
+		margin: 0;
 		font-size: 18px;
 		text-align: right;
 		color: rgb(150,150,150);
@@ -426,7 +414,7 @@ div.settings {
 	.search .fa-search { 
 			position: absolute;
 			top: 13px;
-			right: 7px;
+			right: 3px;
 			font-size: 18px;
 			color: rgb(185,185,185);
 		}
@@ -504,17 +492,23 @@ div.main {
 		margin-top: 0;
 	}
 .friends {
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-justify-content: space-between;
+	-o-justify-content: space-between;
 	justify-content: space-between;
 	margin-top: 5px;
 }
 .thumb {
 	margin: 0 0 10px;
+	-webkit-flex: 0 0 30%;
+	-moz-flex: 0 0 30%;
+	-ms-flex: 0 0 30%;
+	-o-flex: 0 0 30%;
+    flex: 0 0 30%;
 }
 	.thumb div {
 		background-position: center;
-	}
-	.thumb:nth-child(5) {
-		margin: 0 13px 10px;
 	}
 
 /* Post Styling */
@@ -565,14 +559,6 @@ div.main {
 	width: 100%;
 	height: 200px;
 }
-.content {
-	width: 45%;
-	padding: 10px 20px;
-	box-sizing: border-box;
-}
-	.content .with {
-		font-style: italic;
-	}
 
 /* Alternative Post Style*/
 .post.abs {
