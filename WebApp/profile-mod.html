@@ -9,18 +9,27 @@
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 	<script>
 		function changetext(){
-			document.getElementById("signature").style="display:none"
+			document.getElementById("signature").style.display="none";
 			document.getElementById("edit-signature").style.display="block";
+		}
+	</script>
+	<script>
+		function cancelchangetext(){
+			document.getElementById("signature").style.display="block";
+			document.getElementById("edit-signature").style.display="none";
 		}
 	</script>
 	<style>
 	    .add-new-memory{
 	    	padding-top: 130px;
-	    	margin-left: 50px;
+	    	margin-left: 100px;
 	    }
 	    .fa-camera-retro:before{
 	    	font-size: 30px;
 	    	content:"\f083";
+	    }
+	    #input-bar{
+	    	border: 1px solid #ccc;
 	    }
 	</style>
 </head>
@@ -53,16 +62,16 @@
 					<a href="newpost.html"><h3>@matthew_ong</h3></a>
 					<div id="edit_signature" class="edit_signature">
 							<div id="signature" style.display="block">
-								<p class="say-something">Lorem ipsum dolor sit amet. &#40;<a href="javascript:changetext();">edit</a>&#41;
+								<p class="say-something">Lorem ipsum dolor sit amet.  <a href="javascript:changetext();"><i class="fa fa-pencil"></i></a>
 							</div>
 							<div id="edit-signature" style="display:none">
 								<form method="post">
 									<div>
 										<input type="hidden" name>
 									</div>
-									<input name="signature" type="text" maxlength="50" value="Lorem ipsum dolor sit amet.">
-									<input class="submit" type="button" value="save">
-									<input class="cancel" type="button" value="cancel">
+									<input id="input-bar" name="signature" type="text" maxlength="50" value="Lorem ipsum dolor sit amet.">
+									<input id="submit" class="submit" type="button" value="save">
+									<a href="javascript:cancelchangetext();"><input id="cancel" class="cancel" type="button" value="cancel"></a>
 								</form>
 							</div>
 						</p>
