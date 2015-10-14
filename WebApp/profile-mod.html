@@ -23,20 +23,6 @@
 			background-color: rgba(255,255,255,0.4);
 			padding: 0 15px;
 		}
-		@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
-		.search { 
-			position: relative; 
-			padding-top: 15px;
-		}
-		.search input { 
-			text-indent: 30px;
-		}
-		.search .fa-search { 
-  			position: absolute;
-  			top: 22px;
-  			left: 7px;
-  			font-size: 15px;
-  		}
 		div.username, div.settings {
 			width: 30%;
 		}
@@ -49,11 +35,29 @@
 			text-align: center;
 		}
 		div.settings {
-			padding: 1%;
+			padding: 1% 0 1% 2.5%;
 			font-size: 32px;
 			text-align: right;
 			box-sizing: border-box;
 		}
+			.search { 
+				position: relative;
+				text-align: right;
+				margin-right: 10px;
+			}
+			.search input { 
+				padding: 3px 25px 0 0;
+				font-size: 18px;
+				text-align: right;
+				color: rgb(150,150,150);
+			}
+			.search .fa-search { 
+	  			position: absolute;
+	  			top: 13px;
+	  			right: 7px;
+	  			font-size: 18px;
+	  			color: rgb(185,185,185);
+	  		}
 
 		/* Content Styling */
 		
@@ -266,14 +270,14 @@
 		</div>
 		<div class="middleLogo">
 			<a href="timeline.html">
-				<img src="img/logo.png" alt="logo" style= "width: 20%;">
+				<img src="img/ml-mod.png" alt="logo" style= "height: 40px;margin-top: 15px;box-sizing: border-box;">
 			</a>
 		</div>
-		<div class="search">
-  			<span class="fa fa-search"></span>
-  			<input placeholder="Search">
-		</div>
-		<div class="settings">
+		<div class="settings flex">
+			<div class="search">
+	  			<span class="fa fa-search"></span>
+	  			<input placeholder="Search">
+			</div>
 			<a href="settings.html"><i class="fa fa-cog"></i></a>
 		</div>
 	</nav>
@@ -286,7 +290,7 @@
 					<a href="newpost.html"><h3>@matthew_ong</h3></a>
 					<div id="edit_signature" class="edit_signature">
 							<div id="signature" style.display="block">
-								<p class="say-something">Lorem ipsum dolor sit amet.(<a href="javascript:changetext();">edit</a>)
+								<p class="say-something">Lorem ipsum dolor sit amet. &#40;<a href="javascript:changetext();">edit</a>&#41;
 							</div>
 							<div id="edit-signature" style="display:none">
 								<form method="post">
