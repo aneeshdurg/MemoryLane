@@ -35,12 +35,31 @@
 			text-align: center;
 		}
 		div.settings {
-			padding: 1%;
+			padding: 1% 0 1% 2.5%;
 			font-size: 32px;
 			text-align: right;
 			box-sizing: border-box;
 		}
-		/* Content Styling*/
+			.search { 
+				position: relative;
+				text-align: right;
+				margin-right: 10px;
+			}
+			.search input { 
+				padding: 3px 25px 0 0;
+				font-size: 18px;
+				text-align: right;
+				color: rgb(150,150,150);
+			}
+			.search .fa-search { 
+	  			position: absolute;
+	  			top: 13px;
+	  			right: 7px;
+	  			font-size: 18px;
+	  			color: rgb(185,185,185);
+	  		}
+
+		/* Content Styling */
 		div.gridContainer {
 			padding: 1% 2% 0;
 		}
@@ -49,23 +68,23 @@
 			margin-right: 5%;
 			padding: 20px;
 		}
-		/*post styling*/
-		.author-info{
+		
+		/* Post Styling */
+		.author-info {
 			display: inline-block;
 			float: left;
 			height: 100%;
 			padding-right: 20px;
 		}
-		.author-image{
+		.author-image {
 			width: 70px;
 			height: auto;
 			border: 2px solid transparent;
 			box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 		}
-		.author-name{
-		text-align: center;
+		.author-name {
+			text-align: center;
 		}
-		
 		.post {
 			height: auto;
 			margin-bottom: 25px;
@@ -106,7 +125,8 @@
 			.content .with {
 				font-style: italic;
 			}
-		/*alternative post style*/
+
+		/* Alternative Post Style*/
 		.post.abs {
 			padding: 0;
 			margin-bottom: 35px;
@@ -186,10 +206,14 @@
 		</div>
 		<div class="middleLogo">
 			<a href="timeline.html">
-				<h1>Memory Lane</h1>
+				<img src="img/ml-mod.png" alt="logo" style= "height: 40px;margin-top: 15px;box-sizing: border-box;">
 			</a>
 		</div>
-		<div class="settings">
+		<div class="settings flex">
+			<div class="search">
+	  			<span class="fa fa-search"></span>
+	  			<input placeholder="Search">
+			</div>
 			<a href="settings.html"><i class="fa fa-cog"></i></a>
 		</div>
 	</nav>
@@ -215,7 +239,7 @@
 						</div></a>
 					<div class="map" style="background-image:url(img/map3.png)">
 						<div class="location">
-							<h2><i class="fa fa-globe"></i>Tokyo, JP</h2>
+							<h2><i class="fa fa-map-marker"></i>New York, NY</h2>
 						</div>
 					</div>
 				</div>
@@ -231,15 +255,15 @@
 				<div class="post flex abs">
 					<a href="post.html"><div class="panorama" style="background-image: url(img/panorama2.jpg)">
 						<div class="overlay">
-							<p>Donec in mollis ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed venenatis nisi. Cras quis nibh in tortor finibus hendrerit in vel arcu...</p>
+							<p>Praesent imperdiet enim tortor, quis suscipit velit bibendum at. Cras cursus ligula fermentum, convallis sem feugiat, egestas massa. Nulla eu dui elementum, gravida ex sed, sagittis nunc. Vestibulum varius, tortor quis feugiat imperdiet...</p>
 						</div>
 							<div class="title flex">
-								<h2>Lorem Ipsum</h2><h2>9/26/15</h2>
+								<h2>Consectetur Adipiscing Elit</h2><h2>9/28/15</h2>
 							</div>
 						</div></a>
-					<div class="map" style="background-image:url(img/map3.png)">
+					<div class="map" style="background-image:url(img/map2.png)">
 						<div class="location">
-							<h2><i class="fa fa-globe"></i>Tokyo, JP</h2>
+							<h2><i class="fa fa-map-marker"></i>Chicago, IL</h2>
 						</div>
 					</div>
 				</div>
@@ -255,10 +279,10 @@
 				<div class="post flex abs">
 					<a href="post.html"><div class="panorama" style="background-image: url(img/panorama3.jpg)">
 						<div class="overlay">
-							<p>Donec in mollis ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed venenatis nisi. Cras quis nibh in tortor finibus hendrerit in vel arcu...</p>
+							<p>Etiam mi purus, blandit in sem non, pellentesque condimentum ligula. Mauris felis neque, tincidunt nec semper non, condimentum ut lectus. Suspendisse nec nisl vel nulla rhoncus placerat. Cras mollis, lacus at dapibus luctus, mauris massa blandit diam...</p>
 						</div>
 							<div class="title flex">
-								<h2>Lorem Ipsum</h2><h2>9/26/15</h2>
+								<h2>Nam Vitae Urna</h2><h2>9/30/15</h2>
 							</div>
 						</div></a>
 					<div class="map" style="background-image:url(img/map3.png)">
@@ -279,15 +303,15 @@
 				<div class="post flex abs">
 					<a href="post.html"><div class="panorama" style="background-image: url(img/panorama4.jpg)">
 						<div class="overlay">
-							<p>Donec in mollis ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed venenatis nisi. Cras quis nibh in tortor finibus hendrerit in vel arcu...</p>
+							<p>Cras et quam eu enim feugiat lacinia. Nam non ante urna. Vestibulum venenatis ullamcorper urna, ac lobortis dui condimentum et...</p>
 						</div>
 							<div class="title flex">
-								<h2>Lorem Ipsum</h2><h2>9/26/15</h2>
+								<h2>Cras A Diam</h2><h2>10/2/15</h2>
 							</div>
 						</div></a>
-					<div class="map" style="background-image:url(img/map3.png)">
+					<div class="map" style="background-image:url(img/map4.png)">
 						<div class="location">
-							<h2><i class="fa fa-globe"></i>Tokyo, JP</h2>
+							<h2><i class="fa fa-globe"></i>Paris, FR</h2>
 						</div>
 					</div>
 				</div>
