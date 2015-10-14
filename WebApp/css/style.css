@@ -136,12 +136,10 @@ a.signup {
 
 
 .field {
-
 	border-width: 0;
 	text-align: left;
 	margin: 10px 0;
 	height: 36px;
-	background-color: #83bf73;
 	border-radius: 3px;
 	box-sizing: border-box;
 	transition: all 0.25s ease;
@@ -582,7 +580,7 @@ div.main {
 	    transition: all 0.25s ease;
 	}
 		.post.abs .panorama:hover .overlay {
-			opacity: 0.7;
+			opacity: 1;
 		}
 	.post.abs .panorama .overlay p {
 		margin: 0;
@@ -591,6 +589,8 @@ div.main {
 	    position: absolute;
 	    top: 50%;
 	    left: 50%;
+	    -webkit-transform: translateX(-50%) translateY(-50%);
+	    -ms-transform: translateX(-50%) translateY(-50%);
 	    transform: translateX(-50%) translateY(-50%);
 	}
 	.post.abs .panorama .title {
@@ -621,7 +621,7 @@ div.main {
 	    padding-right: 5px;
 	    width: 100%;
 	    text-align: right;
-	    color: #ecf0f1;
+	    color: rgba(255,255,255,0.8);
 	    background-image: url(../img/location-shadow.png);
 	    background-size: auto 100%;
 	}
