@@ -458,6 +458,7 @@ div.main {
 }
 	.profile-header h1, .profile-header h3 {
 		padding: 0;
+		display: inline-block;
 	}
 	.profile-header .say-something {
 		margin-top: 10px;
