@@ -8,83 +8,6 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-    <style>
-        body {
-            background-color: #dadfe1;
-            margin: 0;
-        }
-        a {
-            text-decoration: none;
-            transition: all 0.25s ease;
-        }
-        a:hover {
-            color: #6C7A89;
-        }
-        nav {
-            background-color: rgba(255,255,255,0.4);
-            padding: 0 15px;
-        }
-        div.username, div.settings {
-            width: 30%;
-        }
-            div.username h1, div.middleLogo h1 {
-                display: inline-block;
-                padding-top: 20px;
-            }
-        div.middleLogo {
-            width: 60%;
-            text-align: center;
-        }
-        div.settings {
-            padding: 1%;
-            font-size: 32px;
-            text-align: right;
-            box-sizing: border-box;
-        }
-        .fa{font-size:30px;
-            padding-left:20px;
-            display: inline;
-        }
-        .searchbox{
-            float:right;
-            display: inline;
-        }
-        .headercog{
-            float:right;
-            display: inline;
-        }
-        .single-post{
-            margin: 0 3%;
-            padding: 50px 20px;
-        }
-        .panoramaElement{
-            line-height: 0;
-            width: 100%;
-            padding: 5px 20px 20px;
-            box-sizing: border-box;
-        }
-        .friend{
-            display: inline-block;
-            margin-right: 10px;
-        }
-        .friend-name{
-            text-align: center;
-            margin-top: 2px;
-        }
-        .friend-image{
-            width: 70px;
-            height: auto;
-            border: 2px solid transparent;
-        }
-        .content{
-            float: left; 
-            width: 60%; 
-            padding: 15px; 
-            line-height: 130%;
-            background-color: rgba(255,255,255,0.4);
-        }
-
-    </style>
 </head>
 <body>
     <nav class="flex">
@@ -95,7 +18,7 @@
         </div>
         <div class="middleLogo">
             <a href="timeline.html">
-                <img src="img/ml-mod.png" alt="logo" style= "height: 40px;margin-top: 15px;box-sizing: border-box;">
+                <img src="img/ml-mod.png" alt="logo" id="middleLogo">
             </a>
         </div>
         <div class="settings flex">

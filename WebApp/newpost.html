@@ -7,33 +7,6 @@
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 	<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-	<style>
-		.search { 
-			position: relative; 
-			padding-top: 15px;
-		}
-		div.middleLogo {
-			width: 60%;
-			text-align: center;
-		}
-		.search input { 
-			text-indent: 30px;
-		}
-		.search .fa-search { 
-  			position: absolute;
-  			top: 22px;
-  			left: 7px;
-  			font-size: 15px;
-  		}
-		div.username, div.settings {
-			width: 30%;
-		}
-			div.username h1, div.middleLogo h1 {
-				display: inline-block;
-				padding-top: 20px;
-				width: 20%;
-			}
-	</style>
 </head>
 <body>
 	<nav class="flex">
@@ -44,14 +17,14 @@
 		</div>
 		<div class="middleLogo">
 			<a href="timeline.html">
-				<img src="img/ml-mod.png" alt="logo" style= "height: 40px;margin-top: 15px;box-sizing: border-box;">
+				<img src="img/ml-mod.png" alt="logo" id="middleLogo">
 			</a>
 		</div>
-		<div class="search">
-  			<span class="fa fa-search"></span>
-  			<input placeholder="Search">
-		</div>
-		<div class="settings">
+		<div class="settings flex">
+			<div class="search">
+	  			<span class="fa fa-search"></span>
+	  			<input placeholder="Search">
+			</div>
 			<a href="settings.html"><i class="fa fa-cog"></i></a>
 		</div>
 	</nav>
