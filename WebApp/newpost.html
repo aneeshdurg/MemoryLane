@@ -33,6 +33,70 @@
 				padding-top: 20px;
 				width: 20%;
 			}
+
+		input[type=file] {
+			background-color: #dadfe1;
+			padding: initial;
+			border: initial;
+			line-height: initial;
+			box-shadow: none
+
+		}
+		.photo-selector {
+			position: absolute;
+			top: 260px;
+			left: 20px;
+			z-index: 10;
+			height: 100px;
+			width: 585px;
+			overflow: hidden;
+			cursor: pointer;
+		}
+		.t1-form {
+			font-size: 12px;
+		}
+		.hidden {
+			display: none;
+		}
+		.t1-label {
+			display: block;
+			margin-bottom: 5px;
+			color: #292f33;
+			cursor: pointer;
+			margin: 0;
+			font-size: 13px;
+			line-height: 20px;
+		}
+
+		.visuallyhidden {
+			border: 0;
+			clip: rect(0 0 0 0);
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0;
+			position: absolute;
+			width: 1px;
+		}
+
+		.photo-selector .file-input {
+			position: absolute;
+			z-index: 10;
+			width: 585px;
+			height: 40px;
+			font-size: 50px;
+			cursor: pointer;
+			opacity: 0;
+			padding-top: 100px;
+		}
+
+		.photo-selector .swf-container {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 11;
+			cursor: pointer;
+		}
 	</style>
 </head>
 <body>
@@ -75,8 +139,17 @@
 						<a href="javascript: void(0);" class="change-picture"><i class="fa fa-trash-o"></i></a>
 					</form>
 					</h4>
-
-
+				</div>
+				<div class="image-selector">
+					<div class="photo-selector">
+						<input type="hidden" name="photo_data_empty" class="photo-data" value>
+						<div class="photo-data-container hidden"></div>
+						<label class="t1-label">
+							<span class="visuallyhidden"> Add photos </span>
+							<input type="file" name="media[]" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" data-original-title="Add photos">
+						</label>
+						<div class="swf-container"></div>
+					</div>
 				</div>	
 			</div>
 			<div class="memory-text">
