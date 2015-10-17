@@ -19,19 +19,6 @@
 			document.getElementById("edit-signature").style.display="none";
 		}
 	</script>
-	<style>
-	    .add-new-memory{
-	    	padding-top: 130px;
-	    	margin-left: 100px;
-	    }
-	    .fa-camera-retro:before{
-	    	font-size: 30px;
-	    	content:"\f083";
-	    }
-	    #input-bar{
-	    	border: 1px solid #ccc;
-	    }
-	</style>
 </head>
 <body>
 	<nav class="flex">
@@ -42,7 +29,7 @@
 		</div>
 		<div class="middleLogo">
 			<a href="timeline.html">
-				<img src="img/ml-mod.png" alt="logo" style= "height: 40px;margin-top: 15px;box-sizing: border-box;">
+				<img src="img/ml-mod.png" alt="logo" id="middleLogo">
 			</a>
 		</div>
 		<div class="settings flex">
@@ -78,7 +65,7 @@
 					</div>
 				</div>
 				<div class="add-new-memory">
-					<a href="newpost.html"><i class="fa fa-camera-retro"></i></a>
+					<a href="newpost.html"><i class="fa fa-camera"></i></a>
 				</div>
 			</div>
 			<div class="post flex abs">
@@ -133,11 +120,11 @@
 				<div class="flex">
 					<div class="about-basics flex">
 						<div>
-							<h3>Lives in:</h3>
+							<h3><i class="fa fa-map-marker"></i> Lives in:</h3>
 							<span>Urbana-Champaign</span>
 						</div>
 						<div>
-							<h3>Joined On:</h3>
+							<h3><i class="fa fa-clock-o"></i> Joined:</h3>
 							<span>8/16/2015</span>
 						</div>
 					</div>

@@ -14,9 +14,86 @@ a {
 	a:hover {
 		color: #6C7A89;
 	}
-	a:active{
+	a:active {
 		text-decoration: none;
 	}
+
+.flex {
+	display: -ms-flex!important;
+	display: -webkit-flex!important;
+	display: -moz-flex!important;
+	display: flex!important;
+}
+
+input {
+	font-family: "Argh", Arial;
+	font-style: inherit;
+	font-weight: inherit;
+	vertical-align: middle;
+	outline: none;
+	font-size: 15px;
+}
+
+/* nav bar*/
+nav {
+	background-color: rgba(255,255,255,0.4);
+	padding: 0 15px;
+}
+
+div.username, div.settings {
+	width: 25%;
+}
+	div.username h1, div.middleLogo h1 {
+		display: inline-block;
+		padding-top: 20px;
+	}
+
+div.middleLogo {
+	width: 50%;
+	text-align: center;
+}
+
+div.settings {
+	padding: 1% 0;
+	font-size: 32px;
+	text-align: right;
+	-webkit-justify-content: flex-end;
+	-moz-justify-content: flex-end;
+	-ms-justify-content: flex-end;
+	-o-justify-content: flex-end;
+	justify-content: flex-end;
+	box-sizing: border-box;
+}
+
+.search { 
+	position: relative;
+	text-align: right;
+	margin-right: 10px;
+	border-radius: 20px;
+}
+
+.search input { 
+	padding: 3px 25px 0 0;
+	margin: 0;
+	font-size: 18px;
+	text-align: right;
+	color: rgb(150,150,150);
+	border: 1px solid #ccc;
+}
+
+.search .fa-search { 
+	position: absolute;
+	top: 13px;
+	right: 3px;
+	font-size: 18px;
+	color: rgb(185,185,185);
+}
+
+#middleLogo {
+	height: 40px;
+	margin-top: 15px;
+	box-sizing: border-box;
+}
 
 .profilepic{
 	padding-top: 50px;
@@ -26,25 +103,20 @@ a {
 	float: left;
 	padding-right: 10px;
 }
-h1,h2,h3 {	
+
+h1,
+h2,
+h3 {	
 	margin: 0px;
 }
-h3{
+
+h3 {
 	padding-top: 10px;
 }
 
 .graybg {
 	background-color: #dadfe1
 }
-input{
-	font-size: 12px;
-	font-style: inherit;
-	font-weight: inherit;
-	vertical-align: middle;
-	outline: none;
-}
-
-
 
 .button {
 	margin-right: 17px;
@@ -56,29 +128,25 @@ input{
     src: url('../Aaargh.ttf');
 }
 
-
-.flex {
-	display: -ms-flex!important;
-	display: -webkit-flex!important;
-	display: -moz-flex!important;
-	display: flex!important;
-}
-
 a.signup, .slButtons {
 	float: right;
 	text-decoration: none;
 	font-size: 12px;
 }
+
 a.signup {
 	margin: 10px 5px 0 0;
 }
+
 .slButtons a.signup {
 	position: static;
 	margin-left: 10px;
 }
+
 .slButtons a.signup:first-child {
 	margin-left: 0;
 }
+
 .signup div {
 	background: rgba(0,0,0,0.7);
 	color: #ecf0f1;
@@ -87,9 +155,11 @@ a.signup {
 	border-radius: 3px;
 	transition: all 0.25s ease;
 }
+
 .signup div:hover {
 	background: rgba(0,0,0,0.6);
 }
+
 .login {
 	max-width: 90%;
 	margin: 0 auto;
@@ -101,15 +171,18 @@ a.signup {
          -o-animation: fadein 1s; /* Opera < 12.1 */
             animation: fadein 1s;
 }
+
 .login * {
 	width: 100%;
 	display: block;
 }
+
 .login .logo {
 	width: 50%;
 	margin: 0 auto;
 	pointer-events: none;
 }
+
 .loginContainer {
 	padding: 1px 10px 20px;
 	margin-top: 10px;
@@ -119,6 +192,7 @@ a.signup {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
+
 .passwordReset {
 	font-size: 12px;
 }
@@ -150,10 +224,7 @@ a.signup {
 label {
 	margin: 3px 0;
 }
-input {
-	font-size: 20px;
-	font-family: "Argh", Arial;
-}
+
 input[type=submit] {
 	background: #EEEEEE;
 	border: none;
@@ -162,19 +233,23 @@ input[type=submit] {
 
 	transition: all 0.25s ease;
 }
+
 input[type=submit]:hover {
 	background: #DADFE1;
 }
+
 .forgot {
 	text-align: center;
 	font-size: 12px;
 	margin-top: 15px;
 }
+
 .forgot a {
 	width: auto;
 	text-decoration: none;
 	transition: all 0.25s ease;
 }
+
 .forgot a:hover {
 	color: #2e2e2e;
 }
@@ -322,6 +397,7 @@ input[type=submit]:hover {
 	border-radius: 3px;
 	padding: 5px 20px;
 }
+
 .friends {
 	-webkit-flex-wrap: wrap;
 	-moz-flex-wrap: wrap;
@@ -329,6 +405,7 @@ input[type=submit]:hover {
 	-o-flex-wrap: wrap;
 	flex-wrap: wrap; 
 }
+
 .thumb {
 	min-width: 30%;
     height: 100px;
@@ -339,10 +416,12 @@ input[type=submit]:hover {
     text-align: right;
     overflow: hidden;
 }
+
 .thumb div {
 	background-size: cover;
 	height: 100%;
 }
+
 .thumb img {
 	position: absolute;
 	top: 0;
@@ -352,15 +431,18 @@ input[type=submit]:hover {
 	width: auto;
 	height: 100%;
 }
+
 .thumb .overlay {
 	z-index: 10;
 	opacity: 0.4;
 	width: 100%;
 	transition: all 0.3s ease;
 }
+
 .thumb:hover .overlay, .thumb:hover .name {
 	opacity: 0.9;
 }
+
 .thumb .name {
 	position: absolute;
     bottom: 3px;
@@ -371,67 +453,23 @@ input[type=submit]:hover {
     transition: all 0.3s ease;
 }
 
-nav {
-	background-color: rgba(255,255,255,0.4);
-	padding: 0 15px;
-}
-div.username, div.settings {
-	width: 25%;
-}
-	div.username h1, div.middleLogo h1 {
-		display: inline-block;
-		padding-top: 20px;
-	}
-div.middleLogo {
-	width: 50%;
-	text-align: center;
-}
-div.settings {
-	padding: 1% 0;
-	font-size: 32px;
-	text-align: right;
-	-webkit-justify-content: flex-end;
-	-moz-justify-content: flex-end;
-	-ms-justify-content: flex-end;
-	-o-justify-content: flex-end;
-	justify-content: flex-end;
-	box-sizing: border-box;
-}
-	.search { 
-		position: relative;
-		text-align: right;
-		margin-right: 10px;
-	}
-	.search input { 
-		padding: 3px 25px 0 0;
-		margin: 0;
-		font-size: 18px;
-		text-align: right;
-		color: rgb(150,150,150);
-		border: 1px solid #ccc;
-	}
-	.search .fa-search { 
-			position: absolute;
-			top: 13px;
-			right: 3px;
-			font-size: 18px;
-			color: rgb(185,185,185);
-		}
-
 /* Content Styling */
 div.gridContainer {
 	padding: 1% 2% 0;
 }
+
 div.main {
 	width: 100%;
 	margin-right: 5%;
 	padding: 20px;
 }
+
 .profile div.main {
 	width: 65%;
 	margin-right: 5%;
 	padding: 20px;
 }
+
 .profile div.sidebar {
 	width: 30%;
 	padding: 20px;
@@ -444,6 +482,7 @@ div.main {
 	margin-bottom: 20px;
 	padding: 0 0 20px;
 }
+
 .profile-image {
 	width: 20%;
 	height: 150px;
@@ -452,17 +491,35 @@ div.main {
 	box-shadow: 0 0 10px rgba(0,0,0,0.25);
 	display: inline-block;
 }
+
 .profile-header {
 	width: 60%;
 	margin-left: 20px;
 }
+
 	.profile-header h1, .profile-header h3 {
 		padding: 0;
 		display: inline-block;
 	}
+
 	.profile-header .say-something {
 		margin-top: 10px;
 	}
+
+#edit-signature {
+	padding-top: 10px;
+	border-radius: 3px;
+}
+
+.add-new-memory {
+	padding-top: 130px;
+	margin-left: 100px;
+}
+
+#input-bar {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
 
 /* About Widget */
 
@@ -474,6 +531,7 @@ div.main {
 	-o-flex-wrap: wrap;
 	flex-wrap: wrap;
 }
+
 	.about-basics > div {
 		width: 100%;
 	}
@@ -484,13 +542,15 @@ div.main {
 	background-color: rgba(255,255,255,0.4);
 	box-shadow: 0 0 10px rgba(0,0,0,0.25);
 	padding: 15px 20px;
-	margin: 0 0 20px;
+	margin: 20px;
 	border-radius: 0;
 	box-sizing: border-box;
 }
+
 	.widget h2 {
 		margin-top: 0;
 	}
+
 .friends {
 	-webkit-justify-content: space-between;
 	-moz-justify-content: space-between;
@@ -499,6 +559,7 @@ div.main {
 	justify-content: space-between;
 	margin-top: 5px;
 }
+
 .thumb {
 	margin: 0 0 10px;
 	-webkit-flex: 0 0 30%;
@@ -507,6 +568,7 @@ div.main {
 	-o-flex: 0 0 30%;
     flex: 0 0 30%;
 }
+
 	.thumb div {
 		background-position: center;
 	}
@@ -518,15 +580,18 @@ div.main {
 	height: 100%;
 	padding-right: 20px;
 }
+
 .author-image {
 	width: 70px;
 	height: auto;
 	border: 2px solid transparent;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
+
 .author-name {
 	text-align: center;
 }
+
 .post {
 	height: auto;
 	margin-bottom: 25px;
@@ -539,20 +604,25 @@ div.main {
 	-o-flex-wrap: wrap;
 	flex-wrap: wrap;
 }
+
 .post > a {
 	width: 55%;
 }
+
 .title {
 	width: 100%;
 	height: 40px;
 }
+
 	.title h2 {
 		width: 50%;
 		margin: 0;
 	}
+
 	.title h2:last-child {
 		text-align: right;
 	}
+
 .panorama {
 	background-size: cover;
 	background-position: center;
@@ -565,13 +635,16 @@ div.main {
 	padding: 0;
 	margin-bottom: 35px;
 }
+
 .post.abs > a {
 	width: 70%;
 }
+
 .post.abs .panorama {
 	height: 220px;
 	position: relative;
 }
+
 	.post.abs .panorama .overlay {
 		position: absolute;
 	    height: 100%;
@@ -581,9 +654,11 @@ div.main {
 	    color: #ecf0f1;
 	    transition: all 0.25s ease;
 	}
+
 		.post.abs .panorama:hover .overlay {
 			opacity: 1;
 		}
+
 	.post.abs .panorama .overlay p {
 		margin: 0;
 		width: 100%;
@@ -595,6 +670,7 @@ div.main {
 	    -ms-transform: translateX(-50%) translateY(-50%);
 	    transform: translateX(-50%) translateY(-50%);
 	}
+
 	.post.abs .panorama .title {
 		background: url(../img/post-shadow.png);
 	    padding: 7px 10px;
@@ -603,9 +679,11 @@ div.main {
 	    box-sizing: border-box;
 	    transition: all 0.25s ease;
 	}
+
 		.post.abs .panorama:hover .title {
 			opacity: 0;
 		}
+
 .post.abs .map {
 	width: 30%;
     float: none;
@@ -615,6 +693,7 @@ div.main {
     padding: 0;
     position: relative;
 }
+
 	.post.abs .map .location {
 		text-shadow: 0 0 4px rgba(0,0,0,.9);
 	    position: absolute;
@@ -627,15 +706,18 @@ div.main {
 	    background-image: url(../img/location-shadow.png);
 	    background-size: auto 100%;
 	}
+
 	.post.abs .map .location i {
 		padding-right: 5px;
 	}
+
 /*add new post*/
-#form_note textarea{
+#form_note textarea {
 font-size: 13px;
 line-height: 1.62;
 }
-#note_title{
+
+#note_title {
 width: 582px;
 margin-top: 5px;
 padding: 3px;
@@ -643,7 +725,8 @@ border: 1px solid #ccc;
 line-height: 1.62;
 
 }
-#note_text{
+
+#note_text {
 resize: vertical;
 width: 582px;
 padding: 3px;
@@ -652,25 +735,28 @@ margin-top: 5px;
 height: 400px;
 outline: none;
 }
-.upload-photo{
+
+.upload-photo {
 height: 100%;
 display: inline-block;
 }
-.upload-section{
+
+.upload-section {
 display: block;
 position: relative;
 width: 580px;
-
 border: 3px dashed #eee;
 margin: 3px 0;
 text-align: center;
 color: #ccc;
 background: #fafafa;
 }
-.upload-section p{
+
+.upload-section p {
 line-height: 2;
 }
-.upload-section .upload-btn{
+
+.upload-section .upload-btn {
 color: #999;
 z-index:2;
 height: 94px;
@@ -680,22 +766,26 @@ left:0;
 font-size:14px;
 line-height: 120px;
 }
-#tag{
+
+#tag {
 	border-radius: 3px;
 	font-size: 15px;
 	border: 1px solid #ccc;
 }
-#title{
+
+#title {
 width: 585px;
 margin-top: 5px;
 padding: 3px;
 border: 1px solid #ccc;
 line-height: 1.62;
 }
-.fa-trash-o:before{
+
+.fa-trash-o:before {
 content: "\f014";
 padding-left: 340px;
 }
-#cancelbutton{
+
+#cancelbutton {
 	margin-left: 405px;
 }
