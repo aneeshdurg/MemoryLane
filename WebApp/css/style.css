@@ -1,6 +1,12 @@
+@font-face {
+    font-family: Argh;
+    src: url('../Aaargh.ttf');
+}
+
 body{
 	background-color: #dadfe1;
-	color: #282828;width: 100%;
+	color: #282828;
+	width: 100%;
 	font-family: Argh, Arial;
 	margin: 0;
 }
@@ -20,13 +26,45 @@ a {
 	text-decoration: none;
 	transition: all 0.25s ease;
 }
+	a:hover {
+		color: #6C7A89;
+	}
 
-a:hover {
-	color: #6C7A89;
+	a:active {
+		text-decoration: none;
+	}
+
+input {
+	font-family: "FontAwesome", "Argh", Arial;
+	font-style: inherit;
+	font-weight: inherit;
+	font-size: 15px;
+	outline: none;
+	vertical-align: middle;
 }
 
-a:active {
-	text-decoration: none;
+	input[type=submit] {
+		background: #EEEEEE;
+		border: none;
+		cursor: pointer;
+		padding-top: 6px;
+		transition: all 0.25s ease;
+	}
+
+		input[type=submit]:hover {
+			background: #DADFE1;
+		}
+
+	input[type=file] {
+		background-color: #dadfe1;
+		padding: initial;
+		border: initial;
+		line-height: initial;
+		box-shadow: none
+	}
+
+label {
+	margin: 3px 0;
 }
 
 .flex {
@@ -36,63 +74,74 @@ a:active {
 	display: flex!important;
 }
 
-input {
-	font-family: "Argh", Arial;
-	font-style: inherit;
-	font-size: 15px;
-	font-weight: inherit;
-	outline: none;
-	vertical-align: middle;
-}
+/*------------------------------------*\
+    #NAVIGATION BAR
+\*------------------------------------*/
 
-/* Nav bar*/
 nav {
 	background-color: rgba(255,255,255,0.4);
 	padding: 0 15px;
 }
 
-div.username, 
-div.settings {
-	width: 25%;
+.username,
+.settings {
+	width: 30%;
 }
 
-div.username h1, 
-div.middleLogo h1 {
-	display: inline-block;
-	padding-top: 20px;
-}
-
-div.middleLogo {
+.middleLogo {
 	text-align: center;
-	width: 50%;
+	width: 40%;
 }
 
-div.settings {
-	box-sizing: border-box;
+#middleLogo {
+	height: 40px;
+	margin-top: 15px;
+}
+
+.username h1 {
+	display: inline-block;
+	padding-top: 17px;
+}
+
+.username span {
+	display: none;
+}
+
+.settings {
 	font-size: 32px;
-	padding: 1% 0;
+	padding: 10px 0 0;
 	text-align: right;
 	-webkit-justify-content: flex-end;
 	-moz-justify-content: flex-end;
 	-ms-justify-content: flex-end;
 	-o-justify-content: flex-end;
 	justify-content: flex-end;
+	box-sizing: border-box;
 }
 
-.search { 
+.search {
+	display: none;
 	border-radius: 20px;
 	margin-right: 10px;
 	position: relative;
 	text-align: right;
 }
 
-.search input { 
-	border: 1px solid #ccc;
-	color: rgb(150,150,150);
-	font-size: 18px;margin: 0;
-	padding: 3px 25px 0 0;
+.search input {
+	width: 100%;
+	margin: 0;
+	padding: 5px;
+	border: 1px solid rgba(215,215,215,0.7);
+	background-color: rgba(215,215,215,1);
+	color: rgb(130,130,130);
+	font-size: 18px;
 	text-align: right;
+	box-sizing: border-box;
+	transition: all 0.15s ease;
 }
+	.search input:focus {
+		box-shadow: 0 0 5px rgba(0,0,0,0.3);
+	}
 
 .search .fa-search { 
 	color: rgb(185,185,185);
@@ -102,26 +151,9 @@ div.settings {
 	top: 13px;
 }
 
-#middleLogo {
-	box-sizing: border-box;
-	height: 40px;
-	margin-top: 15px;
-}
-
-/* Sign up and login in*/
-.graybg {
-	background-color: #dadfe1
-}
-
-.button {
-	margin-right: 17px;
-}
-
-
-@font-face {
-    font-family: Argh;
-    src: url('../Aaargh.ttf');
-}
+/*------------------------------------*\
+    #SIGN UP & LOGIN
+\*------------------------------------*/
 
 a.signup, .slButtons {
 	float: right;
@@ -130,36 +162,31 @@ a.signup, .slButtons {
 }
 
 a.signup {
-	margin: 10px 5px 0 0;
+	margin: 10px 10px 0;
 }
 
-.slButtons a.signup {
-	margin-left: 10px;
-	position: static;	
-}
-
-.slButtons a.signup:first-child {
-	margin-left: 0;
-}
+	a.signup:first-child {
+		margin-left: 0;
+	}
 
 .signup div {
 	background: rgba(0,0,0,0.7);
-	border-radius: 3px;
 	color: #ecf0f1;
+	border-radius: 3px;
 	padding: 10px 15px;
 	text-align: center;	
 	transition: all 0.25s ease;
 }
 
-.signup div:hover {
-	background: rgba(0,0,0,0.6);
-}
+	.signup div:hover {
+		background: rgba(0,0,0,0.6);
+	}
 
 .login {
-	clear: both;
 	max-width: 90%;
 	margin: 0 auto;
 	text-align: center;
+	clear: both;
 	-webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 1s; /* Firefox < 16 */
         -ms-animation: fadein 1s; /* Internet Explorer */
@@ -167,60 +194,45 @@ a.signup {
             animation: fadein 1s;
 }
 
-.login * {
-	display: block;
-	width: 100%;
-}
+	.login * {
+		display: block;
+		width: 100%;
+	}
 
 .login .logo {
+	width: 50%;
 	margin: 0 auto;
 	pointer-events: none;
-	width: 50%;
 }
 
-.loginContainer {
+.login .loginContainer {
 	background-color: rgba(255,255,255,0.75);
-	border-radius: 5px;
 	margin-top: 10px;
-	padding: 1px 10px 20px;	
+	padding: 10px 10px 20px;
+	border-radius: 5px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-.passwordReset {
+.login .loginContainer.passwordReset {
 	font-size: 12px;
 }
 
-.field {
+.login .loginContainer .field {
+	height: 36px;
+	margin: 10px 0;
+	padding-left: 5px;
 	border-radius: 3px;
 	border-width: 0;
-	box-sizing: border-box;
-	margin: 10px 0;
-	height: 36px;
 	text-align: left;
+	box-sizing: border-box;
 	transition: all 0.25s ease;
 }
 
-.field:focus {
-	box-shadow: 0 0 2px rgba(0,0,0,0.5);
-}
-
-label {
-	margin: 3px 0;
-}
-
-input[type=submit] {
-	background: #EEEEEE;
-	border: none;
-	cursor: pointer;
-	padding-top: 6px;
-	transition: all 0.25s ease;
-}
-
-input[type=submit]:hover {
-	background: #DADFE1;
-}
+	.login .loginContainer .field:focus {
+		box-shadow: 0 0 2px rgba(0,0,0,0.5);
+	}
 
 .forgot {
 	font-size: 12px;
@@ -229,182 +241,23 @@ input[type=submit]:hover {
 }
 
 .forgot a {
+	width: auto;
 	text-decoration: none;
 	transition: all 0.25s ease;
-	width: auto;	
 }
 
-.forgot a:hover {
-	color: #2e2e2e;
-}
-
-@media (min-width: 720px) {
-	
-	.login {
-		bottom: 0;
-		height: 410px;
-		left: 0;
-		margin: auto;
-		max-width: 400px;
-		position: absolute;
-		right: 0;
-		top: 0;
+	.forgot a:hover {
+		color: #2e2e2e;
 	}
 
-	.login .logo {
-		width: auto;
-		max-width: 80%;
-	}
+/*------------------------------------*\
+    #PROFILE PAGE
+\*------------------------------------*/
 
-	.passwordReset {
-		margin-left: -30%;
-		width: 150%;
-	}
+/* -- Content -- */
 
-	a.signup, .slButtons {
-		font-size: 16px;
-	}
-}
-
-/* Firefox < 16 */
-@-moz-keyframes fadein {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0px); }
-}
-
-/* Safari, Chrome and Opera > 12.1 */
-@-webkit-keyframes fadein {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0px); }
-}
-
-/* Internet Explorer */
-@-ms-keyframes fadein {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0px); }
-}
-
-/* Opera < 12.1 */
-@-o-keyframes fadein {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0px); }
-}
-
-@keyframes fadein {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0px); }
-}
-
-/* Single Post*/
-.container {
-	display: block;
-	height: 25%;
-	margin-left: 21%;
-	width: 100%;	
-}
-
-.panoramaElement {
-	background-color: rgba(255,255,255,0.4);
-	box-sizing: border-box;
-	display: inline-block;
-	margin-left: 0;
-	line-height: 0;
-	padding: 5px 20px 20px;	
-	width: 100%;
-}
-
-.panoramaResize {
-	box-shadow: 0 0 10px rgba(0,0,0,0.4);
-	height: auto;	
-	margin-bottom: 20px;
-	width: 100%;
-}
-
-.panoramaHeader {
-	margin-bottom: 5px;
-	justify-content: space-between;
-	width:100%;	
-}
-
-.panoramaLeft, .panoramaRight {
-	font-size: 24px;
-	font-weight: 700;
-}
-
-.textBody {
-	font-size: 18px;
-}
-
-.textWith{
-	font-family: Argh;
-	font-size: 21px;
-	font-weight: 700;
-	line-height: 110%;
-	margin-bottom: 15px;
-}
-
-.textRemember {
-	font-size: 25px;
-	font-weight: 700;
-	line-height: 110%;
-	margin: 0;
-}
-
-.content {
-	background-color: rgba(255,255,255,0.4);
-	box-sizing: border-box;float: left; 
-    line-height: 130%;
-    padding: 15px;
-    width: 60%;
-}
-
-.single-post {
-    margin: 0 3%;
-    padding: 50px 20px;
-}
-        
-.friend {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.friend-name {
-    margin-top: 2px;
-    text-align: center;  
-}
-
-.friend-image {
-    border: 2px solid transparent;
-    height: auto;
-    width: 70px;  
-}
-
-.map {
-	float: right;
-	width: 35%;
-}
-
-.mapImage {
-	width: 100%;
-}
-
-.mapsElement{
-	border: 2px solid black;
-	display: inline-block;
-	margin-left: .5%;
-	position: relative;
-	width: 16%;	
-}
-
-.mapsResize{
-	height: auto;
-	width: 100%;
-}
-
-/* Profile*/
-/* About Widget */
-.about-basics {
-	width: 100%;
+.gridContainer {
+	padding: 1% 2% 0;
 	-webkit-flex-wrap: wrap;
 	-moz-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
@@ -412,143 +265,43 @@ input[type=submit]:hover {
 	flex-wrap: wrap;
 }
 
-.about-basics > div {
+.profile .main, .profile .sidebar {
 	width: 100%;
+	padding: 0 20px;
+	margin-right: 0!important;
 }
 
-/* FRIENDS WIDGET */
-.friends {
-	-webkit-flex-wrap: wrap;
-	-moz-flex-wrap: wrap;
-	-ms-flex-wrap: wrap;
-	-o-flex-wrap: wrap;
-	flex-wrap: wrap; 
+.profile .main {
+	padding-top: 20px;
 }
 
-.thumb {
-	min-width: 30%;
-    height: 100px;
-    background: rgba(255,255,255,0.7);
-    padding: 0;
-    position: relative;
-    text-align: right;
-    overflow: hidden;
-}
+/* -- Profile Info -- */
 
-.thumb div {
-	background-size: cover;
-	height: 100%;
-}
-
-.thumb img {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	width: auto;
-	height: 100%;
-}
-
-.thumb .overlay {
-	z-index: 10;
-	opacity: 0.4;
-	width: 100%;
-	transition: all 0.3s ease;
-}
-
-.thumb:hover .overlay, .thumb:hover .name {
-	opacity: 0.9;
-}
-
-.thumb .name {
-	position: absolute;
-    bottom: 3px;
-    right: 5px;
-    color: #ecf0f1;
-    z-index: 100;
-    opacity: 0.8;
-    transition: all 0.3s ease;
-}
-
-/* Friends Widget Tweaks */
-.widget {
-	width: 100%;
-	background-color: rgba(255,255,255,0.4);
-	box-shadow: 0 0 10px rgba(0,0,0,0.25);
-	padding: 15px 20px;
-	margin: 20px;
-	border-radius: 0;
-	box-sizing: border-box;
-}
-
-	.widget h2 {
-		margin-top: 0;
-	}
-
-.friends {
-	-webkit-justify-content: space-between;
-	-moz-justify-content: space-between;
-	-ms-justify-content: space-between;
-	-o-justify-content: space-between;
-	justify-content: space-between;
-	margin-top: 5px;
-}
-
-.thumb {
-	margin: 0 0 10px;
-	-webkit-flex: 0 0 30%;
-	-moz-flex: 0 0 30%;
-	-ms-flex: 0 0 30%;
-	-o-flex: 0 0 30%;
-    flex: 0 0 30%;
-}
-
-	.thumb div {
-		background-position: center;
-	}
-
-/* Content Styling */
-div.gridContainer {
-	padding: 1% 2% 0;
-}
-
-div.main {
-	width: 100%;
-	margin-right: 5%;
-	padding: 20px;
-}
-
-.profile div.main {
-	width: 65%;
-	margin-right: 5%;
-	padding: 20px;
-}
-
-.profile div.sidebar {
-	width: 30%;
-	padding: 20px;
-	box-sizing: border-box;
-}
-
-/* Profile Info Styling */
 .profile-info {
 	margin-bottom: 20px;
 	padding: 0 0 20px;
+	position: relative;
+}
+
+.profile-info .add-new-memory {
+	position: absolute;
+	bottom: 10px;
+	right: 5px;
 }
 
 .profile-image {
-	width: 20%;
+	display: inline-block;
+	width: 40%;
 	height: 150px;
 	background-size: cover;
 	background-position: center;
 	box-shadow: 0 0 10px rgba(0,0,0,0.25);
-	display: inline-block;
 }
 
 .profile-header {
 	width: 60%;
 	margin-left: 20px;
+	font-size: 12px;
 }
 
 .profile-header h1, 
@@ -566,7 +319,115 @@ div.main {
 	border-radius: 3px;
 }
 
-/* Add new post*/
+/* -- Widgets -- */
+
+.widget {
+	width: 100%;
+	background-color: rgba(255,255,255,0.4);
+	box-shadow: 0 0 10px rgba(0,0,0,0.25);
+	padding: 15px 20px;
+	margin: 20px 0;
+	border-radius: 0;
+	box-sizing: border-box;
+}
+
+	.widget:first-child {
+		margin-top: 0;
+	}
+
+.widget h2 {
+	margin-top: 0;
+}
+
+/* -- About Widget -- */
+
+.about-basics {
+	width: 100%;
+	-webkit-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-o-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+.about-basics > div {
+	width: 100%;
+}
+
+/* -- Friends Widget -- */
+
+.friends {
+	-webkit-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-o-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-justify-content: space-between;
+	-o-justify-content: space-between;
+	justify-content: space-between;
+	margin-top: 5px;
+}
+
+.thumb {
+	min-width: 30%;
+    height: 100px;
+    margin: 0 0 10px;
+    padding: 0;
+    background: rgba(255,255,255,0.7);
+    position: relative;
+    text-align: right;
+    overflow: hidden;
+	-webkit-flex: 0 0 30%;
+	-moz-flex: 0 0 30%;
+	-ms-flex: 0 0 30%;
+	-o-flex: 0 0 30%;
+    flex: 0 0 30%;
+}
+
+.thumb div {
+	background-size: cover;
+	background-position: center;
+	height: 100%;
+}
+
+.thumb img {
+	width: auto;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.thumb .overlay {
+	z-index: 10;
+	opacity: 0.4;
+	width: 100%;
+	transition: all 0.3s ease;
+}
+
+	.thumb:hover .overlay,
+	.thumb:hover .name {
+		opacity: 0.9;
+	}
+
+.thumb .name {
+	position: absolute;
+    bottom: 3px;
+    right: 5px;
+    color: #ecf0f1;
+    z-index: 100;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+/*------------------------------------*\
+    #NEW POST
+\*------------------------------------*/
+
 #form_note textarea {
 	font-size: 13px;
 	line-height: 1.62;
@@ -582,13 +443,13 @@ div.main {
 }
 
 #note_text {
-	resize: vertical;
 	width: 582px;
-	padding: 3px;
-	border: 1px solid #ccc;
-	margin-top: 5px;
 	height: 400px;
+	padding: 3px;
+	margin-top: 5px;
+	border: 1px solid #ccc;
 	outline: none;
+	resize: vertical;
 }
 
 .upload-photo {
@@ -600,10 +461,10 @@ div.main {
 	display: block;
 	position: relative;
 	width: 580px;
-	border: 3px dashed #eee;
 	margin: 3px 0;
 	text-align: center;
 	color: #ccc;
+	border: 3px dashed #eee;
 	background: #fafafa;
 }
 
@@ -636,30 +497,17 @@ div.main {
 	line-height: 1.62;
 }
 
-.fa-trash-o:before {
-	content: "\f014";
-	padding-left: 340px;
-}
+	.fa-trash-o:before {
+		padding-left: 340px;
+	}
 
 #cancelbutton {
 	margin-left: 405px;
-}
-.add-new-memory {
-	padding-top: 130px;
-	margin-left: 100px;
 }
 
 #input-bar {
 	border: 1px solid #ccc;
 	border-radius: 5px;
-}
-
-input[type=file] {
-	background-color: #dadfe1;
-	padding: initial;
-	border: initial;
-	line-height: initial;
-	box-shadow: none
 }
 
 .photo-selector {
@@ -732,9 +580,17 @@ input[type=file] {
 	transition: all 0.25s ease;
 }
 
-/* timeline Post Styling */
+/*------------------------------------*\
+    #TIMELINE
+\*------------------------------------*/
+
+.main {
+	width: 100%;
+	padding: 20px;
+}
+
 .author-info {
-	display: inline-block;
+	display: none;
 	float: left;
 	height: 100%;
 	padding-right: 20px;
@@ -744,26 +600,32 @@ input[type=file] {
 	width: 70px;
 	height: auto;
 	border: 2px solid transparent;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 0 10px rgba(0,0,0,0.25);
 }
 
 .author-name {
+	margin: 5px 0; 
 	text-align: center;
 }
 
 .title {
 	width: 100%;
 	height: 40px;
+	-webkit-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-o-flex-wrap: wrap;
+	flex-wrap: wrap;
 }
 
 .title h2 {
-	width: 50%;
+	width: 100%;
 	margin: 0;
 }
 
-.title h2:last-child {
-	text-align: right;
-}
+	.title h2:last-child {
+		font-size: 14px;
+	}
 
 .panorama {
 	background-size: cover;
@@ -772,8 +634,11 @@ input[type=file] {
 	height: 200px;
 }
 
-  /* Post style for timeline and profile*/
-.post.abs {
+/*------------------------------------*\
+    #POST STYLING
+\*------------------------------------*/
+
+.post {
 	padding: 0;
 	margin-bottom: 35px;
 	background-color: rgba(255, 255, 255, 0.4);
@@ -785,77 +650,410 @@ input[type=file] {
 	flex-wrap: wrap;
 }
 
-.post.abs > a {
-	width: 70%;
+.post > a {
+	width: 100%;
 }
 
-.post.abs .panorama {
+.post .panorama {
 	height: 220px;
 	position: relative;
 }
 
-.post.abs .panorama .overlay {
-	position: absolute;
+.post .panorama .overlay {
     height: 100%;
     width: 100%;
+    position: absolute;
     background-image: url(../img/post-overlay.png);
     opacity: 0;
     color: #ecf0f1;
+    z-index: 10;
     transition: all 0.25s ease;
 }
 
-.post.abs .panorama:hover .overlay {
-	opacity: 1;
-}
+	.post .panorama:hover .overlay {
+		opacity: 1;
+	}
 
-.post.abs .panorama .overlay p {
-	margin: 0;
+.post .panorama .overlay p {
 	width: 100%;
-    text-align: center;
+	margin: 0;
+	padding: 0 10px;
     position: absolute;
     top: 50%;
     left: 50%;
+    text-align: center;
     -webkit-transform: translateX(-50%) translateY(-50%);
     -ms-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
+    box-sizing: border-box;
 }
 
-.post.abs .panorama .title {
-	background: url(../img/post-shadow.png);
+.post .panorama .title {
     padding: 7px 10px;
     color: #ecf0f1;
+    background: url(../img/post-shadow.png);
     text-shadow: 0 0 4px rgba(0,0,0,0.75);
     box-sizing: border-box;
     transition: all 0.25s ease;
 }
 
-.post.abs .panorama:hover .title {
-	opacity: 0;
-}
+	.post .panorama:hover .title,
+	.post:hover .map .location {
+		opacity: 0;
+	}
 
-.post.abs .map {
-	width: 30%;
-    float: none;
+.map {
+	width: 100%;
+    padding: 0;
+    position: relative;
     background-image: url(../img/map.png);
     background-position: center;
     background-size: cover;
-    padding: 0;
-    position: relative;
 }
 
-.post.abs .map .location {
-	text-shadow: 0 0 4px rgba(0,0,0,.9);
+.map .location {
+	width: 100%;
+	padding-right: 5px;
     position: absolute;
     bottom: 0;
     right: 0;
-    padding-right: 5px;
-    width: 100%;
     text-align: right;
     color: rgba(255,255,255,0.8);
+    text-shadow: 0 0 4px rgba(0,0,0,.9);
     background-image: url(../img/location-shadow.png);
     background-size: auto 100%;
+    z-index: 1;
+    box-sizing: border-box;
+    transition: all 0.25s ease;
 }
 
-.post.abs .map .location i {
-	padding-right: 5px;
+.map .location i {
+	padding-right: 7px;
+}
+
+/*------------------------------------*\
+    #SINGLE POST
+\*------------------------------------*/
+
+.container {
+	display: block;
+	width: 100%;
+	height: 25%;
+	margin-left: 21%;	
+}
+
+.panoramaElement {
+	display: inline-block;
+	width: 100%;
+	margin-left: 0;
+	line-height: 0;
+	padding: 5px 20px 20px;	
+	box-sizing: border-box;
+}
+
+.panoramaResize {
+	width: 100%;
+	height: auto;
+	margin-bottom: 20px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.panoramaHeader {
+	width:100%;
+	margin-bottom: 5px;
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-o-justify-content: space-between;
+	-ms-justify-content: space-between;
+	justify-content: space-between;
+}
+
+.panoramaLeft, .panoramaRight {
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.panoramaLeft img {
+	height: 35px;
+	margin: 5px 10px 0 0;
+	opacity: 0.85;
+	box-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.textBody {
+	font-size: 14px;
+	line-height: 180%;
+}
+
+.textWith{
+	width: 100%;
+	margin-bottom: 15px;
+	font-family: Argh;
+	font-size: 21px;
+	font-weight: 700;
+	line-height: 110%;
+}
+
+.textRemember {
+	margin: 0;
+	font-size: 25px;
+	font-weight: 700;
+	line-height: 110%;
+}
+
+.content {
+	width: 100%;
+	padding: 15px 20px;
+	float: left; 
+    line-height: 130%;
+    background-color: rgba(255,255,255,0.4);
+    box-sizing: border-box;
+}
+
+.single-post {
+    margin: 0 3%;
+    padding: 50px 20px;
+}
+
+.panoramaElement .sidebar {
+	padding-top: 20px;
+	width: 100%;
+	-webkit-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-o-flex-wrap: wrap;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+}
+
+.panoramaElement .map {
+	width: 100%;
+	height: 200px;
+}
+.panoramaElement .map h2 {
+	margin-bottom: 10px;
+}
+
+.panoramaElement .friends {
+	width: 100%;
+}
+
+.panoramaElement .friends .thumb {
+	min-width: 20%;
+    height: 90px;
+	-webkit-flex: 0 0 20%;
+    -moz-flex: 0 0 20%;
+    -ms-flex: 0 0 20%;
+    -o-flex: 0 0 20%;
+    flex: 0 0 20%;
+}
+.panoramaElement .friends .thumb .name {
+	bottom: 8px;
+}
+
+/*------------------------------------*\
+
+    #TABLET STYLING
+
+\*------------------------------------*/
+
+@media (min-width: 720px) {
+	/*------------------------------------*\
+	    #LOGIN & SIGNUP
+	\*------------------------------------*/
+
+	.login {
+		max-width: 400px;
+		height: 410px;
+		margin: auto;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	.login .logo {
+		width: auto;
+		max-width: 80%;
+	}
+
+	.passwordReset {
+		width: 150%;
+		margin-left: -25%;
+	}
+
+	a.signup, .slButtons {
+		font-size: 16px;
+	}
+
+	/*------------------------------------*\
+	    #NAVIGATION BAR
+	\*------------------------------------*/
+	.username span {
+		display: block;
+	}
+	.username i {
+		display: none;
+	}
+	.search {
+		display: block;
+	}
+
+	/*------------------------------------*\
+	    #PROFILE PAGE
+	\*------------------------------------*/
+	.profile .sidebar {
+		padding-top: 20px;
+	}
+
+	.profile-image {
+		width: 20%;
+	}
+
+	.profile-header {
+		width: 60%;
+		font-size: 1em;
+	}
+
+	/*------------------------------------*\
+	    #TIMELINE
+	\*------------------------------------*/
+	.main {
+		margin-right: 5%;
+	}
+
+	.author-info {
+		display: inline-block;
+	}
+
+	/*------------------------------------*\
+	    #POST STYLING
+	\*------------------------------------*/
+	.post h2 {
+		font-size: 1em;
+	}
+	.post > a {
+		width: 70%;
+	}
+		.post:hover .map .location {
+			opacity: 1;
+		}
+	.title {
+		-webkit-flex-wrap: nowrap;
+		-moz-flex-wrap: nowrap;
+		-ms-flex-wrap: nowrap;
+		-o-flex-wrap: nowrap;
+		flex-wrap: nowrap;
+	}
+
+	.title h2 {
+		width: 50%;
+	}
+
+		.title h2:last-child {
+			text-align: right;
+			font-size: 1em;
+		}
+	.map {
+		width: 30%;
+	}
+	/*------------------------------------*\
+	    #SINGLE POST
+	\*------------------------------------*/
+	.content {
+		width: 60%;
+	}
+	.panoramaElement .sidebar {
+		padding: 0 0 0 20px;
+		width: 40%;
+	}
+	.panoramaElement .map {
+		height: 300px;
+	}
+}
+
+/*------------------------------------*\
+
+    #DESKTOP STYLING
+
+\*------------------------------------*/
+
+@media (min-width: 920px) {
+	/*------------------------------------*\
+	    #POST STYLING
+	\*------------------------------------*/
+	.post h2,
+	.title h2:last-child {
+		font-size: 1.5em;
+	}
+
+	/*------------------------------------*\
+	    #PROFILE PAGE
+	\*------------------------------------*/
+
+	.gridContainer {
+		-webkit-flex-wrap: nowrap;
+		-moz-flex-wrap: nowrap;
+		-ms-flex-wrap: nowrap;
+		-o-flex-wrap: nowrap;
+		flex-wrap: nowrap;
+	}
+
+	.profile .main {
+		width: 65%;
+		margin-right: 5%;
+	}
+
+	.profile .sidebar {
+		width: 30%;
+	}
+
+	.widget {
+		margin: 20px;
+	}
+
+	/*------------------------------------*\
+	    #SINGLE POST
+	\*------------------------------------*/
+
+	.textBody {
+		font-size: 18px;
+	}
+	.panoramaElement .map {
+		height: 400px;
+	}
+}
+
+/*------------------------------------*\
+    #CSS ANIMATIONS
+\*------------------------------------*/
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0px); }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0px); }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0px); }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0px); }
+}
+
+@keyframes fadein {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0px); }
 }
