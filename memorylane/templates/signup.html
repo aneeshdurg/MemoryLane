@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" class="graybg">
+<html lang="en">
+
+
 {% load staticfiles%}
 {% include 'head.html' %}
+	<title>Sign Up - Memory Lane</title>
+	
 <body>
-	<a href="/login/" class="signup">
+	<a href="/login" class="signup">
 		<div class="button">Log In</div>
 	</a>
 	<div class="login">
 		<img src="{% static "img/logo.png" %}" alt="Memory Lane" title="Memory Lane" class="logo">
 		<span>You had to be there.</span>
 		<div class="group loginContainer">
-			<form action="">
-				<input class="field" type="email" name="email" placeholder="Email" required>
-				<input class="field" type="password" name="password" placeholder="Password" required>
-				<input class="field" type="text" name="username" placeholder="User Name" required>
+			{% if form.errors %}
+        	<p>Errors, errors, errors.</p>
+    		{% endif %}
+			<!-- <form method="post" action=".">{% csrf_token %}
+				<input class="field" type="email" name="email" placeholder="Email" {{ forms.email}} required>
+				<input class="field" type="password" name="password" placeholder="Password" {{ forms.password1 }} required>
+				<input class="field" type="text" name="username" placeholder="User Name" {{ forms.username }} required>
 				<input type="submit" class="submit" value="Sign Up">
-			</form>
+			</form> -->
+			<form method="post" action=".">{% csrf_token %}
+        <table border="0">
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Sign up" />
+    </form>
 		</div>
 	</div>
 </body>
