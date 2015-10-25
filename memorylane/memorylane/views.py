@@ -2,12 +2,11 @@ from django.shortcuts import get_object_or_404, render
 from django.template import Template, Context
 from django.http import HttpResponse
 from .forms import *
-
+from datetime import datetime
 from .models import User, Memory
 
 
 from django.contrib.auth import logout
-from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
@@ -35,7 +34,23 @@ def settings(request):
 def post(request, memory_id):
 	memory = get_object_or_404(Memory, pk=memory_id)
 	author = get_object_or_404(User, pk=memory.author)
-	return render(request, 'post.html', {'memory': memory, 'author': author})
+	return render(request, 'post.html', {'memory': memory, 'author': author, 'image' : memory.image.name[10:]})
+
+def newpost(request):
+    return render(request, 'newpost.html', {})
+
+def newpostsubmit(request):
+    if 'title' in request.POST:
+
+        m = Memory(name=request.POST['title'], author=1, location="Siebel Center", date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'])
+        m.save()
+        memory = get_object_or_404(Memory, pk=m.id)
+        author = get_object_or_404(User, pk=memory.author)
+        return post(request, m.id)
+        message = 'Successfully added a new memory'
+    else:
+        message = 'You submitted an empty form.'
+    return HttpResponse(message)
 
 def passwordreset(request):
 	return render(request, 'password-reset.html', {})

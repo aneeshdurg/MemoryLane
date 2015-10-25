@@ -18,7 +18,7 @@ class User(models.Model):
 class Memory(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
-    image = models.CharField(max_length=1000)
+    image = models.FileField(upload_to="memorylane/static/images")
     description = models.TextField()
     author = models.IntegerField()
     date_created = models.DateField()
