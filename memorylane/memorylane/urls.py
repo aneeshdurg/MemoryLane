@@ -31,5 +31,7 @@ urlpatterns = [
     url(r'^userlist/$', views.userlist, name='userlist'),
     url(r'^newpost/', views.newpost, name='newpost'),
     url(r'^newpostsubmit/$', views.newpostsubmit, name='newpostsubmit'),
+    url(r'^timeline/$', views.timeline, name='timeline'),
+    url(r'^profile-mod/$', views.profilemod, name='profilemod'),
     
 ]
