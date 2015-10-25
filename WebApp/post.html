@@ -50,7 +50,7 @@
                 <p class="textBody">Sed erat turpis, imperdiet eu rhoncus at, vestibulum eu dui. Donec non libero vitae lorem vestibulum semper tincidunt vel purus. Etiam nec purus nec quam semper condimentum. Proin posuere quam quis faucibus commodo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis augue quam, laoreet non ipsum ut, ultrices volutpat mi. Aenean molestie tortor tortor, eu vulputate lectus dignissim quis. Donec vitae leo justo. Vestibulum luctus feugiat eros, a viverra erat sollicitudin a.</p>
                 <p class="textBody">Praesent sed purus volutpat arcu hendrerit hendrerit a bibendum ex. In hac habitasse platea dictumst. Etiam quis arcu et magna lacinia ultricies. Morbi in fringilla massa. Aenean porta non lorem a pulvinar. Nulla a fermentum erat. Curabitur a mollis dui. Donec pellentesque dictum sem, a dictum neque. Duis ut posuere dolor. Suspendisse luctus aliquam nisi sed vulputate.</p>
             </div>
-            <div class="sidebar flex">
+            <div id="sidebar" class="flex sticky">
                 <div class="map" style="background-image:url(img/map2.png)">
                     <div class="location">
                         <h2><i class="fa fa-map-marker"></i>Chicago, IL</h2>
@@ -107,6 +107,31 @@
                         $('.searchbox-icon').css('display','block');
                     }
                 }
+    </script>
+    <script src="jquery-1.7.1.min.js"></script>
+    <script>
+            $(function(){ // document ready
+
+          if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
+
+            var stickyTop = $('.sticky').offset().top; // returns number 
+
+            $(window).scroll(function(){ // scroll event
+
+              var windowTop = $(window).scrollTop(); // returns number 
+
+              if (stickyTop < windowTop-240){
+                $('.sticky').css({ position: 'fixed', top: '0', width: '34.5%', right: '6.95%'});
+              }
+              else {
+                $('.sticky').css({ position: 'static', width: '40%'});
+              }
+
+            });
+
+          }
+
+        });
     </script>
 </body>
 </html>
