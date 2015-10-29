@@ -97,3 +97,8 @@ def home(request):
     'home.html',
     { 'user': request.user }
     )	
+def timeline(request):
+    return render(request, 'timeline.html', {})
+
+def profilemod(request):
+    return render(request, 'profile-mod.html', {})

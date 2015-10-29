@@ -1,142 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 {% load staticfiles%}
 {% include 'head.html' %}
 
 <body>
-<div class="header">
-    <div class="profileheader" style="padding-right: 200px;">
-        
-        <a href="#" class="profilelink"><h2 class="profilename">{{author.first_name}}</h2></a>
-    </div>
-<div class="settingheader">
-    <a href="settings.html" class="profilelink"><h2 class="headercog" style="float: right;"><i class="fa fa-cog" style="font-size: 30px; padding-left: 20px;"></i></h2></a>
-    <form class="searchbox" style="float:right;">
-        <input type="search" placeholder="Search......" name="search" class="searchbox-input" onkeyup="buttonUp();" required>
-       
-        <span class="searchbox-icon"><i class="fa fa-search" style="font-size: 30px;"></i></span>
-    </form>
-    
-    </div>  
-    <div class="logo">
-        
-            
-        <a href="#" class="profilelink"><h1 class="headermaintext">Memory Lane</h1></a>
-        
-    </div>
-
-</div>  
-    
-    <hr>
-    
-    
-<!-- div to hold all elements of a single timeline post -->
-<div class="container2">
-
-    
-
-    <!-- div to hold panaroma shot and top bar(title and date) -->
+<nav class="flex">
+        <div class="username">
+            <a href="/profile-mod/">
+                <h1><i class="fa fa-user"></i> <span>matthew_ong</span></h1>
+            </a>
+        </div>
+        <div class="middleLogo">
+            <a href="/timeline/">
+                <img src="{% static "img/ml-mod.png" %}" alt="logo" id="middleLogo">
+            </a>
+        </div>
+        <div class="settings flex">
+            <div class="search">
+                <input placeholder="Search &#xf002;">
+            </div>
+            <a href="/settings/"><i class="fa fa-cog"></i></a>
+        </div>
+    </nav>
+    <!-- div to hold all elements of a single timeline post -->
+    <div class="single-post">
+        <!-- div to hold panaroma shot and top bar(title and date) -->
     <div class = "panoramaElement">
         <div class="panoramaHeader">
             <p class="panoramaLeft">{{memory.name}}</p>
             <p class="panoramaRight">{{memory.date_created}}</p>
-        </div>
-        <img src="{{image}}" class="panoramaResize">
-        
-        <div class="mapDiv">
+    </div>
+        <img src="{{image}}" class="panoramaResize">        
+        <div class="content">
             <p class="textRemember">I remember...</p>
             <p class="textBody">
             {{memory.description}}
             </p>
-            <p class="textWith">with...</p>
-            <div class="shared">
-                <div class="authorElement">
-                    <a href="profile.html" class="profilelink"><img src="img/profile.jpg" class="proPicResize">
-                    <!-- should be poster's first name -->
-                    <p class ="proPicName">Matthew</p>
-                    </a>
+        </div>
+            <div id="sidebar" class="flex sticky">
+                <div class="map" style="background-image:url({% static "img/map2.png" %})">
+                    <div class="location">
+                        <h2><i class="fa fa-map-marker"></i>Chicago, IL</h2>
+                    </div>
                 </div>
-                <div class="authorElement">
-                    <a href="profile.html" class="profilelink">
-                    <img src="img/profile.jpg" class="proPicResize">
-                    <!-- should be poster's first name -->
-                    <p class ="proPicName">Matthew</p>
-                    </a>
-                </div>
-                <div class="authorElement">
-                    <a href="profile.html" class="profilelink">
-                    <img src="img/profile.jpg" class="proPicResize">
-                    <!-- should be poster's first name -->
-                    <p class ="proPicName">Matthew</p>
-                    </a>
-                </div>
-                <div class="authorElement">
-                    <a href="profile.html" class="profilelink">
-                    <img src="img/profile.jpg" class="proPicResize">
-                    <!-- should be poster's first name -->
-                    <p class ="proPicName">Matthew</p>
-                    </a>
+                <p class="textWith">with...</p>
+                <div class="group flex friends">
+                    <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/preska.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Preska</span></div></a>
+                    <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/samara.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Samara</span></div></a>
+                    <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/zak.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Zak</span></div></a>
+                    <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/aneesh.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Aneesh</span></div></a>
                 </div>
             </div>
-            
         </div>
-        
-        <div class="map">
-            <img src="{% static "img/map.jpg" %}" class="mapImage">
-        </div>
-        
+        <br>
     </div>
-    <br>
-
-
-
-
-</div>
-
-<script>
-  $(document).ready(function(){
-            var submitIcon = $('.searchbox-icon');
-            var inputBox = $('.searchbox-input');
-            var searchBox = $('.searchbox');
-            var isOpen = false;
-            submitIcon.click(function(){
-                if(isOpen == false){
-                    searchBox.addClass('searchbox-open');
-                    inputBox.focus();
-                    isOpen = true;
-                } else {
-                    searchBox.removeClass('searchbox-open');
-                    inputBox.focusout();
-                    isOpen = false;
-                }
-            });  
-             submitIcon.mouseup(function(){
-                    return false;
-                });
-            searchBox.mouseup(function(){
-                    return false;
-                });
-            $(document).mouseup(function(){
-                    if(isOpen == true){
-                        $('.searchbox-icon').css('display','block');
-                        submitIcon.click();
+    <script>
+      $(document).ready(function(){
+                var submitIcon = $('.searchbox-icon');
+                var inputBox = $('.searchbox-input');
+                var searchBox = $('.searchbox');
+                var isOpen = false;
+                submitIcon.click(function(){
+                    if(isOpen == false){
+                        searchBox.addClass('searchbox-open');
+                        inputBox.focus();
+                        isOpen = true;
+                    } else {
+                        searchBox.removeClass('searchbox-open');
+                        inputBox.focusout();
+                        isOpen = false;
                     }
-                });
-        });
-            function buttonUp(){
-                var inputVal = $('.searchbox-input').val();
-                inputVal = $.trim(inputVal).length;
-                if( inputVal !== 0){
-                    $('.searchbox-icon').css('display','none');
-                } else {
-                    $('.searchbox-input').val('');
-                    $('.searchbox-icon').css('display','block');
+                });  
+                submitIcon.mouseup(function(){
+                        return false;
+                    });
+                searchBox.mouseup(function(){
+                        return false;
+                    });
+                $(document).mouseup(function(){
+                        if(isOpen == true){
+                            $('.searchbox-icon').css('display','block');
+                            submitIcon.click();
+                        }
+                    });
+            });
+                function buttonUp(){
+                    var inputVal = $('.searchbox-input').val();
+                    inputVal = $.trim(inputVal).length;
+                    if( inputVal !== 0){
+                        $('.searchbox-icon').css('display','none');
+                    } else {
+                        $('.searchbox-input').val('');
+                        $('.searchbox-icon').css('display','block');
+                    }
                 }
-            }
-</script>
+    </script>
+    <script src="{% static "jquery-1.7.1.min.js" %}"></script>
+    <script>
+            $(function(){ // document ready
 
+          if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
+
+            var stickyTop = $('.sticky').offset().top; // returns number 
+
+            $(window).scroll(function(){ // scroll event
+
+              var windowTop = $(window).scrollTop(); // returns number 
+
+              if (stickyTop < windowTop-240){
+                $('.sticky').css({ position: 'fixed', top: '0', width: '34.5%', right: '6.95%'});
+              }
+              else {
+                $('.sticky').css({ position: 'static', width: '40%'});
+              }
+
+            });
+
+          }
+
+        });
+    </script>
 
 </body>
 </html>
