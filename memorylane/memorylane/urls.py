@@ -29,6 +29,9 @@ urlpatterns = [
     url(r'^friends/', views.friends, name="friends"),
     url(r'^profiletest/(?P<user_id>[0-9]+)/$', views.profiletest, name='profiletest'),
     url(r'^userlist/$', views.userlist, name='userlist'),
-    
+    url(r'^newpost/', views.newpost, name='newpost'),
+    url(r'^newpostsubmit/$', views.newpostsubmit, name='newpostsubmit'),
+    url(r'^timeline/$', views.timeline, name='timeline'),
+    url(r'^profile-mod/$', views.profilemod, name='profilemod'),
     
 ]

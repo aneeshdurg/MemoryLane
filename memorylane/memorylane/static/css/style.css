@@ -1,5 +1,5 @@
 @font-face {
-    font-family: Argh;
+    font-family: Argh
     src: url('../Aaargh.ttf');
 }
 
@@ -79,8 +79,11 @@ label {
 \*------------------------------------*/
 
 nav {
-	background-color: rgba(255,255,255,0.4);
+	background-color: #ccc;
 	padding: 0 15px;
+	position: fixed;
+	width: 98.5%;
+	z-index: 13;
 }
 
 .username,
@@ -257,7 +260,7 @@ a.signup {
 /* -- Content -- */
 
 .gridContainer {
-	padding: 1% 2% 0;
+	padding: 60px 2% 0;
 	-webkit-flex-wrap: wrap;
 	-moz-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
@@ -325,7 +328,7 @@ a.signup {
 	width: 100%;
 	background-color: rgba(255,255,255,0.4);
 	box-shadow: 0 0 10px rgba(0,0,0,0.25);
-	padding: 15px 20px;
+	padding: 60px 20px;
 	margin: 20px 0;
 	border-radius: 0;
 	box-sizing: border-box;
@@ -587,6 +590,7 @@ a.signup {
 .main {
 	width: 100%;
 	padding: 20px;
+	padding-top: 60px;
 }
 
 .author-info {
@@ -812,12 +816,13 @@ a.signup {
 
 .single-post {
     margin: 0 3%;
-    padding: 50px 20px;
+    padding: 60px 20px;
 }
 
-.panoramaElement .sidebar {
+.panoramaElement #sidebar {
 	padding-top: 20px;
 	width: 100%;
+	right: 8%;
 	-webkit-flex-wrap: wrap;
 	-moz-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
@@ -964,7 +969,7 @@ a.signup {
 	.content {
 		width: 60%;
 	}
-	.panoramaElement .sidebar {
+	.panoramaElement #sidebar {
 		padding: 0 0 0 20px;
 		width: 40%;
 	}
