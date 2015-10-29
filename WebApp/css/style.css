@@ -1005,6 +1005,10 @@ a.signup {
 		margin-right: 5%;
 	}
 
+	.profile .main .post .panorama .title {
+		font-size: 0.75em;
+	}
+
 	.profile .sidebar {
 		width: 30%;
 	}
