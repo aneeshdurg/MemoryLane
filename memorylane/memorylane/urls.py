@@ -33,5 +33,6 @@ urlpatterns = [
     url(r'^newpostsubmit/$', views.newpostsubmit, name='newpostsubmit'),
     url(r'^timeline/$', views.timeline, name='timeline'),
     url(r'^profile-mod/$', views.profilemod, name='profilemod'),
+    url(r'^register/$', views.register, name='register'),
     
 ]

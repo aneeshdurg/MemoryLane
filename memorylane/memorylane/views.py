@@ -26,7 +26,22 @@ def userlist(request):
 	return HttpResponse(output)
 
 def signup(request):
+    # register(request)
 	return render(request, 'signup.html', {})
+    # if request.method == 'POST':
+    #     form = RegistrationForm(request.POST)
+    #     if form.is_valid():
+    #         user = User.objects.create_user(
+    #         username=username,
+    #         password=password,
+    #         email=email
+    #         )
+    #         return HttpResponseRedirect('/signup/success/')
+    # else:
+    #     form = RegistrationForm()
+    # variables = RequestContext(request, {
+    # 'form': form
+    # })
 
 def settings(request):
 	return render(request, 'settings.html', {})
@@ -56,7 +71,21 @@ def passwordreset(request):
 	return render(request, 'password-reset.html', {})
 
 def login(request):
-	return render(request, 'login.html', {})
+    # if request.method == 'POST':
+    #     form = RegistrationForm(request.POST)
+    #     if form.is_valid():
+    #         user = User.objects.create_user(
+    #         username=username,
+    #         password=password,
+    #         )
+    #         return HttpResponseRedirect('/register/success/')
+    # else:
+    #     form = RegistrationForm()
+    # variables = RequestContext(request, {
+    # 'form': form
+    # })
+    # else
+    return render(request, 'login.html', {})
 
 def friends(request):
 	return render(request, 'friends.html', {})
@@ -65,22 +94,16 @@ def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(
-            username=form.cleaned_data['username'],
-            password=form.cleaned_data['password1'],
-            email=form.cleaned_data['email']
-            )
-            return HttpResponseRedirect('/register/success/')
+            user = User(username=form.cleaned_data['username'], password=form.cleaned_data['password'], email=form.cleaned_data['email'], date_created=datetime.now())
+            user.save()
+            return HttpResponseRedirect('/timeline/')
     else:
         form = RegistrationForm()
     variables = RequestContext(request, {
     'form': form
     })
  
-    return render_to_response(
-    'registration/register.html',
-    variables,
-    )
+    return timeline(request)
  
 def register_success(request):
     return render_to_response(
