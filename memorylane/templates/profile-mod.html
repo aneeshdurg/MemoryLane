@@ -3,7 +3,30 @@
 
 {% load staticfiles %}
 {% include 'head.html' %}
-
+<head>
+	<meta charset="UTF-8">
+	<title>Profile - Memory Lane</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+	<script>
+		function changeText(){
+			document.getElementById("original").style.display="none";
+			document.getElementById("editBio").style.display="block";
+		}
+		function save(){
+			document.getElementById("original").style.display="block";
+			document.getElementById("editBio").style.display="none";
+			var newBio = document.getElementById("bioTextArea").value;
+			document.getElementById("currentBio").innerHTML = newBio;
+		}
+		function cancel(){
+			document.getElementById("original").style.display="block";
+			document.getElementById("editBio").style.display="none";
+		}
+	</script>
+</head>
 <body>
 	<nav class="flex">
 		<div class="username">
@@ -30,21 +53,21 @@
 				<div class="profile-header">
 					<a href=/profile-mod/><h1>Matthew Ong</h1></a><br/>
 					<a href=/newpost/><h3>@matthew_ong</h3></a>
-					<div id="edit_signature" class="edit_signature">
-							<div id="signature" style.display="block">
-								<p class="say-something">Lorem ipsum dolor sit amet.  <a href="javascript:changetext();"><i class="fa fa-pencil"></i></a>
-							</div>
-							<div id="edit-signature" style="display:none">
-								<form method="post">
-									<div>
-										<input type="hidden" name>
-									</div>
-									<input id="input-bar" name="signature" type="text" maxlength="50" value="Lorem ipsum dolor sit amet.">
-									<input id="submit" class="submit" type="button" value="save">
-									<a href="javascript:cancelchangetext();"><input id="cancel" class="cancel" type="button" value="cancel"></a>
-								</form>
-							</div>
-						</p>
+					
+					<div id="bio" class="bio">
+						<div id="original" style.display="block">
+							<p id="currentBio">{{bio}}</p>
+							<a href="javascript:changeText();"><i class="fa fa-pencil"></i></a>
+						</div>
+						<div id="editBio" style="display:none">
+							<form action="newBio" method="post">
+							 	{% csrf_token %}
+    							{{ form }}
+								<textarea id="bioTextArea" rows="4" cols="25" name="newBio">{{bio}}</textarea>
+								<input type="button" value="Save" onclick="save()">
+								<input type="button" value="Cancel" onclick="cancel()">
+							</form>
+						</div>
 					</div>
 				</div>
 				<div class="add-new-memory">

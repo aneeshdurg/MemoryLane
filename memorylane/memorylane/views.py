@@ -121,7 +121,31 @@ def home(request):
     { 'user': request.user }
     )	
 def timeline(request):
-    return render(request, 'timeline.html', {})
+    author = get_object_or_404(User, pk=1)
+    memory = get_object_or_404(Memory, pk=1)
+    username = author.username
+    first_name = author.first_name
+    description = memory.description
+    location = memory.location
+    name = memory.name
+    image = memory.image
+    date_created = memory.date_created
+    users = User.objects.all()
+    return render(request, 'timeline.html', {"users": users, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def profilemod(request):
-    return render(request, 'profile-mod.html', {})
+    if request.method == 'POST':
+        form = BioForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/Saved/')
+    else:
+        author = get_object_or_404(User, pk=1)
+        bio = author.bio
+        return render(request, 'profile-mod.html', {"bio": bio})
+
+def getUsers(request):
+        users = User.objects.all()
+        name_list = []
+        for x in users:
+                name_list.append(x.first_name + ' ' + x.last_name)
+        return name_list
