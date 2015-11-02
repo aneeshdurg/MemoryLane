@@ -54,7 +54,7 @@ def newpost(request):
 
 def newpostsubmit(request):
     if 'title' in request.POST:
-        m = Memory(name=request.POST['title'], author=1, location="Siebel Center", date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'])
+        m = Memory(name=request.POST['title'], author=1, location=request.POST['location'], date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'])
         m.save()
         memory = get_object_or_404(Memory, pk=m.id)
         author = get_object_or_404(User, pk=memory.author)
