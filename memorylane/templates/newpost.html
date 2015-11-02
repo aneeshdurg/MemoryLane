@@ -37,20 +37,14 @@
 					<div class="upload-section" style="background: url(http://img3.douban.com/f/sns/1931ea1504566997b7b93816547b07cea2ad8dea/pics/sns/isay/isay_icon_pic.svg) 5px -26px no-repeat, none;" style="background: url(http://img3.douban.com/f/sns/5fb7ba441acad1f96db856431433ac10cd7eec1a/pics/sns/isay/isay_icon_pic_upload.svg) center 30% no-repeat, none">
 						<a href ="javascript: void 0;" class="upload-btn">Drag photo here or click box to upload from files</a>
 					</div>
-						<h4><input id="tag" type="text" name="tags" size="10" maxlength="30" /><i class="fa fa-tag"></i>
-							<a href="javascript: void(0);" class="change-picture"><i class="fa fa-trash-o"></i></a>
-						</h4>
-					</div>
-				<div class="image-selector">
-					<div class="photo-selector">
-						<input type="hidden" name="photo_data_empty" class="photo-data" value>
-						<div class="photo-data-container hidden"></div>
-							<label class="t1-label">
-								<span class="visuallyhidden"> Add photos </span>
-								<input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" data-original-title="Add photos">
-							</label>
-						<div class="swf-container"></div>
-					</div>
+					<h4><input id="tag" type="text" name="tags" size="10" maxlength="30" /><i class="fa fa-tag"></i>
+						<i id="trash" class="fa fa-trash-o"></i>				
+					</h4>
+				</div>
+				<div class="photo-selector">
+					<span class="visuallyhidden"> Add photos </span>
+					<input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" id="imgInp">
+					<img id="newphoto" src="{% static "img/transparent.png" %}" alt="your image" />
 				</div>	
 			</div>
 			<div class="memory-text">
@@ -65,8 +59,48 @@
 			</br>
 			<button type="preview" value="Preview">Preview</button>
 			<button type="submit"  value="Submit">Submit</button>
-			<a href="javascript:history.back()"><button id="cancelbutton" type="cancel" value="Cancel">Cancel</button></a>
-		</form>
+			<a href="#" onclick="history.go(-1);return false;"><button id="cancelbutton" type="cancel" value="Cancel">Cancel</button></a>		
+			</div>
+			</form>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	
+			<script>
+			function readURL(input) {
+
+		    	if (input.files && input.files[0]) {
+		        	var reader = new FileReader();
+
+		        	reader.onload = function (e) {
+		            	$('#newphoto').attr('src', e.target.result);
+		        	}
+
+		        	reader.readAsDataURL(input.files[0]);
+		    	}
+		    	else {
+		    		var img = input.value;
+		    			$('#newphoto').attr('src', img);
+		    	}
+			}
+			$("#imgInp").change(function(){
+			    	readURL(this);
+				});
+		
+			function clearFileInput(id) { 
+				var oldInput = document.getElementById(id); 
+				var newInput = document.createElement("input"); 
+				newInput.type = "file"; 				 
+				newInput.name = oldInput.name; 
+				newInput.accept = oldInput.accept;
+				newInput.className = oldInput.className;				
+				newInput.id = oldInput.id;
+				oldInput.parentNode.replaceChild(newInput, oldInput); 
+			};
+			$("#trash").click(function() {
+				clearFileInput("imgInp");
+				$('#newphoto').attr('src', "{% static "img/transparent.png" %}");
+			});
+
+			</script>
 </body>
 </html>
 
