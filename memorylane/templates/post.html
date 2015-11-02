@@ -3,8 +3,66 @@
 
 {% load staticfiles %}
 {% include 'head.html' %}
+<head>
+    <!--script>
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -33, lng: 151.196},
+        zoom: 15
+      });
 
-<body>
+      var infowindow = new google.maps.InfoWindow();
+      var service = new google.maps.places.PlacesService(map);
+
+      service.getDetails({
+        placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
+      }, function(place, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(place.name);
+            infowindow.open(map, this);
+          });
+        }
+      });
+    }
+
+    </script-->
+    <script>
+     var geocoder;
+  var map;
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var mapOptions = {
+      zoom: 8,
+      center: latlng
+    }
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  }
+
+  function codeAddress() {
+
+    geocoder.geocode( {{memory.location}}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+  }
+
+    </script>
+</head>
+
+<body onload="initialize()">
     <nav class="flex">
         <div class="username">
             <a href="/profile-mod/">
@@ -39,9 +97,17 @@
             </p>
         </div>
             <div id="sidebar" class="flex sticky">
-                <div class="map" style="background-image:url({% static "img/map2.png" %})">
+                <div class="map" id="map">
+                    <div id="address">{{memory.location}}</div>
                     <div class="location">
-                        <h2><i class="fa fa-map-marker"></i>Chicago, IL</h2>
+                        {% load easy_maps_tags %}
+                        <!-- Default map with 300x400 dimensions -->
+                        {% easy_map '{{memory.location}}' 300 400 %}
+                        {% load easy_maps_tags cache %}
+                        {% cache 600 my_map firm.address %}
+                            {% easy_map firm.address 300 400 %}
+                        {% endcache %}
+                        <h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
                     </div>
                 </div>
                 <p class="textWith">with...</p>
@@ -55,46 +121,12 @@
         </div>
         <br>
     </div>
-    <script>
-      $(document).ready(function(){
-        var submitIcon = $('.searchbox-icon');
-        var inputBox = $('.searchbox-input');
-        var searchBox = $('.searchbox');
-        var isOpen = false;
-        submitIcon.click(function(){
-        if(isOpen == false){
-            searchBox.addClass('searchbox-open');
-            inputBox.focus();
-            isOpen = true;
-            } else {
-                searchBox.removeClass('searchbox-open');
-                inputBox.focusout();
-                isOpen = false;
-            }
-            });  
-        submitIcon.mouseup(function(){return false;});
-        searchBox.mouseup(function(){return false;});
-        $(document).mouseup(function(){
-        if(isOpen == true){
-            $('.searchbox-icon').css('display','block');
-            submitIcon.click();
-            }
-            });
-            });
-        function buttonUp(){
-            var inputVal = $('.searchbox-input').val();
-            inputVal = $.trim(inputVal).length;
-            if( inputVal !== 0){
-                $('.searchbox-icon').css('display','none');
-            } else {
-                $('.searchbox-input').val('');
-                $('.searchbox-icon').css('display','block');
-            }
-            }
-    </script>
+    <script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC63gKI9GdSMMPoXZq-hGwAv82CDIAfD8M&signed_in=true&libraries=places&callback=initMap" async defer></script>
     <script src="jquery-1.7.1.min.js"></script>
+
     <script>
-        $(function(){ // document ready
+        //$(function(){ // document ready
         if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
         var stickyTop = $('.sticky').offset().top; // returns number 
         $(window).scroll(function(){ // scroll event
