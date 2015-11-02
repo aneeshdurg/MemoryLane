@@ -52,7 +52,9 @@ def post(request, memory_id):
 	return render(request, 'post.html', {'memory': memory, 'author': author, 'image' : memory.image.name[10:]})
 
 def newpost(request):
-    return render(request, 'newpost.html', {})
+    author = get_object_or_404(User, pk=1)
+    username = author.username
+    return render(request, 'newpost.html', {"username": username})
 
 def newpostsubmit(request):
     if 'title' in request.POST:
@@ -134,6 +136,17 @@ def timeline(request):
     return render(request, 'timeline.html', {"users": users, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def profilemod(request):
+    author = get_object_or_404(User, pk=1)
+    memory = get_object_or_404(Memory, pk=1)
+    username = author.username
+    first_name = author.first_name
+    description = memory.description
+    location = memory.location
+    name = memory.name
+    image = memory.image
+    date_created = memory.date_created
+    memories = Memory.objects.all()
+    
     if request.method == 'POST':
         form = BioForm(request.POST)
         if form.is_valid():
@@ -141,11 +154,18 @@ def profilemod(request):
     else:
         author = get_object_or_404(User, pk=1)
         bio = author.bio
-        return render(request, 'profile-mod.html', {"bio": bio})
+        return render(request, 'profile-mod.html', {"bio": bio, "memories": memories, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def getUsers(request):
-        users = User.objects.all()
-        name_list = []
-        for x in users:
-                name_list.append(x.first_name + ' ' + x.last_name)
-        return name_list
+    users = User.objects.all()
+    name_list = []
+    for x in users:
+        name_list.append(x.first_name + ' ' + x.last_name)
+    return name_list
+
+def getMemories(request):
+    memories = Memory.objects.all()
+    memory_list = []
+    for x in memories:
+        memorylist.append(x.first_name + ' ' + x.last_name)
+    return memorylist

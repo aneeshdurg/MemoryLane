@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{% load staticfiles%}
+{% load staticfiles %}
 {% include 'head.html' %}
 
 <body>
-<nav class="flex">
+    <nav class="flex">
         <div class="username">
             <a href="/profile-mod/">
-                <h1><i class="fa fa-user"></i> <span>matthew_ong</span></h1>
+                <h1><i class="fa fa-user"></i> <span>{{username}}</span></h1>
             </a>
         </div>
         <div class="middleLogo">
@@ -114,11 +114,8 @@
               else {
                 $('.sticky').css({ position: 'static', width: '40%'});
               }
-
             });
-
           }
-
         });
     </script>
 </body>
