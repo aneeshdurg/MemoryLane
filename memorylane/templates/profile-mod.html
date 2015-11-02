@@ -3,7 +3,24 @@
 
 {% load staticfiles %}
 {% include 'head.html' %}
-
+<head>
+	<script>
+		function changeText(){
+			document.getElementById("original").style.display="none";
+			document.getElementById("editBio").style.display="block";
+		}
+		function save(){
+			document.getElementById("original").style.display="block";
+			document.getElementById("editBio").style.display="none";
+			var newBio = document.getElementById("bioTextArea").value;
+			document.getElementById("currentBio").innerHTML = newBio;
+		}
+		function cancel(){
+			document.getElementById("original").style.display="block";
+			document.getElementById("editBio").style.display="none";
+		}
+	</script>
+</head>
 <body>
 	<nav class="flex">
 		<div class="username">
