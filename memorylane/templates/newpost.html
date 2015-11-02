@@ -4,13 +4,12 @@
 {% load staticfiles %}
 {% include 'head.html' %}
 
-	<body>
 
-
+<body>
 	<nav class="flex">
 		<div class="username">
 			<a href=/profile-mod/>
-				<h1>matthew_ong</h1>
+				<h1>{{username}}</h1>
 			</a>
 		</div>
 		<div class="middleLogo">
@@ -25,59 +24,91 @@
 			<a href=/settings/><i class="fa fa-cog"></i></a>
 		</div>
 	</nav>
-		<div class="main">
-			<form method="post" action="/newpostsubmit/" name="newpost" enctype="multipart/form-data">
+	<div class="main">
+		<form method="post" action="/newpostsubmit/" name="newpost" enctype="multipart/form-data">
 			<h1>New Memory</h1>
 			<p class="autosave-post">Draft saved <b>{% now "f" %} {% now "m/d/Y" %}</b></p>
 			<div class="title-post">
-				
-					<h2>Title:
-					</h2>
-					<input id="title" type="text" name="title" size="30" maxlength="100" />
-				
+				<h2>Title:
+				</h2>
+				<input id="title" type="text" name="title" size="30" maxlength="100" />
 			</div>
 			<div class="upload-photo">
 				<div class="tagField">
 					<div class="upload-section" style="background: url(http://img3.douban.com/f/sns/1931ea1504566997b7b93816547b07cea2ad8dea/pics/sns/isay/isay_icon_pic.svg) 5px -26px no-repeat, none;" style="background: url(http://img3.douban.com/f/sns/5fb7ba441acad1f96db856431433ac10cd7eec1a/pics/sns/isay/isay_icon_pic_upload.svg) center 30% no-repeat, none">
 						<a href ="javascript: void 0;" class="upload-btn">Drag photo here or click box to upload from files</a>
 					</div>
-				
 					<h4><input id="tag" type="text" name="tags" size="10" maxlength="30" /><i class="fa fa-tag"></i>
-						<a href="javascript: void(0);" class="change-picture"><i class="fa fa-trash-o"></i></a>
-				
+						<i id="trash" class="fa fa-trash-o"></i>				
 					</h4>
 				</div>
-				<div class="image-selector">
-					<div class="photo-selector">
-						<input type="hidden" name="photo_data_empty" class="photo-data" value>
-						<div class="photo-data-container hidden"></div>
-						<label class="t1-label">
-							<span class="visuallyhidden"> Add photos </span>
-							<input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" data-original-title="Add photos">
-						</label>
-						<div class="swf-container"></div>
-					</div>
+				<div class="photo-selector">
+					<span class="visuallyhidden"> Add photos </span>
+					<input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" id="imgInp">
+					<img id="newphoto" src="{% static "img/transparent.png" %}" alt="your image" />
 				</div>	
 			</div>
 			<div class="memory-text">
-	
-					<h2>Memory:<br/>
-						<textarea cols="30" rows="5" tabindex="2" id="note_text" name="note_text" placeholder="I remember..." required ></textarea>
-					</h2>
-	
+				<h2>Memory:<br/>
+					<textarea cols="30" rows="5" tabindex="2" id="note_text" name="note_text" placeholder="I remember..." required ></textarea>
+				</h2>
 			</div>
 			</br>
+			<div class="memory-text">
+				<h2>Location:<br/>
+					<input type="text" name="location" id="address"/>
+				</h2>
+			</div>
+			<br>
 			<div class="private">
 				<input type="checkbox" name="privatepost" value="private">Make this post private (only friends can view)
 			</div>
 			</br>
 			<button type="preview" value="Preview">Preview</button>
 			<button type="submit"  value="Submit">Submit</button>
-			<a href="javascript:history.back()"><button id="cancelbutton" type="cancel" value="Cancel">Cancel</button></a>
-		
+			<a href="#" onclick="history.go(-1);return false;"><button id="cancelbutton" type="cancel" value="Cancel">Cancel</button></a>		
 			</div>
 			</form>
-	</body>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	
+			<script>
+			function readURL(input) {
+			
+		    	if (input.files && input.files[0]) {
+		        	var reader = new FileReader();
+
+		        	reader.onload = function (e) {
+
+		            	$('#newphoto').attr('src', e.target.result);
+		        	}
+
+		        	reader.readAsDataURL(input.files[0]);
+		    	}
+		    	else {
+		    		var img = input.value;
+		    			$('#newphoto').attr('src', img);
+		    	}
+			}
+
+			$("#imgInp").change(function(){
+			    	readURL(this);
+			    	
+				});
+			
+		
+		
+			function clearFileInput(id) { 
+
+				var control = $("#imgInp");
+				control.replaceWith( control = control.clone( true ) );
+			};
+			$("#trash").click(function() {
+				clearFileInput("imgInp");
+				$('#newphoto').attr('src', "{% static "img/transparent.png" %}");
+			});
+
+			</script>
+</body>
 </html>
 
 
