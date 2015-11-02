@@ -57,65 +57,54 @@
     </div>
     <script>
       $(document).ready(function(){
-                var submitIcon = $('.searchbox-icon');
-                var inputBox = $('.searchbox-input');
-                var searchBox = $('.searchbox');
-                var isOpen = false;
-                submitIcon.click(function(){
-                    if(isOpen == false){
-                        searchBox.addClass('searchbox-open');
-                        inputBox.focus();
-                        isOpen = true;
-                    } else {
-                        searchBox.removeClass('searchbox-open');
-                        inputBox.focusout();
-                        isOpen = false;
-                    }
-                });  
-                submitIcon.mouseup(function(){
-                        return false;
-                    });
-                searchBox.mouseup(function(){
-                        return false;
-                    });
-                $(document).mouseup(function(){
-                        if(isOpen == true){
-                            $('.searchbox-icon').css('display','block');
-                            submitIcon.click();
-                        }
-                    });
+        var submitIcon = $('.searchbox-icon');
+        var inputBox = $('.searchbox-input');
+        var searchBox = $('.searchbox');
+        var isOpen = false;
+        submitIcon.click(function(){
+        if(isOpen == false){
+            searchBox.addClass('searchbox-open');
+            inputBox.focus();
+            isOpen = true;
+            } else {
+                searchBox.removeClass('searchbox-open');
+                inputBox.focusout();
+                isOpen = false;
+            }
+            });  
+        submitIcon.mouseup(function(){return false;});
+        searchBox.mouseup(function(){return false;});
+        $(document).mouseup(function(){
+        if(isOpen == true){
+            $('.searchbox-icon').css('display','block');
+            submitIcon.click();
+            }
             });
-                function buttonUp(){
-                    var inputVal = $('.searchbox-input').val();
-                    inputVal = $.trim(inputVal).length;
-                    if( inputVal !== 0){
-                        $('.searchbox-icon').css('display','none');
-                    } else {
-                        $('.searchbox-input').val('');
-                        $('.searchbox-icon').css('display','block');
-                    }
-                }
+            });
+        function buttonUp(){
+            var inputVal = $('.searchbox-input').val();
+            inputVal = $.trim(inputVal).length;
+            if( inputVal !== 0){
+                $('.searchbox-icon').css('display','none');
+            } else {
+                $('.searchbox-input').val('');
+                $('.searchbox-icon').css('display','block');
+            }
+            }
     </script>
     <script src="jquery-1.7.1.min.js"></script>
     <script>
-            $(function(){ // document ready
-
-          if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
-
-            var stickyTop = $('.sticky').offset().top; // returns number 
-
-            $(window).scroll(function(){ // scroll event
-
-              var windowTop = $(window).scrollTop(); // returns number 
-
-              if (stickyTop < windowTop-240){
-                $('.sticky').css({ position: 'fixed', top: '0', width: '34.5%', right: '6.95%'});
-              }
-              else {
-                $('.sticky').css({ position: 'static', width: '40%'});
-              }
-            });
-          }
+        $(function(){ // document ready
+        if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
+        var stickyTop = $('.sticky').offset().top; // returns number 
+        $(window).scroll(function(){ // scroll event
+        var windowTop = $(window).scrollTop(); // returns number 
+        if (stickyTop < windowTop-240){
+            $('.sticky').css({ position: 'fixed', top: '0', width: '34.5%', right: '6.95%'});
+        }else{
+            $('.sticky').css({ position: 'static', width: '40%'});
+            }
+        });}
         });
     </script>
 </body>

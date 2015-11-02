@@ -23,46 +23,40 @@
 			<a href=/settings/><i class="fa fa-cog"></i></a>
 		</div>
 	</nav>
-		<div class="main">
-			<form method="post" action="/newpostsubmit/" name="newpost" enctype="multipart/form-data">
+	<div class="main">
+		<form method="post" action="/newpostsubmit/" name="newpost" enctype="multipart/form-data">
 			<h1>New Memory</h1>
 			<p class="autosave-post">Draft saved <b>{% now "f" %} {% now "m/d/Y" %}</b></p>
 			<div class="title-post">
-				
-					<h2>Title:
-					</h2>
-					<input id="title" type="text" name="title" size="30" maxlength="100" />
-				
+				<h2>Title:
+				</h2>
+				<input id="title" type="text" name="title" size="30" maxlength="100" />
 			</div>
 			<div class="upload-photo">
 				<div class="tagField">
 					<div class="upload-section" style="background: url(http://img3.douban.com/f/sns/1931ea1504566997b7b93816547b07cea2ad8dea/pics/sns/isay/isay_icon_pic.svg) 5px -26px no-repeat, none;" style="background: url(http://img3.douban.com/f/sns/5fb7ba441acad1f96db856431433ac10cd7eec1a/pics/sns/isay/isay_icon_pic_upload.svg) center 30% no-repeat, none">
 						<a href ="javascript: void 0;" class="upload-btn">Drag photo here or click box to upload from files</a>
 					</div>
-				
-					<h4><input id="tag" type="text" name="tags" size="10" maxlength="30" /><i class="fa fa-tag"></i>
-						<a href="javascript: void(0);" class="change-picture"><i class="fa fa-trash-o"></i></a>
-				
-					</h4>
-				</div>
+						<h4><input id="tag" type="text" name="tags" size="10" maxlength="30" /><i class="fa fa-tag"></i>
+							<a href="javascript: void(0);" class="change-picture"><i class="fa fa-trash-o"></i></a>
+						</h4>
+					</div>
 				<div class="image-selector">
 					<div class="photo-selector">
 						<input type="hidden" name="photo_data_empty" class="photo-data" value>
 						<div class="photo-data-container hidden"></div>
-						<label class="t1-label">
-							<span class="visuallyhidden"> Add photos </span>
-							<input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" data-original-title="Add photos">
-						</label>
+							<label class="t1-label">
+								<span class="visuallyhidden"> Add photos </span>
+								<input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" data-original-title="Add photos">
+							</label>
 						<div class="swf-container"></div>
 					</div>
 				</div>	
 			</div>
 			<div class="memory-text">
-	
-					<h2>Memory:<br/>
-						<textarea cols="30" rows="5" tabindex="2" id="note_text" name="note_text" placeholder="I remember..." required ></textarea>
-					</h2>
-	
+				<h2>Memory:<br/>
+					<textarea cols="30" rows="5" tabindex="2" id="note_text" name="note_text" placeholder="I remember..." required ></textarea>
+				</h2>
 			</div>
 			</br>
 			<div class="private">
@@ -72,10 +66,8 @@
 			<button type="preview" value="Preview">Preview</button>
 			<button type="submit"  value="Submit">Submit</button>
 			<a href="javascript:history.back()"><button id="cancelbutton" type="cancel" value="Cancel">Cancel</button></a>
-		
-			</div>
-			</form>
-	</body>
+		</form>
+</body>
 </html>
 
 

@@ -5,7 +5,6 @@ from .forms import *
 from datetime import datetime
 from .models import User, Memory
 
-
 from django.contrib.auth import logout
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -14,10 +13,7 @@ from django.template import RequestContext
 def profiletest(request, user_id):
 	u = User.objects.get(pk=user_id)
 	output = ("<h1>You're looking at user %s.</h1>" % user_id)
-	
 	output = output + "<br>" + u.first_name + " " + u.last_name
-
-
 	return HttpResponse(output)
 
 def userlist(request):
@@ -58,7 +54,6 @@ def newpost(request):
 
 def newpostsubmit(request):
     if 'title' in request.POST:
-
         m = Memory(name=request.POST['title'], author=1, location="Siebel Center", date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'])
         m.save()
         memory = get_object_or_404(Memory, pk=m.id)
@@ -101,16 +96,11 @@ def register(request):
             return HttpResponseRedirect('/timeline/')
     else:
         form = RegistrationForm()
-    variables = RequestContext(request, {
-    'form': form
-    })
- 
+    variables = RequestContext(request, {'form': form})
     return timeline(request)
  
 def register_success(request):
-    return render_to_response(
-    'registration/success.html',
-    )
+    return render_to_response('registration/success.html')
  
 def logout_page(request):
     logout(request)
@@ -118,10 +108,8 @@ def logout_page(request):
  
 #@login_required
 def home(request):
-    return render_to_response(
-    'home.html',
-    { 'user': request.user }
-    )	
+    return render_to_response('home.html',{'user': request.user })
+
 def timeline(request):
     author = get_object_or_404(User, pk=1)
     memory = get_object_or_404(Memory, pk=1)
@@ -146,7 +134,6 @@ def profilemod(request):
     image = memory.image
     date_created = memory.date_created
     memories = Memory.objects.all()
-    
     if request.method == 'POST':
         form = BioForm(request.POST)
         if form.is_valid():
