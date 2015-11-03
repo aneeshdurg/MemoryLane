@@ -3,12 +3,37 @@
 
 {% load staticfiles %}
 {% include 'head.html' %}
+<<<<<<< HEAD
 
+=======
+<head>
+	<script>
+		function changeText(){
+			document.getElementById("original").style.display="none";
+			document.getElementById("editBio").style.display="block";
+		}
+		function save(){
+			document.getElementById("original").style.display="block";
+			document.getElementById("editBio").style.display="none";
+			var newBio = document.getElementById("bioTextArea").value;
+			document.getElementById("currentBio").innerHTML = newBio;
+		}
+		function cancel(){
+			document.getElementById("original").style.display="block";
+			document.getElementById("editBio").style.display="none";
+		}
+	</script>
+</head>
+>>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 <body>
 	<nav class="flex">
 		<div class="username">
 			<a href=/profile-mod/>
+<<<<<<< HEAD
 				<h1><i class="fa fa-user"></i> <span>matthew_ong</span></h1>
+=======
+				<h1><i class="fa fa-user"></i> <span>{{username}}</span></h1>
+>>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 			</a>
 		</div>
 		<div class="middleLogo">
@@ -28,6 +53,7 @@
 			<div class="profile-info flex">
 				<div class="profile-image" style="background-image:url({% static "img/matthew.jpg" %})"></div>
 				<div class="profile-header">
+<<<<<<< HEAD
 					<a href=/profile-mod/><h1>Matthew Ong</h1></a><br/>
 					<a href=/newpost/><h3>@matthew_ong</h3></a>
 					<div id="edit_signature" class="edit_signature">
@@ -45,12 +71,32 @@
 								</form>
 							</div>
 						</p>
+=======
+					<a href=/profile-mod/><h1>{{first_name}} {{last_name}}</h1></a><br/>
+					<a href=/newpost/><h3>@{{username}}</h3></a>
+					
+					<div id="bio" class="bio">
+						<div id="original" style.display="block">
+							<p id="currentBio">{{bio}}</p>
+							<a href="javascript:changeText();"><i class="fa fa-pencil"></i></a>
+						</div>
+						<div id="editBio" style="display:none">
+							<form action="newBio" method="post">
+							 	{% csrf_token %}
+    							{{ form }}
+								<textarea id="bioTextArea" rows="4" cols="25" name="newBio">{{bio}}</textarea>
+								<input type="button" value="Save" onclick="save()">
+								<input type="button" value="Cancel" onclick="cancel()">
+							</form>
+						</div>
+>>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 					</div>
 				</div>
 				<div class="add-new-memory">
 					<a href=/newpost/><i class="fa fa-camera"></i></a>
 				</div>
 			</div>
+<<<<<<< HEAD
 			<div class="post flex">
 				<a href=/post/1><div class="panorama" style="background-image: url({% static "img/panorama2.jpg" %})">
 					<div class="overlay">
@@ -58,10 +104,21 @@
 					</div>
 					<div class="title flex">
 						<h2>Lorem Ipsum</h2><h2>September 26th, 2015</h2>
+=======
+		{% for name in memories %}
+			<div class="post flex">
+				<a href=/post/1><div class="panorama" style="background-image: url({% static "img/panorama2.jpg" %})">
+					<div class="overlay">
+						<p>{{description}}</p>
+					</div>
+					<div class="title flex">
+						<h2>{{name}}</h2><h2>{{date_created}}</h2>
+>>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 					</div>
 				</div></a>
 				<div class="map" style="background-image:url({% static "img/map3.png" %})">
 					<div class="location">
+<<<<<<< HEAD
 						<h2><i class="fa fa-globe"></i>Tokyo, JP</h2>
 					</div>
 				</div>
@@ -96,6 +153,13 @@
 					</div>
 				</div>
 			</div>
+=======
+						<h2><i class="fa fa-globe"></i>{{location}}</h2>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+>>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 		</div>
 		<div class="sidebar">
 			<div class="about widget">

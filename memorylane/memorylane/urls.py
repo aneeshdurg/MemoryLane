@@ -33,5 +33,9 @@ urlpatterns = [
     url(r'^newpostsubmit/$', views.newpostsubmit, name='newpostsubmit'),
     url(r'^timeline/$', views.timeline, name='timeline'),
     url(r'^profile-mod/$', views.profilemod, name='profilemod'),
+<<<<<<< HEAD
+=======
+    url(r'^register/$', views.register, name='register'),
+>>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
     
 ]

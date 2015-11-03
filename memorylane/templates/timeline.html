@@ -8,7 +8,11 @@
 	<nav class="flex">
 		<div class="username">
 			<a href=/profile-mod/>
+<<<<<<< HEAD
 				<h1><i class="fa fa-user"></i> <span>matthew_ong</span></h1>
+=======
+				<h1><i class="fa fa-user"></i> <span>{{username}}</span></h1>
+>>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 			</a>
 		</div>
 		<div class="middleLogo">
@@ -26,25 +30,41 @@
 		<!-- div to hold all elements of a single timeline post -->
 	<div class="gridContainer flex">
 		<div class="main">
+<<<<<<< HEAD
+=======
+		{% for username in users %}
+>>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 			<div class="memory">
 			<!-- div to hold proPic, as well as present name under picture -->
 				<div class="author-info" >
 					<a href=/profile-mod/>
 						<img src="{% static "img/matthew.jpg" %}" class="author-image">
+<<<<<<< HEAD
 						<p class="author-name">Matthew</p>
+=======
+						<p class="author-name">{{first_name}}</p>
+>>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 					</a>
 				</div>
 				<div class="post flex">
 					<a href=/post/1><div class="panorama" style="background-image: url({% static "img/panorama.jpg"%})">
 						<div class="overlay">
+<<<<<<< HEAD
 							<p>Donec in mollis ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed venenatis nisi. Cras quis nibh in tortor finibus hendrerit in vel arcu...</p>
 						</div>
 							<div class="title flex">
 								<h2>Lorem Ipsum</h2><h2>September 26th, 2015</h2>
+=======
+							<p>{{description}}</p>
+						</div>
+							<div class="title flex">
+								<h2>{{name}}</h2><h2>{{date_created}}</h2>
+>>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 							</div>
 						</div></a>
 					<div class="map" style="background-image:url({% static "img/map3.png" %})">
 						<div class="location">
+<<<<<<< HEAD
 							<h2><i class="fa fa-map-marker"></i>New York, NY</h2>
 						</div>
 					</div>
@@ -118,14 +138,24 @@
 					<div class="map" style="background-image:url({% static "img/map4.png" %})">
 						<div class="location">
 							<h2><i class="fa fa-globe"></i>Paris, FR</h2>
+=======
+							<h2><i class="fa fa-map-marker"></i>{{location}}</h2>
+>>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 						</div>
 					</div>
 				</div>
 			</div>
+<<<<<<< HEAD
 		</div>
 	</div>
 </div>
 
 
+=======
+		{% endfor %}
+		</div>
+	</div>
+</div>
+>>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 </body>
 </html>
