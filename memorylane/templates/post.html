@@ -46,18 +46,16 @@
      var geocoder;
   var map;
   function initialize() {
-    geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(-34.397, 150.644);
-    var mapOptions = {
-      zoom: 8,
-      center: latlng
-    }
-    map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: {lat: -34.397, lng: 150.644}
+  });
+  var geocoder = new google.maps.Geocoder();
+    codeAddress(geocoder, map);
   }
 
-  function codeAddress() {
-
-    geocoder.geocode( {{memory.location}}, function(results, status) {
+  function codeAddress(geocoder, map) {
+    geocoder.geocode( {'address':"{{memory.location}}"}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
         var marker = new google.maps.Marker({
@@ -73,7 +71,7 @@
     </script>
 </head>
 
-<body onload="initialize()">
+<body>
     <nav class="flex">
         <div class="username">
             <a href="/profile-mod/">
@@ -117,13 +115,13 @@
                 <div class="map" id="map">
                     <div id="address">{{memory.location}}</div>
                     <div class="location">
-                        {% load easy_maps_tags %}
+                        {#% load easy_maps_tags %#}
                         <!-- Default map with 300x400 dimensions -->
-                        {% easy_map '{{memory.location}}' 300 400 %}
-                        {% load easy_maps_tags cache %}
-                        {% cache 600 my_map firm.address %}
-                            {% easy_map firm.address 300 400 %}
-                        {% endcache %}
+                        {#% easy_map '{{memory.location}}' 300 400 %#}
+                        {#% load easy_maps_tags cache %#}
+                        {#% cache 600 my_map firm.address %#}
+                            {#% easy_map firm.address 300 400 %#}
+                        {#% endcache %#}
                         <h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
 >>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
                     </div>
@@ -209,8 +207,8 @@
 
 =======
     <script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC63gKI9GdSMMPoXZq-hGwAv82CDIAfD8M&signed_in=true&libraries=places&callback=initMap" async defer></script>
-    <script src="jquery-1.7.1.min.js"></script>
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC63gKI9GdSMMPoXZq-hGwAv82CDIAfD8M&signed_in=true&libraries=places&callback=initialize" async defer></script>
+
 
     <script>
         //$(function(){ // document ready

@@ -78,6 +78,12 @@ def friends(request):
 
 def register(request):
     if request.method == 'POST':
+        users = User.objects.all()
+        for x in users:
+            if x.username==request.POST['username']:
+                return HttpResponse('That username is taken, please choose another one.')
+            if x.email==request.POST['email']:
+                return HttpResponse('That email is already in use.')    
         user = User(username=request.POST['username'], password=request.POST['password'], email=request.POST['email'], date_created=datetime.now())
         user.save()
         return timeline(request, user)    
@@ -113,6 +119,19 @@ def timeline(request, currentuser):
     date_created = memory.date_created
     users = User.objects.all()
     return render(request, 'timeline.html', {"users": users, "first_name" : first_name, "username": currentuser.username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+
+def timeline(request):
+    author = get_object_or_404(User, pk=1)
+    memory = get_object_or_404(Memory, pk=1)
+    username = author.username
+    first_name = author.first_name
+    description = memory.description
+    location = memory.location
+    name = memory.name
+    image = memory.image
+    date_created = memory.date_created
+    users = User.objects.all()
+    return render(request, 'timeline.html', {"users": users, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def profilemod(request):
     author = get_object_or_404(User, pk=1)
