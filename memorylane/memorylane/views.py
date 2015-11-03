@@ -68,20 +68,9 @@ def passwordreset(request):
 	return render(request, 'password-reset.html', {})
 
 def login(request):
-    # if request.method == 'POST':
-    #     form = RegistrationForm(request.POST)
-    #     if form.is_valid():
-    #         user = User.objects.create_user(
-    #         username=username,
-    #         password=password,
-    #         )
-    #         return HttpResponseRedirect('/register/success/')
-    # else:
-    #     form = RegistrationForm()
-    # variables = RequestContext(request, {
-    # 'form': form
-    # })
-    # else
+    if request.method == 'POST':
+        user = get_object_or_404(User, password=request.POST['password'], email=request.POST['email'])
+        return timeline(request, user)
     return render(request, 'login.html', {})
 
 def friends(request):
@@ -89,28 +78,19 @@ def friends(request):
 
 def register(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            user = User(username=form.cleaned_data['username'], password=form.cleaned_data['password'], email=form.cleaned_data['email'], date_created=datetime.now())
-            user.save()
-            return HttpResponseRedirect('/timeline/')
+        user = User(username=request.POST['username'], password=request.POST['password'], email=request.POST['email'], date_created=datetime.now())
+        user.save()
+        return timeline(request, user)    
     else:
-        form = RegistrationForm()
-    variables = RequestContext(request, {'form': form})
-    return timeline(request)
+        return HttpResponseRedirect('/signup/')
  
-def register_success(request):
-    return render_to_response('registration/success.html')
- 
-def logout_page(request):
-    logout(request)
-    return HttpResponseRedirect('/')
+
  
 #@login_required
 def home(request):
     return render_to_response('home.html',{'user': request.user })
 
-def timeline(request):
+def timeline(request, currentuser):
     author = get_object_or_404(User, pk=1)
     memory = get_object_or_404(Memory, pk=1)
     username = author.username
@@ -121,7 +101,7 @@ def timeline(request):
     image = memory.image
     date_created = memory.date_created
     users = User.objects.all()
-    return render(request, 'timeline.html', {"users": users, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+    return render(request, 'timeline.html', {"users": users, "first_name" : first_name, "username": currentuser.username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def profilemod(request):
     author = get_object_or_404(User, pk=1)
