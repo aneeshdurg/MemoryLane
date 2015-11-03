@@ -107,7 +107,8 @@ def timeline(request, currentuser):
     image = memory.image
     date_created = memory.date_created
     users = User.objects.all()
-    return render(request, 'timeline.html', {"users": users, "first_name" : first_name, "username": currentuser.username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+    memories = Memory.objects.all()
+    return render(request, 'timeline.html', {"memories": memories})
 
 def timeline(request):
     author = get_object_or_404(User, pk=1)
@@ -120,7 +121,8 @@ def timeline(request):
     image = memory.image
     date_created = memory.date_created
     users = User.objects.all()
-    return render(request, 'timeline.html', {"users": users, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+    memories = Memory.objects.all()
+    return render(request, 'timeline.html', {"memories": memories})
 
 def profilemod(request):
     author = get_object_or_404(User, pk=1)
