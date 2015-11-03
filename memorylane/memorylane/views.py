@@ -78,6 +78,12 @@ def friends(request):
 
 def register(request):
     if request.method == 'POST':
+        users = User.objects.all()
+        for x in users:
+            if x.username==request.POST['username']:
+                return HttpResponse('That username is taken, please choose another one.')
+            if x.email==request.POST['email']:
+                return HttpResponse('That email is already in use.')    
         user = User(username=request.POST['username'], password=request.POST['password'], email=request.POST['email'], date_created=datetime.now())
         user.save()
         return timeline(request, user)    
