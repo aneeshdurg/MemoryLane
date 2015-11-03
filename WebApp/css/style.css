@@ -79,20 +79,12 @@ label {
 \*------------------------------------*/
 
 nav {
-<<<<<<< HEAD
 	position: fixed;
 	padding: 0 15px;
 	background-color: #e9eced;
 	width: 100%;
 	z-index: 100;
 	box-sizing: border-box;
-=======
-	background-color: #ccc;
-	padding: 0 15px;
-	position: fixed;
-	width: 98.5%;
-	z-index: 13;
->>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 }
 
 .username,
@@ -269,11 +261,7 @@ a.signup {
 /* -- Content -- */
 
 .gridContainer {
-<<<<<<< HEAD
-	padding: 65px 2% 0;
-=======
-	padding: 60px 2% 0;
->>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
+	padding: 75px 2% 0;
 	-webkit-flex-wrap: wrap;
 	-moz-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
@@ -341,11 +329,7 @@ a.signup {
 	width: 100%;
 	background-color: rgba(255,255,255,0.4);
 	box-shadow: 0 0 10px rgba(0,0,0,0.25);
-<<<<<<< HEAD
 	padding: 20px;
-=======
-	padding: 60px 20px;
->>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
 	margin: 20px 0;
 	border-radius: 0;
 	box-sizing: border-box;
@@ -426,7 +410,7 @@ a.signup {
 	z-index: 10;
 	opacity: 0.4;
 	width: 100%;
-	transition: all 0.3s ease;
+	transition: opacity 0.3s ease;
 }
 
 	.thumb:hover .overlay,
@@ -606,12 +590,8 @@ a.signup {
 
 .main {
 	width: 100%;
-	padding: 20px;
-<<<<<<< HEAD
-	padding-top: 40px;
-=======
-	padding-top: 60px;
->>>>>>> f3d28af53f5b5e95c875c1ce9b1c9db2bfd452f4
+	padding: 20px 20px 20px;
+	box-sizing: border-box;
 }
 
 .author-info {
@@ -692,7 +672,7 @@ a.signup {
     opacity: 0;
     color: #ecf0f1;
     z-index: 10;
-    transition: all 0.25s ease;
+    transition: opacity 0.25s ease;
 }
 
 	.post .panorama:hover .overlay {

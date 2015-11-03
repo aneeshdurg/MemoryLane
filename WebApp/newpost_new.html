@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>New Post - Memory Lane</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+	<style>
+	.gridContainer > div {
+		width: 47.5%;
+		margin-right: 2.5%;
+		box-sizing: border-box;
+	}
+		.gridContainer > div:last-child {
+			padding-left: 2.5%;
+			margin-right: 0;
+			border-left: 1px solid rgba(10,18,13,0.2);
+		}
+	.preview {
+		width: 100%;
+		height: 200px;
+		background-size: cover;
+		position: relative;
+		color: #ecf0f1;
+		text-shadow: 0 0 4px rgba(0,0,0,0.75);
+		box-shadow: 0 0 10px rgba(0,0,0,0.25);
+	}
+		.preview input {
+			width: 100%;
+			height: 40px;
+			margin-top: 3px;
+			padding: 0 0 5px 5px;
+			background: transparent;
+			font-size: 24px;
+			color: #ecf0f1;
+			text-shadow: 0 0 4px rgba(0,0,0,0.75);
+			border: none;
+			box-sizing: border-box;
+			transition: all 0.25s ease;
+		}
+			.preview:hover input {
+			    font-size: 28px;
+			}
+			.preview input::-webkit-input-placeholder {
+			   color: #ecf0f1;
+			}
+
+			:-moz-placeholder { /* Firefox 18- */
+			   color: #ecf0f1;  
+			}
+
+			::-moz-placeholder {  /* Firefox 19+ */
+			   color: #ecf0f1;  
+			}
+
+			:-ms-input-placeholder {  
+			   color: #ecf0f1;  
+			}
+		.preview .overlay {
+			background-image: url(img/overlay.png);
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			transition: opacity 0.25s ease;
+		}
+			.preview .overlay:first-child {
+				opacity: 0;
+			}
+			.preview:hover .overlay {
+				opacity: 1;
+			}
+		.preview #date {
+			position: absolute;
+			font-size: 24px;
+			top: 5px;
+			right: 5px;
+		}
+	.tag-delete {
+		border: 1px solid rgba(10,18,13,0.2);
+		border-top: none;
+	}
+	.tag-delete > div {
+		width: 50%;
+		text-align: center;
+		transition: box-shadow 0.25s ease;
+	}
+		.tag-delete > div:hover {
+			box-shadow: 0 0 10px rgba(10,18,13,0.2);
+		}
+		.tag-delete > div:first-child {
+			border-right: 1px solid rgba(10,18,13,0.2);
+		}
+	.tag-delete > div i {
+		width: 100%;
+		font-size: 32px;
+		padding: 5px 0;
+	}
+	.post-info {
+		margin-top: 50px;
+		display: none!important;
+		-webkit-align-items: center;
+		-moz-align-items: center;
+		-ms-align-items: center;
+		-o-align-items: center;
+		align-items: center;
+	}
+	.publish {
+		padding: 20px;
+		width: 50%;
+		background-color: rgba(255,255,255,0.4);
+		box-sizing: border-box;
+	}
+	.publish .post-status ul {
+		list-style: none;
+		padding: 0;
+	}
+	.buttonContainer {
+		width: 50%;
+		-webkit-justify-content: space-around;
+		-moz-justify-content: space-around;
+		-ms-justify-content: space-around;
+		-o-justify-content: space-around;
+		justify-content: space-around;
+	}
+	.edit-area textarea {
+		width: 100%;
+		background-color: rgba(255,255,255,0.4);
+		padding: 5px;
+		font-family: Argh;
+		font-size: 20px;
+		color: rgba(10,18,13,0.5);
+		border: none;
+		border-bottom: 1px solid rgba(10,18,13,0.2);
+		transition: box-shadow 0.25s ease;
+		box-sizing: border-box;
+	}
+		.edit-area textarea:hover {
+			box-shadow: 0 0 10px rgba(10,18,13,0.2);
+		}
+		.edit-area textarea:focus {
+			outline: none;
+		}
+
+	/* 
+	 *
+	 * Conflicting CSS Fixes
+	 *
+	*/
+	.fa-trash-o:before {
+		padding-left: 0;
+	}
+	</style>
+</head>
+<body>
+	<nav class="flex">
+		<div class="username">
+			<a href="profile-mod.html">
+				<h1>matthew_ong</h1>
+			</a>
+		</div>
+		<div class="middleLogo">
+			<a href="timeline.html">
+				<img src="img/ml-mod.png" alt="logo" id="middleLogo">
+			</a>
+		</div>
+		<div class="settings flex">
+			<div class="search">
+	  			<input placeholder="Search &#xf002;">
+			</div>
+			<a href="settings.html"><i class="fa fa-cog"></i></a>
+		</div>
+	</nav>
+	<div class="gridContainer flex">
+		<div class="picture">
+			<div class="preview" style="background-image: url(img/panorama2.jpg);">
+				<div class="overlay"></div>
+				<div class="overlay">
+					<input type="text" placeholder="Add New Title">
+					<span id="date">April 20th, 2015</span>
+				</div>
+			</div>
+			<div class="tag-delete flex">
+				<div class="tag">
+					<a href>
+						<i class="fa fa-tag"></i>
+					</a>
+				</div>
+				<div class="delete">
+					<a href>
+						<i class="fa fa-trash-o"></i>
+					</a>
+				</div>
+			</div>
+			<div class="post-info flex">
+				<div class="publish">
+					<h2>Edit</h2>
+					<div class="post-status">
+						<ul>
+							<li>Status: Draft | <a href>Edit</a></li>
+							<li>Visibility: Public | <a href>Edit</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="buttonContainer signup flex">
+					<a href><div>Publish</div></a>
+					<a href><div>Preview</div></a>
+				</div>
+			</div>
+		</div>
+		<div class="edit-area">
+			<textarea name="Memory" cols="30" rows="20" placeholder="Today was amazing..."></textarea>
+		</div>
+	</div>
+</body>
+</html>
