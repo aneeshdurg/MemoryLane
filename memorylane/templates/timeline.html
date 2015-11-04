@@ -8,7 +8,7 @@
 	<nav class="flex">
 		<div class="username">
 			<a href=/profile-mod/>
-				<h1><i class="fa fa-user"></i> <span>{{username}}</span></h1>
+				<h1><i class="fa fa-user"></i> <span>matthew_ong</span></h1>
 			</a>
 		</div>
 		<div class="middleLogo">
@@ -24,34 +24,105 @@
 		</div>
 	</nav>
 		<!-- div to hold all elements of a single timeline post -->
-	<div class="gridContainer flex">
+
+		<div class="gridContainer flex">
 		<div class="main">
-		{% for memory in memories %}
 			<div class="memory">
 			<!-- div to hold proPic, as well as present name under picture -->
 				<div class="author-info" >
-					<a href=/profile-mod/>
+					<a href="profile-mod.html">
 						<img src="{% static "img/matthew.jpg" %}" class="author-image">
-						<p class="author-name">Author</p>
+						<p class="author-name">Matthew</p>
 					</a>
 				</div>
 				<div class="post flex">
-					<a href=/post/1><div class="panorama" style="background-image: url({% static "img/panorama.jpg"%})">
+					<a href="post.html"><div class="panorama" style="background-image: url({% static "img/panorama.jpg" %})">
 						<div class="overlay">
-							<p>{{memory.description}}</p>
+							<p>Donec in mollis ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed venenatis nisi. Cras quis nibh in tortor finibus hendrerit in vel arcu...</p>
 						</div>
 							<div class="title flex">
-								<h2>{{memory.name}}</h2><h2>{{memory.date_created}}</h2>
+								<h2>Lorem Ipsum</h2><h2>September 26th, 2015</h2>
 							</div>
 						</div></a>
 					<div class="map" style="background-image:url({% static "img/map3.png" %})">
 						<div class="location">
-							<h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
+							<h2><i class="fa fa-map-marker"></i>New York, NY</h2>
 						</div>
 					</div>
 				</div>
 			</div>
-		{% endfor %}
+			<div class="memory">
+			<!-- div to hold proPic, as well as present name under picture -->
+				<div class="author-info" >
+					<a href="profile-mod.html">
+						<img src="{% static "img/preska.jpg" %}" class="author-image">
+						<p class="author-name">Preska</p>
+					</a>
+				</div>
+				<div class="post flex">
+					<a href="post.html"><div class="panorama" style="background-image: url({% static "img/panorama2.jpg"%})">
+						<div class="overlay">
+							<p>Praesent imperdiet enim tortor, quis suscipit velit bibendum at. Cras cursus ligula fermentum, convallis sem feugiat, egestas massa. Nulla eu dui elementum, gravida ex sed, sagittis nunc. Vestibulum varius, tortor quis feugiat imperdiet...</p>
+						</div>
+							<div class="title flex">
+								<h2>Consectetur Adipiscing Elit</h2><h2>September 28th, 2015</h2>
+							</div>
+						</div></a>
+					<div class="map" style="background-image:url({% static "img/map2.png" %})">
+						<div class="location">
+							<h2><i class="fa fa-map-marker"></i>Chicago, IL</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="memory">
+			<!-- div to hold proPic, as well as present name under picture -->
+				<div class="author-info" >
+					<a href="profile-mod.html">
+						<img src="{% static "img/Samara.jpg"%}" class="author-image">
+						<p class="author-name">Samara</p>
+					</a>
+				</div>
+				<div class="post flex">
+					<a href="post.html"><div class="panorama" style="background-image: url({% static "img/panorama3.jpg"%})">
+						<div class="overlay">
+							<p>Etiam mi purus, blandit in sem non, pellentesque condimentum ligula. Mauris felis neque, tincidunt nec semper non, condimentum ut lectus. Suspendisse nec nisl vel nulla rhoncus placerat. Cras mollis, lacus at dapibus luctus, mauris massa blandit diam...</p>
+						</div>
+							<div class="title flex">
+								<h2>Nam Vitae Urna</h2><h2>September 30th, 2015</h2>
+							</div>
+						</div></a>
+					<div class="map" style="background-image:url({% static "img/map3.png" %})">
+						<div class="location">
+							<h2><i class="fa fa-globe"></i>Tokyo, JP</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="memory">
+			<!-- div to hold proPic, as well as present name under picture -->
+				<div class="author-info" >
+					<a href="profile-mod.html">
+						<img src="{% static "img/Aneesh.jpg"%}" class="author-image">
+						<p class="author-name">Aneesh</p>
+					</a>
+				</div>
+				<div class="post flex">
+					<a href="post.html"><div class="panorama" style="background-image: url({% static "img/panorama4.jpg"%})">
+						<div class="overlay">
+							<p>Cras et quam eu enim feugiat lacinia. Nam non ante urna. Vestibulum venenatis ullamcorper urna, ac lobortis dui condimentum et...</p>
+						</div>
+							<div class="title flex">
+								<h2>Cras A Diam</h2><h2>October 2nd, 2015</h2>
+							</div>
+						</div></a>
+					<div class="map" style="background-image:url({% static "img/map4.png" %})">
+						<div class="location">
+							<h2><i class="fa fa-globe"></i>Paris, FR</h2>
+						</div>
+					</div>
+				</div>
+			
 		</div>
 	</div>
 </div>
