@@ -28,5 +28,5 @@ class RegistrationForm(forms.Form):
     #             raise forms.ValidationError(_("The two password fields did not match."))
     #     return self.cleaned_data
 
-class BioFrom(forms.Form):
+class BioForm(forms.Form):
     bioTextArea = forms.CharField(label='BioTextArea', max_length=100)
