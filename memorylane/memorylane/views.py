@@ -69,8 +69,8 @@ def passwordreset(request):
 
 def login(request):
     if request.method == 'POST':
-        #user = get_object_or_404(User, password=request.POST['password'], email=request.POST['email'])
-        return timeline(request)
+        user = get_object_or_404(User, password=request.POST['password'], email=request.POST['email'])
+        return timeline2(request, user)
     return render(request, 'login.html', {})
 
 def friends(request):
