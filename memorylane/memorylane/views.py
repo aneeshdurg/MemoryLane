@@ -70,7 +70,7 @@ def passwordreset(request):
 def login(request):
     if request.method == 'POST':
         user = get_object_or_404(User, password=request.POST['password'], email=request.POST['email'])
-        return timeline2(request, user)
+        return timeline(request, user)
     return render(request, 'login.html', {})
 
 def friends(request):
@@ -86,7 +86,7 @@ def register(request):
                 return HttpResponse('That email is already in use.')    
         user = User(username=request.POST['username'], password=request.POST['password'], email=request.POST['email'], date_created=datetime.now())
         user.save()
-        return timeline2(request, user)    
+        return timeline(request, user)    
     else:
         return HttpResponseRedirect('/signup/')
  
@@ -96,7 +96,7 @@ def register(request):
 def home(request):
     return render_to_response('home.html',{'user': request.user })
 
-def timeline2(request, currentuser):
+def timeline(request, currentuser):
     author = get_object_or_404(User, pk=1)
     memory = get_object_or_404(Memory, pk=1)
     username = author.username
@@ -108,7 +108,7 @@ def timeline2(request, currentuser):
     date_created = memory.date_created
     users = User.objects.all()
     memories = Memory.objects.all()
-    return render(request, 'timeline.html', {"memories": memories, "username": username})
+    return render(request, 'timeline.html', {"memories": memories})
 
 def timeline(request):
     author = get_object_or_404(User, pk=1)
