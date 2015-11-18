@@ -3,8 +3,9 @@
 
 {% load staticfiles %}
 {% include 'head.html' %}
-
-
+<head>
+	<title>New Post</title>
+</head>
 <body>
 	<nav class="flex">
 		<div class="username">
@@ -26,6 +27,9 @@
 	</nav>
 	<div class="main">
 		<form method="post" action="/newpostsubmit/" name="newpost" enctype="multipart/form-data">
+			</br>
+			</br>
+			</br>
 			<h1>New Memory</h1>
 			<p class="autosave-post">Draft saved <b>{% now "f" %} {% now "m/d/Y" %}</b></p>
 			<div class="title-post">

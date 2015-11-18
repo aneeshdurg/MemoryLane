@@ -22,22 +22,23 @@ def userlist(request):
 	return HttpResponse(output)
 
 def signup(request):
-    # register(request)
-	return render(request, 'signup.html', {})
-    # if request.method == 'POST':
-    #     form = RegistrationForm(request.POST)
-    #     if form.is_valid():
-    #         user = User.objects.create_user(
-    #         username=username,
-    #         password=password,
-    #         email=email
-    #         )
-    #         return HttpResponseRedirect('/signup/success/')
-    # else:
-    #     form = RegistrationForm()
-    # variables = RequestContext(request, {
-    # 'form': form
-    # })
+    register(request)
+	
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(
+            username=username,
+            password=password,
+            email=email
+            )
+            return HttpResponseRedirect('/signup/success/')
+    else:
+        form = RegistrationForm()
+    variables = RequestContext(request, {
+    'form': form
+    })
+    return render(request, 'signup.html', {})
 
 def settings(request):
 	return render(request, 'settings.html', {})
@@ -89,9 +90,7 @@ def register(request):
         return timeline(request, user)    
     else:
         return HttpResponseRedirect('/signup/')
- 
 
- 
 #@login_required
 def home(request):
     return render_to_response('home.html',{'user': request.user })
@@ -122,7 +121,7 @@ def timeline(request):
     date_created = memory.date_created
     users = User.objects.all()
     memories = Memory.objects.all()
-    return render(request, 'timeline.html', {"memories": memories})
+    return render(request, 'timeline.html', {"memories": memories, "username": username})
 
 def profilemod(request):
     author = get_object_or_404(User, pk=1)
