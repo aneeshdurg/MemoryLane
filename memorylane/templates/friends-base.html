@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load staticfiles %}
+{% include 'head.html' %}
+<title>{{username}}'s Friends</title>
+<!--<script>
+    function addIsactive(){
+    	if (!( this.classList.contains("is-active")))
+        this.className += " is-active";
+
+    }
+    function delIsactive(current){
+    	current.className = 
+    	current.getElementById("MyElement").className.replace( /(?:^|\s)MyClass(?!\S)/g , '' )
+    }
+
+</script>-->
+<body>
+	{% include 'nav.html' %}
+	<div class="gridContainer flex friends">
+		<div class="main flex">
+			<div class="user-info flex">
+				<div class="user-image" style="background-image:url({% static "img/matthew.jpg" %})">
+				</div>
+				<br>
+				<div class="user-name">
+					<a href=/profile-mod/><h1>{{first_name}}Matthew {{last_name}}Ong</h1></a><br/>
+					<a href=/newpost/><h3>@{{username}}matthew</h3></a>
+				</div>
+			</div>
+			<div class="subnav  friends">
+				<ul class="FriendsNav-list">
+				    <li class="FriendsNav-item FriendsNav-item-friends {% block friends %}{% endblock %}">
+					   	<a  href=/friends/>
+					   		<span class="FriendsNav-label">Friends</span>
+					   		<span class="FriendsNav-value" data-is-compact="false">6</span>
+					   	</a>
+				    </li>
+				   	<li class="FriendsNav-item FriendsNav-item-following {% block following %}{% endblock %}">
+				   		<a href=/following/>
+				   			<span class="FriendsNav-label">Following</span>
+					   		<span class="FriendsNav-value" data-is-compact="false">3</span>
+					   	</a>
+					</li>
+				   	<li class="FriendsNav-item FriendsNav-item-followers {% block follower %}{% endblock %}">
+				   		<a href=/follower/>
+				   			<span class="FriendsNav-label">Follower</span>
+					   		<span class="FriendsNav-value" data-is-compact="false">4</span>
+					   	</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+			<!--will be templated if we have users-->
+
+			<div class="people flex friends">
+				{% block loadPeople%} {% endblock %}
+			</div>
+
+</body>
+</html>

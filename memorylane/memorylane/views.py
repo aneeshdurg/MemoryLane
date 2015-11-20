@@ -77,6 +77,12 @@ def login(request):
 def friends(request):
 	return render(request, 'friends.html', {})
 
+def following(request):
+    return render(request, 'following.html', {})
+
+def follower(request):
+    return render(request, 'follower.html', {})
+
 def register(request):
     if request.method == 'POST':
         users = User.objects.all()

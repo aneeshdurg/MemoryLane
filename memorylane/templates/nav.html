@@ -1,0 +1,19 @@
+{% load staticfiles %}
+<nav class="flex">
+	<div class="username">
+		<a href=/profile-mod/>
+			<h1><i class="fa fa-user"></i> <span>{{user.username}}</span></h1>
+		</a>
+	</div>
+	<div class="middleLogo">
+		<a href=/timeline/>
+			<img src="{% static "img/ml-mod.png" %}" alt="logo" id="middleLogo">
+		</a>
+	</div>
+	<div class="settings flex">
+		<div class="search">
+  			<input placeholder="Search &#xf002;">
+		</div>
+		<a href="/settings/"><i class="fa fa-cog"></i></a>
+	</div>
+</nav>
