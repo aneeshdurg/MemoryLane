@@ -1,6 +1,6 @@
 {% extends "friends-base.html" %}
 {% load staticfiles %}
-{% block friends %} is-active {% endblock %}
+{% block follower%} is-active {% endblock %}
 {% block loadPeople %}
 <a class="thumb" href="/profile-mod/">
 	<div style="background-image: url({% static "img/preska.jpg" %})">
@@ -35,24 +35,6 @@
 			<img src="{% static "img/overlay.png" %}">
 			<p>{{bio}}I love Frouble.</p>
 			<span class="name">Aneesh</span>
-		</div>
-	</div>
-</a>
-<a class="thumb" href="/profile-mod/">
-	<div style="background-image: url({% static "img/eric.jpg" %})">
-		<div class="overlay">
-			<img src="{% static "img/overlay.png" %}">
-			<p>{{bio}}I love Frouble.</p>
-			<span class="name">Eric</span>
-		</div>
-	</div>
-</a>
-<a class="thumb" href="/profile-mod/">
-	<div style="background-image: url({% static "img/marianne.jpg" %})">
-		<div class="overlay">
-			<img src="{% static "img/overlay.png" %}">
-			<p>{{bio}}I love Frouble.</p>
-			<span class="name">Marianne</span>
 		</div>
 	</div>
 </a>
