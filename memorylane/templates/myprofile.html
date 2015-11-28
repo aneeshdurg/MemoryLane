@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load staticfiles %}
+{% include 'head.html' %}
+<head>
+    <title>Profile Settings</title>
+    <script>
+        function changeBioText(){
+            document.getElementById("original").style.display="none";
+            document.getElementById("editBio").style.display="block";
+        }
+        function saveBio(){
+            document.getElementById("original").style.display="block";
+            document.getElementById("editBio").style.display="none";
+            var newBio = document.getElementById("bioTextArea").value;
+            document.getElementById("currentBio").innerHTML = newBio;
+        }
+        function cancelBio(){
+            document.getElementById("original").style.display="block";
+            document.getElementById("editBio").style.display="none";
+        }
+
+        function changeLivesIn(){
+            document.getElementById("original").style.display="none";
+            document.getElementById("editBio").style.display="block";
+        }
+        function saveLivesIn(){
+            document.getElementById("original").style.display="block";
+            document.getElementById("editBio").style.display="none";
+            var newBio = document.getElementById("bioTextArea").value;
+            document.getElementById("currentBio").innerHTML = newBio;
+        }
+        function cancelLivesIn(){
+            document.getElementById("original").style.display="block";
+            document.getElementById("editBio").style.display="none";
+        }
+    </script>
+</head>
+<body>
+    <nav class="flex">
+        <div class="username">
+            <a href=/profile-mod/>
+                <h1><i class="fa fa-user"></i> <span>{{username}}</span></h1>
+            </a>
+        </div>
+        <div class="middleLogo">
+            <a href=/timeline/>
+            <img src="{% static "img/ml-mod.png" %}" alt="logo" style= "height: 40px;margin-top: 15px;box-sizing: border-box;">
+            </a>
+        </div>
+        <div class="settings flex">
+            <div class="search">
+                <input placeholder="Search &#xf002;">
+            </div>
+            <div class="dropdown">
+                <!-- trigger button -->
+                <!-- <button><i class="fa fa-cog"></button> -->
+                <input type="image" src="{% static "img/settingsicon.png" %}" alt="Settings">
+                <!-- dropdown menu -->
+                <ul class="dropdown-menu">
+                    <li><a href=/myprofile/>My Profile</a></li>
+                    <li><a href=/account/>Account</a></li>
+                    <li><a href=/general/>General</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="main">
+        <div class="settingstitle">
+            Profile Settings
+        </div>
+    </div>
+    <div class="gridContainer flex profile">
+        <div class="main">
+            <div class="profile-info flex">
+                <div class="profile-image" style="background-image:url({% static "img/matthew.jpg" %})"></div>
+                <div class="profile-header">
+                    <a href=/profile-mod/><h1>{{first_name}} {{last_name}}</h1></a><br/>
+                    <a href=/newpost/><h3>@{{username}}</h3></a>
+                    <div id="bio" class="bio">
+                        <div id="original" style.display="block">
+                            <p id="currentBio">{{bio}}</p>
+                            <a href="javascript:changeBioText();"><i class="fa fa-pencil"></i></a>
+                        </div>
+                        <div id="editBio" style="display:none">
+                            <form action="newBio" method="post">
+                                {% csrf_token %}
+                                {{ form }}
+                                <textarea id="bioTextArea" rows="4" cols="25" name="newBio">{{bio}}</textarea>
+                                <input type="button" value="Save" onclick="saveBio()">
+                                <input type="button" value="Cancel" onclick="cancelBio()">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% for name in memories %}
+            <div class="post flex">
+                <a href=/post/1><div class="panorama" style="background-image: url({% static "img/panorama2.jpg" %})">
+                    <div class="overlay">
+                        <p>{{description}}</p>
+                    </div>
+                    <div class="title flex">
+                        <h2>{{name}}</h2><h2>{{date_created}}</h2>
+                    </div>
+                </div></a>
+                <div class="map" style="background-image:url({% static "img/map3.png" %})">
+                    <div class="location">
+                        <h2><i class="fa fa-globe"></i>{{location}}</h2>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="sidebar">
+            <div class="about widget">
+                <h1>About</h1>
+                <div class="flex">
+                    <div class="about-basics flex">
+
+                        <div id="livesin" class="livesin">
+                            <div id="original" style.display="block">
+                                <p id="livesin">{{livesin}}</p>
+                                <a href="javascript:changeBioText();"><i class="fa fa-pencil"></i></a>
+                            </div>
+                            <div id="editBio" style="display:none">
+                                <form action="newBio" method="post">
+                                    {% csrf_token %}
+                                    {{ form }}
+                                    <textarea id="bioTextArea" rows="4" cols="25" name="newBio">{{bio}}</textarea>
+                                    <input type="button" value="Save" onclick="saveBio()">
+                                    <input type="button" value="Cancel" onclick="cancelBio()">
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <h3><i class="fa fa-map-marker"></i> Lives in:</h3>
+                            <span>Urbana-Champaign</span>
+                        </div>
+                        <div>
+                            <h3><i class="fa fa-clock-o"></i> Joined:</h3>
+                            <span>8/16/2015</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="about-passage">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora animi dolorem fugiat, similique velit eligendi atque, earum perferendis corporis quibusdam! Nisi animi, ut reiciendis explicabo aperiam sed porro nesciunt, maxime.</p>
+                </div>
+            </div>
+            <div class="widget">
+                <a href=/friends/><h2>Friends</h2></a>
+                <div class="group flex friends">
+                    <a class="thumb" href><div style="background-image: url({% static "img/preska.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Preska</span></div></a>
+                    <a class="thumb" href><div style="background-image: url({% static "img/samara.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Samara</span></div></a>
+                    <a class="thumb" href><div style="background-image: url({% static "img/zak.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Zak</span></div></a>
+                    <a class="thumb" href><div style="background-image: url({% static "img/aneesh.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Aneesh</span></div></a>
+                    <a class="thumb" href><div style="background-image: url({% static "img/eric.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Eric</span></div></a>
+                    <a class="thumb" href><div style="background-image: url({% static "img/marianne.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Marianne</span></div></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
