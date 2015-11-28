@@ -1,7 +1,7 @@
 #files.py
 import re
 from django import forms
-from .models import User, Memory
+from .models import Memory
 from django.utils.translation import ugettext_lazy as _
 
 
