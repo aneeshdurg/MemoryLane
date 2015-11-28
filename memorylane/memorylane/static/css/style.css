@@ -858,6 +858,81 @@ a.signup {
 }
 
 /*------------------------------------*\
+    #SETTINGS
+\*------------------------------------*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown .dropdown-menu {
+    position: absolute;
+
+    top: 100%;
+    left: -90px;
+
+    margin: 0;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+    padding-right: 100px;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    display: none;
+    margin: 0;
+
+    list-style: none;
+    width: 100%;
+   	padding: 0;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+/** List Item Styles **/
+.dropdown a {
+    display: block;
+    padding: 0.2em 0.8em;
+    text-decoration: none;
+    background: #CCCCCC;
+    color: #333333;
+}
+/** List Item Hover Styles **/
+.dropdown a:hover {
+    background: #BBBBBB;
+}
+.settingstitle {
+	width: 90%;
+	height: 40px;
+	font-size: 40px;
+	font-weight: bold;
+	padding-top: 60px;
+}
+
+.general{
+	list-style: none;
+}
+.general span.edit{
+	text-align: right;
+}
+ul, li{
+    list-style:none;
+    list-style-type:none;
+}
+
+.deletecontinue{
+	padding-top:40px;
+}
+.enterpassword{
+	padding-top:10px;
+}
+
+/*------------------------------------*\
 
     #TABLET STYLING
 

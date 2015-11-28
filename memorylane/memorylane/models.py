@@ -10,6 +10,8 @@ class User(models.Model):
     email = models.EmailField()
     password = models.CharField(max_length=100)
     bio = models.TextField()
+    livesin = models.TextField()
+    about = models.TextField()
     memories = models.CharField(max_length=5000)
 
     def __str__(self):
