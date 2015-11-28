@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^post/(?P<memory_id>[0-9]+)/$', views.post, name="post"),
     url(r'^passwordreset/', views.passwordreset, name="passwordreset"),
     url(r'^login/', views.login, name="login"),
+     url(r'^logout/$', views.logout, name='logout'),
     url(r'^friends/', views.friends, name="friends"),
     url(r'^profiletest/(?P<user_id>[0-9]+)/$', views.profiletest, name='profiletest'),
     url(r'^userlist/$', views.userlist, name='userlist'),
@@ -37,5 +38,6 @@ urlpatterns = [
     url(r'^account/$', views.account, name='account'),
     url(r'^general/$', views.general, name='general'),
     url(r'^delete/$', views.delete, name='delete')
-    
+    url(r'^following/$', views.following, name='following'),
+    url(r'^follower/$', views.follower, name='follower'),
 ]
