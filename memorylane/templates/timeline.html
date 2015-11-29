@@ -8,38 +8,11 @@
 </head>
 
 <body>
-	<nav class="flex">
-    <div class="username">
-      <a href=/profile-mod/>
-        <h1><i class="fa fa-user"></i> <span>{{username}}</span></h1>
-      </a>
-    </div>
-    <div class="middleLogo">
-      <a href=/timeline/>
-        <img src="{% static "img/ml-mod.png" %}" alt="logo" style= "height: 40px;margin-top: 15px;box-sizing: border-box;">
-      </a>
-    </div>
-    <div class="settings flex">
-      <div class="search">
-          <input placeholder="Search &#xf002;">
-      </div>
-      <div class="dropdown">
-        <!-- trigger button -->
-        <!-- <button><i class="fa fa-cog"></button> -->
-        <input type="image" src="{% static "img/settingsicon.png" %}" alt="Settings">
-        <!-- dropdown menu -->
-        <ul class="dropdown-menu">
-          <li><a href=/myprofile/>My Profile</a></li>
-          <li><a href=/account/>Account</a></li>
-          <li><a href=/general/>General</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+	{% include 'nav.html' %}
 		<!-- div to hold all elements of a single timeline post -->
 	<div class="gridContainer flex">
 		<div class="main">
-		{% for memory in memories %}
+		{% for memory in memories reversed %}
 			<div class="memory">
 			<!-- div to hold proPic, as well as present name under picture -->
 				<div class="author-info" >
@@ -49,17 +22,19 @@
 					</a>
 				</div>
 				<div class="post flex">
-					<a href=/post/1><div class="panorama" style="background-image: url({% static "img/panorama.jpg"%})">
-						<div class="overlay">
-							<p>{{memory.description}}</p>
-						</div>
+					<a href=/post/1>
+						<div class="panorama" style="background-image: url({% static "img/panorama.jpg"%})">
+							<div class="overlay">
+								<p>{{memory.description}}</p>
+							</div>
 							<div class="title flex">
 								<h2>{{memory.name}}</h2><h2>{{memory.date_created}}</h2>
 							</div>
-						</div></a>
-					<div class="map" style="background-image:url({% static "img/map3.png" %})">
+						</div>
+					</a>
+					<div class="map" id="map">
 						<div class="location">
-							<h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
+							<h2><i class="fa fa-globe"></i>{{memory.location}}</h2>
 						</div>
 					</div>
 				</div>

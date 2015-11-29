@@ -6,4 +6,45 @@
 	<link rel="icon" href="{% static "image/x-icon" %}" type=""/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<link rel="shortcut icon" href= "{% static "image/x-icon" %}"type=/>
+    <script>
+    var geocoder;
+    var map;
+    function initialize() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: {lat: -34.397, lng: 150.644}
+        });
+        var geocoder = new google.maps.Geocoder();
+        codeAddress(geocoder, map);
+    }
+    function codeAddress(geocoder, map) {
+        geocoder.geocode( {'address':"{{memory.location}}"}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
+        });
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC63gKI9GdSMMPoXZq-hGwAv82CDIAfD8M&signed_in=true&libraries=places&callback=initialize" async defer>
+    </script>
+    <script>
+    //$(function(){ // document ready
+    if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
+    var stickyTop = $('.sticky').offset().top; // returns number 
+    $(window).scroll(function(){ // scroll event
+    var windowTop = $(window).scrollTop(); // returns number 
+    if (stickyTop < windowTop-240){
+        $('.sticky').css({ position: 'fixed', top: '0', width: '34.5%', right: '6.95%'});
+    }else{
+        $('.sticky').css({ position: 'static', width: '40%'});
+        }
+    });}
+    });
+    </script>
 </head>

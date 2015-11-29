@@ -2,7 +2,7 @@
 <nav class="flex">
 	<div class="username">
 		<a href=/profile-mod/>
-			<h1><i class="fa fa-user"></i> <span>{{user.username}}</span></h1>
+			<h1><i class="fa fa-user"></i> <span>{{user.username}}Matthew</span></h1>
 		</a>
 	</div>
 	<div class="middleLogo">
@@ -14,6 +14,16 @@
 		<div class="search">
   			<input placeholder="Search &#xf002;">
 		</div>
-		<a href="/settings/"><i class="fa fa-cog"></i></a>
-	</div>
+		<div class="dropdown">
+        <!-- trigger button -->
+        <!-- <button><i class="fa fa-cog"></button> -->
+        <input type="image" src="{% static "img/settingsicon.png" %}" alt="Settings">
+        <!-- dropdown menu -->
+        <ul class="dropdown-menu">
+	        <li><a href=/myprofile/>My Profile</a></li>
+	        <li><a href=/account/>Account</a></li>
+	        <li><a href=/general/>General</a></li>
+        </ul>
+      	</div>
+    </div>
 </nav>
