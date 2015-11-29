@@ -33,11 +33,10 @@ urlpatterns = [
     url(r'^newpostsubmit/$', views.newpostsubmit, name='newpostsubmit'),
     url(r'^timeline/$', views.timeline, name='timeline'),
     url(r'^profile-mod/$', views.profilemod, name='profilemod'),
-    url(r'^register/$', views.register, name='register'),
     url(r'^myprofile/$', views.myprofile, name='myprofile'),
     url(r'^account/$', views.account, name='account'),
     url(r'^general/$', views.general, name='general'),
-    url(r'^delete/$', views.delete, name='delete')
+    url(r'^delete/$', views.delete, name='delete'),
     url(r'^following/$', views.following, name='following'),
     url(r'^follower/$', views.follower, name='follower'),
 ]
