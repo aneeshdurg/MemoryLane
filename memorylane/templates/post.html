@@ -1,151 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-
 {% load staticfiles %}
 {% include 'head.html' %}
-<head>
-    <!--script>
-    function initMap() {
-      var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -33, lng: 151.196},
-        zoom: 15
-      });
-
-      var infowindow = new google.maps.InfoWindow();
-      var service = new google.maps.places.PlacesService(map);
-
-      service.getDetails({
-        placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
-      }, function(place, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          var marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location
-          });
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent(place.name);
-            infowindow.open(map, this);
-          });
-        }
-      });
+<style>
+    .memory-body {
+        display: flex;
+        flex-direction: column;
     }
-
-    </script-->
-    <script>
-     var geocoder;
-  var map;
-  function initialize() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: {lat: -34.397, lng: 150.644}
-  });
-  var geocoder = new google.maps.Geocoder();
-    codeAddress(geocoder, map);
-  }
-
-  function codeAddress(geocoder, map) {
-    geocoder.geocode( {'address':"{{memory.location}}"}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-        });
-      } else {
-        alert("Geocode was not successful for the following reason: " + status);
-      }
-    });
-  }
-
-    </script>
-</head>
-
+    .location-memory {
+        padding-top: 30px;
+        line-height: 1;
+    }
+</style>
 <body>
-    <nav class="flex">
-    <div class="username">
-      <a href=/profile-mod/>
-        <h1><i class="fa fa-user"></i> <span>{{username}}</span></h1>
-      </a>
-    </div>
-    <div class="middleLogo">
-      <a href=/timeline/>
-        <img src="{% static "img/ml-mod.png" %}" alt="logo" style= "height: 40px;margin-top: 15px;box-sizing: border-box;">
-      </a>
-    </div>
-    <div class="settings flex">
-      <div class="search">
-          <input placeholder="Search &#xf002;">
-      </div>
-      <div class="dropdown">
-        <!-- trigger button -->
-        <!-- <button><i class="fa fa-cog"></button> -->
-        <input type="image" src="{% static "img/settingsicon.png" %}" alt="Settings">
-        <!-- dropdown menu -->
-        <ul class="dropdown-menu">
-          <li><a href=/myprofile/>My Profile</a></li>
-          <li><a href=/account/>Account</a></li>
-          <li><a href=/general/>General</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    {% include 'nav.html' %}
     <!-- div to hold all elements of a single timeline post -->
     <div class="single-post">
         <!-- div to hold panaroma shot and top bar(title and date) -->
-    <div class = "panoramaElement">
-        <div class="panoramaHeader">
-            <p class="panoramaLeft">{{memory.name}}</p>
-            <p class="panoramaRight">{{memory.date_created}}</p>
-    </div>
-        <img src="{{image}}" class="panoramaResize">        
-        <div class="content">
-            <p class="textRemember">I remember...</p>
-            <p class="textBody">
-            {{memory.description}}
-            </p>
-        </div>
-            <div id="sidebar" class="flex sticky">
-                <div class="map" id="map">
-                    <div id="address">{{memory.location}}</div>
-                    <div class="location">
-                        {#% load easy_maps_tags %#}
-                        <!-- Default map with 300x400 dimensions -->
-                        {#% easy_map '{{memory.location}}' 300 400 %#}
-                        {#% load easy_maps_tags cache %#}
-                        {#% cache 600 my_map firm.address %#}
-                            {#% easy_map firm.address 300 400 %#}
-                        {#% endcache %#}
-                        <h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
+        <div class = "panoramaElement">
+            <div class="panoramaHeader">
+                <p class="panoramaLeft">{{memory.name}}</p>
+                <p class="panoramaRight">{{memory.date_created}}</p>
+            </div>
+            <img src="{{image}}" class="panoramaResize">
+            <div class="memory flex">
+                <div class="memory-body">        
+                    <div class="content">
+                        <p class="textRemember">I remember...</p>
+                        <p class="textBody">
+                        {{memory.description}}
+                        </p>                        
+                    </div>
+                    <div class="location-memory">
+                        <h2> More memories about {{memory.location}}</h1>
+                        {% for memory in memories reversed %}
+                            {% ifequal memory.location location %}
+                            <div class="memory">
+                            <!-- div to hold proPic, as well as present name under picture -->
+                                <div class="author-info" >
+                                    <a href=/profile-mod/>
+                                        <img src="{% static "img/matthew.jpg" %}" class="author-image">
+                                        <p class="author-name">{{first_name}}</p>
+                                        <p class="author-name">Author</p>
+                                    </a>
+                                </div>
+                                <div class="post flex">
+                                    <a href=/post/1><div class="panorama" style="background-image: {% static memory.image %}"> 
+                                        <div class="overlay">
+                                            <p>{{memory.description}}</p>
+                                        </div>
+                                            <div class="title flex">
+                                                <h2>{{memory.name}}</h2><h2>{{memory.date_created}}</h2>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="map" id="map">
+                                        <div class="location">
+                                            <h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endifequal %}
+                            <!--background-color: #fff;
+                                border-radius: 6px;
+                                display: inline-block;
+                                margin: -45px 2px 0 -3px;
+                                padding: 3px;
+                                position: relative;
+                                vertical-align: bottom;
+                                z-index: 1-->
+                        {% endfor %}
                     </div>
                 </div>
-                <p class="textWith">with...</p>
-                <div class="group flex friends">
-                    <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/preska.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Preska</span></div></a>
-                    <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/samara.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Samara</span></div></a>
-                    <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/zak.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Zak</span></div></a>
-                    <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/aneesh.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Aneesh</span></div></a>
+                <div id="sidebar" class="flex sticky">
+                    <div class="map" id="map"></div>
+                    <a href=/location/>
+                        <div class="location">
+                            <h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
+                        </div>
+                    </a>
+                    <p class="textWith">with...</p>
+                    <div class="group flex friends">
+                        <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/preska.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Preska</span></div></a>
+                        <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/samara.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Samara</span></div></a>
+                        <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/zak.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Zak</span></div></a>
+                        <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/aneesh.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Aneesh</span></div></a>
+                    </div>
                 </div>
             </div>
         </div>
         <br>
     </div>
-    <script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC63gKI9GdSMMPoXZq-hGwAv82CDIAfD8M&signed_in=true&libraries=places&callback=initialize" async defer></script>
-
-
-    <script>
-        //$(function(){ // document ready
-        if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
-        var stickyTop = $('.sticky').offset().top; // returns number 
-        $(window).scroll(function(){ // scroll event
-        var windowTop = $(window).scrollTop(); // returns number 
-        if (stickyTop < windowTop-240){
-            $('.sticky').css({ position: 'fixed', top: '0', width: '34.5%', right: '6.95%'});
-        }else{
-            $('.sticky').css({ position: 'static', width: '40%'});
-            }
-        });}
-        });
-    </script>
 </body>
 </html>

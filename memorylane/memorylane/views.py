@@ -158,6 +158,11 @@ def getMemories(request):
         memorylist.append(x.first_name + ' ' + x.last_name)
     return memorylist
 
+def location(request):
+    location = {{location}}
+    memories = Memory.objects.all()
+    return render(request, "location.html", {"memories": memories})
+
 def myprofile(request):
     author = get_object_or_404(User, pk=1)
     memory = get_object_or_404(Memory, pk=1)
