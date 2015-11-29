@@ -125,6 +125,7 @@ def profilemod(request):
     memory = get_object_or_404(Memory, pk=1)
     username = request.user.username
     first_name = request.user.first_name
+    last_name = request.user.last_name
     description = memory.description
     location = memory.location
     name = memory.name
