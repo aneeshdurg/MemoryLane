@@ -53,9 +53,6 @@ def signup(request):
     })
     return render(request, 'signup.html', {})
 
-def settings(request):
-	return render(request, 'settings.html', {})
-
 def post(request, memory_id):
 	memory = get_object_or_404(Memory, pk=memory_id)
 	author = get_object_or_404(User, username=memory.author)
@@ -126,8 +123,9 @@ def timeline(request):
 def profilemod(request):
     author = get_object_or_404(User, username=request.user.username)
     memory = get_object_or_404(Memory, pk=1)
-    username = request.user.username
-    first_name = request.user.first_name
+    username = author.username
+    first_name = author.first_name
+    last_name = author.last_name
     description = memory.description
     location = memory.location
     name = memory.name
@@ -143,8 +141,8 @@ def profilemod(request):
 
     else:
         author = get_object_or_404(User, pk=1)
-        bio = get_object_or_404(UserProfile, username=request.user.username).bio
-        return render(request, 'profile-mod.html', {"bio": bio, "memories": memories, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+        bio = author.bio
+        return render(request, 'profile-mod.html', {"bio": bio, "memories": memories, "first_name" : first_name, "last_name": last_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def getUsers(request):
     users = User.objects.all()
@@ -159,3 +157,45 @@ def getMemories(request):
     for x in memories:
         memorylist.append(x.first_name + ' ' + x.last_name)
     return memorylist
+
+def myprofile(request):
+    author = get_object_or_404(User, pk=1)
+    memory = get_object_or_404(Memory, pk=1)
+    username = author.username
+    first_name = author.first_name
+    last_name = author.last_name
+    bio = author.bio
+    description = memory.description
+    location = memory.location
+    name = memory.name
+    image = memory.image
+    date_created = memory.date_created
+    users = User.objects.all()
+    memories = Memory.objects.all()
+    return render(request, 'myprofile.html', {"bio": bio, "memories": memories, "first_name" : first_name, "last_name": last_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+
+def account(request):
+    author = get_object_or_404(User, pk=1)
+    memory = get_object_or_404(Memory, pk=1)
+    username = author.username
+    first_name = author.first_name
+    last_name = author.last_name
+    users = User.objects.all()
+    memories = Memory.objects.all()
+    return render(request, 'account.html', {"username": username, "first_name": first_name, "last_name": last_name})
+
+def general(request):
+    author = get_object_or_404(User, pk=1)
+    memory = get_object_or_404(Memory, pk=1)
+    username = author.username
+    first_name = author.first_name
+    last_name = author.last_name
+    email = author.email
+    users = User.objects.all()
+    return render(request, 'general.html', {"username": username, "first_name": first_name, "last_name": last_name, "email": email})
+
+def delete(request):
+    author = get_object_or_404(User, pk=1)
+    memory = get_object_or_404(Memory, pk=1)
+    username = author.username
+    return render(request, 'delete.html', {"username": username})

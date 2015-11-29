@@ -6,6 +6,8 @@ class UserProfile(models.Model):
     propic = models.CharField(max_length=1000)
     date_created = models.DateField()
     bio = models.TextField()
+    livesin = models.TextField()
+    about = models.TextField()
     memories = models.CharField(max_length=5000)
     
     def __str__(self):
