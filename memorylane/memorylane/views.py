@@ -123,9 +123,9 @@ def timeline(request):
 def profilemod(request):
     author = get_object_or_404(User, username=request.user.username)
     memory = get_object_or_404(Memory, pk=1)
-    username = author.username
-    first_name = author.first_name
-    last_name = author.last_name
+    username = request.user.username
+    first_name = request.user.first_name
+    last_name = request.user.last_name
     description = memory.description
     location = memory.location
     name = memory.name
@@ -141,8 +141,8 @@ def profilemod(request):
 
     else:
         author = get_object_or_404(User, pk=1)
-        bio = author.bio
-        return render(request, 'profile-mod.html', {"bio": bio, "memories": memories, "first_name" : first_name, "last_name": last_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+        bio = get_object_or_404(UserProfile, username=request.user.username).bio
+        return render(request, 'profile-mod.html', {"bio": bio, "memories": memories, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def getUsers(request):
     users = User.objects.all()
@@ -161,10 +161,10 @@ def getMemories(request):
 def myprofile(request):
     author = get_object_or_404(User, pk=1)
     memory = get_object_or_404(Memory, pk=1)
-    username = author.username
-    first_name = author.first_name
-    last_name = author.last_name
-    bio = author.bio
+    username = request.user.username
+    first_name = request.user.first_name
+    last_name = request.user.last_name
+    bio = request.user.bio
     description = memory.description
     location = memory.location
     name = memory.name
