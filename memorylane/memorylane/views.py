@@ -177,7 +177,7 @@ def myprofile(request):
     date_created = memory.date_created
     users = User.objects.all()
     memories = Memory.objects.all()
-    return render(request, 'myprofile.html', {"bio": bio, "memories": memories, "first_name" : first_name, "last_name": last_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+    return render(request, 'settings/myprofile.html', {"bio": bio, "memories": memories, "first_name" : first_name, "last_name": last_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def account(request):
     author = get_object_or_404(User, pk=1)
@@ -187,7 +187,7 @@ def account(request):
     last_name = author.last_name
     users = User.objects.all()
     memories = Memory.objects.all()
-    return render(request, 'account.html', {"username": username, "first_name": first_name, "last_name": last_name})
+    return render(request, 'settings/account.html', {"username": username, "first_name": first_name, "last_name": last_name})
 
 def general(request):
     author = get_object_or_404(User, pk=1)
@@ -197,10 +197,10 @@ def general(request):
     last_name = author.last_name
     email = author.email
     users = User.objects.all()
-    return render(request, 'general.html', {"username": username, "first_name": first_name, "last_name": last_name, "email": email})
+    return render(request, 'settings/general.html', {"username": username, "first_name": first_name, "last_name": last_name, "email": email})
 
 def delete(request):
     author = get_object_or_404(User, pk=1)
     memory = get_object_or_404(Memory, pk=1)
     username = author.username
-    return render(request, 'delete.html', {"username": username})
+    return render(request, 'settings/delete.html', {"username": username})

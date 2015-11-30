@@ -155,6 +155,12 @@ nav {
 	top: 13px;
 }
 
+.edit{
+	display: inline;
+	float: right;
+	padding-right:900px;
+}
+
 /*------------------------------------*\
     #SIGN UP & LOGIN
 \*------------------------------------*/
