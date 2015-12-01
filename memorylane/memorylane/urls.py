@@ -39,4 +39,5 @@ urlpatterns = [
     url(r'^delete/$', views.delete, name='delete'),
     url(r'^following/$', views.following, name='following'),
     url(r'^follower/$', views.follower, name='follower'),
+    url(r'^post/$', views.post, name='post')
 ]
