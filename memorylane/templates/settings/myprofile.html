@@ -49,18 +49,18 @@
             <div class="profile-info flex">
                 <div class="profile-image" style="background-image:url({% static "img/matthew.jpg" %})"></div>
                 <div class="profile-header">
-                    <a href=/profile-mod/><h1>{{first_name}} {{last_name}}</h1></a><br/>
-                    <a href=/newpost/><h3>@{{username}}</h3></a>
+                    <a href=/profile-mod/><h1></h1></a><br/>
+                    <a href=/newpost/><h3>@{{user.username}}</h3></a>
                     <div id="bio" class="bio">
                         <div id="original" style.display="block">
-                            <p id="currentBio">{{bio}}</p>
+                            <p id="currentBio">{{user.bio}}</p>
                             <a href="javascript:changeBioText();"><i class="fa fa-pencil"></i></a>
                         </div>
                         <div id="editBio" style="display:none">
                             <form action="newBio" method="post">
                                 {% csrf_token %}
                                 {{ form }}
-                                <textarea id="bioTextArea" rows="4" cols="25" name="newBio">{{bio}}</textarea>
+                                <textarea id="bioTextArea" rows="4" cols="25" name="newBio">{{user.bio}}</textarea>
                                 <input type="button" value="Save" onclick="saveBio()">
                                 <input type="button" value="Cancel" onclick="cancelBio()">
                             </form>

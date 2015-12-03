@@ -17,33 +17,36 @@
         </br>
             <ul>
                 <hr/>
+                <form name="settingsform" action="../settingssubmit/" method="post">
                 <li>
-                    <span>Name: {{first_name}} {{last_name}}</span>
+                    <span>Name: <input type="text" name="name" value="{{user.name}}"/></span>
                     <div class="edit">
-                        <input type="button" value="Edit">
+                        <input type="submit" value="Save">
                     </div>
                 </li>
                 <hr/>
                 <li>
-                    <span>Username: {{username}}</span>
+                    <input type="hidden" value="{{user.username}}" name="user_id"/>
+                    <span>Username: <input type="text" value="{{user.username}}" name="username"/></span>
                     <div class="edit">
-                        <input type="button" value="Edit">
+                        <input type="submit" value="Save">
                     </div>
                 </li>
                 <hr/>
                 <li>
-                    <span>Email: {{email}}</span>
+                    <span>Email: <input type="email" value="{{user.email}}" name="email"/></span>
                     <div class="edit">
-                        <input type="button" value="Edit">
+                        <input type="submit" value="Save">
                     </div>
                 </li>
                 <hr/>
                 <li>
                     <span>Password: Changed 8 days ago</span>
                     <div class="edit">
-                        <input type="button" value="Edit">
+                        <input type="submit" value="Save">
                     </div>
                 </li>
+            </form>
                 <hr/>
             </ul>
             <div class="deleteacc">

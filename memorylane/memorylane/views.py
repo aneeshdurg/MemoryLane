@@ -74,6 +74,16 @@ def newpostsubmit(request):
         message = 'You submitted an empty form.'
     return HttpResponse(message)
 
+def settingssubmit(request):
+    if 'user_id' in request.POST:
+        u = get_object_or_404(User, username=request.POST['user_id'])
+        u.name = request.POST['name']
+        u.username = request.POST['username']
+        u.email = request.POST['email']
+        u.save()
+        return account(request)
+
+
 def passwordreset(request):
 	return render(request, 'password-reset.html', {})
 
@@ -140,9 +150,9 @@ def profilemod(request):
             return HttpResponseRedirect('/Saved/')
 
     else:
-        author = get_object_or_404(User, pk=1)
+        author = request.user;
         bio = get_object_or_404(UserProfile, username=request.user.username).bio
-        return render(request, 'profile-mod.html', {"bio": bio, "memories": memories, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+        return render(request, 'profile-mod.html', {"user": author, "bio": bio, "memories": memories, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def getUsers(request):
     users = User.objects.all()
@@ -164,12 +174,9 @@ def location(request):
     return render(request, "location.html", {"memories": memories})
 
 def myprofile(request):
-    author = get_object_or_404(User, pk=1)
+    author = request.user
     memory = get_object_or_404(Memory, pk=1)
     username = request.user.username
-    first_name = request.user.first_name
-    last_name = request.user.last_name
-    bio = request.user.bio
     description = memory.description
     location = memory.location
     name = memory.name
@@ -177,17 +184,15 @@ def myprofile(request):
     date_created = memory.date_created
     users = User.objects.all()
     memories = Memory.objects.all()
-    return render(request, 'settings/myprofile.html', {"bio": bio, "memories": memories, "first_name" : first_name, "last_name": last_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+    return render(request, 'settings/myprofile.html', {"user": author, "memories": memories, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def account(request):
-    author = get_object_or_404(User, pk=1)
+    author = request.user
     memory = get_object_or_404(Memory, pk=1)
     username = author.username
-    first_name = author.first_name
-    last_name = author.last_name
     users = User.objects.all()
     memories = Memory.objects.all()
-    return render(request, 'settings/account.html', {"username": username, "first_name": first_name, "last_name": last_name})
+    return render(request, 'settings/account.html', {"user": author})
 
 def general(request):
     author = get_object_or_404(User, pk=1)

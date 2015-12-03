@@ -26,12 +26,12 @@
 			</div>
 		{% for name in memories reversed %}
 			<div class="post flex">
-				<a href=/post/1><div class="panorama" style="background-image: url({% static "img/panorama2.jpg" %})">
+				<a href=/post/{{name.id}}><div class="panorama" style="background-image: url({% static "img/panorama2.jpg" %})">
 					<div class="overlay">
 						<p>{{description}}</p>
 					</div>
 					<div class="title flex">
-						<h2>{{name}}</h2><h2>{{date_created}}</h2>
+						<h2>{{name}}</h2><h2>{{name.date_created}}</h2>
 					</div>
 				</div></a>
 				<div class="map" id="map">
@@ -53,7 +53,7 @@
 						</div>
 						<div>
 							<h3><i class="fa fa-clock-o"></i> Joined:</h3>
-							<span>8/16/2015</span>
+							<span>{{user.date_created}}</span>
 						</div>
 					</div>
 				</div>

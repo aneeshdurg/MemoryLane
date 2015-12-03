@@ -18,11 +18,11 @@
 				<div class="author-info" >
 					<a href=/profile-mod/>
 						<img src="{% static "img/matthew.jpg" %}" class="author-image">
-						<p class="author-name">Author</p>
+						<p class="author-name">{{memory.author}}</p>
 					</a>
 				</div>
 				<div class="post flex">
-					<a href=/post/1>
+					<a href=/post/{{memory.id}}>
 						<div class="panorama" style="background-image: url({% static "img/panorama.jpg"%})">
 							<div class="overlay">
 								<p>{{memory.description}}</p>
