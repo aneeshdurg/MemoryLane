@@ -19,10 +19,11 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 
 def profiletest(request, user_id):
-	u = User.objects.get(pk=user_id)
-	output = ("<h1>You're looking at user %s.</h1>" % user_id)
-	output = output + "<br>" + u.first_name + " " + u.last_name
-	return HttpResponse(output)
+    u = User.objects.get(pk=user_id)
+    output = ("<h1>You're looking at user %s.</h1>" % request.user.username)
+    profile = get_object_or_404(UserProfile, username=request.user.username).bio
+    output = output + "<br>" + u.username + " " + u.last_name + " " + profile
+    return HttpResponse(output)
 
 def userlist(request):
 	lastest_user_list = User.objects.order_by('pk')[:7]
@@ -104,13 +105,15 @@ def newpostsubmit(request):
 def settingssubmit(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
-    if 'user_id' in request.POST:
-        u = get_object_or_404(User, username=request.POST['user_id'])
-        u.name = request.POST['name']
-        u.username = request.POST['username']
-        u.email = request.POST['email']
-        u.save()
-        return account(request)
+    if request.method == 'POST':
+        if 'user_id' in request.POST:
+            request.user.username = request.POST['username']
+        elif 'email' in request.POST:
+            request.user.email = request.POST['email']
+        elif 'name' in request.POST:
+            request.user.first_name=request.POST['name']
+        request.user.save()  
+    return HttpResponseRedirect('/account/')
 
 def passwordreset(request):
     if not request.user.is_authenticated():
@@ -230,20 +233,13 @@ def location(request, location):
 def myprofile(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
-    author = request.user
-    memory = get_object_or_404(Memory, pk=1)
-    username = request.user.username
-    first_name = request.user.first_name
-    last_name = request.user.last_name
-    bio = request.user.bio
-    description = memory.description
-    location = memory.location
-    name = memory.name
-    image = memory.image
-    date_created = memory.date_created
+    profile = get_object_or_404(UserProfile, username=request.user.username)
     users = User.objects.all()
-    memories = Memory.objects.all()
-    return render(request, 'settings/myprofile.html', {"user": author, "memories": memories, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+    memories = Memory.objects.filter(author=request.user.username)
+    if request.method == 'POST':
+        profile.bio = request.POST['newBio']
+        profile.save()
+    return render(request, 'settings/myprofile.html', {"memories": memories, "profile": profile, "user":request.user})
 
 def account(request):
     if not request.user.is_authenticated():
