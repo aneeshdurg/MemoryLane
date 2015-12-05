@@ -15,11 +15,10 @@
         </div>
         <div class="deletecontinue">
             Enter your password to delete your account permanently:
-            <div class="enterpassword">
-                <input type="textarea">
-                <input type="button" value="DELETE ACCOUNT PERMANENTLY">
-                <input type="button" value="Cancel">
-            </div>
+            <form method = "post" action="/delete/">
+                <input class="field" type="password" name="password" placeholder="Password" required>
+                <input type="submit" class="submit" value="Submit">
+            </form>
         </div>
     </div>
 </body>
