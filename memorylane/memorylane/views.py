@@ -225,6 +225,7 @@ def getMemories(request):
 
 def location(request, location):
     memories = Memory.objects.all()
+    location = location.replace("+"," ")
     return render(request, "location.html", {"memories": memories, "location": location})
 
 def myprofile(request):
