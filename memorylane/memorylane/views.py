@@ -5,6 +5,8 @@ from .forms import *
 from datetime import datetime
 from .models import Memory
 from .models import UserProfile
+from django.contrib.auth.models import User
+from friendship.models import Friend, Follow
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -54,13 +56,20 @@ def signup(request):
     return render(request, 'signup.html', {})
 
 def post(request, memory_id):
-	memory = get_object_or_404(Memory, pk=memory_id)
-	author = get_object_or_404(User, username=memory.author)
-	return render(request, 'post.html', {'memory': memory, 'author': author, 'image' : memory.image.name[10:]})
+    memory = get_object_or_404(Memory, pk=memory_id)
+    author = get_object_or_404(User, username=memory.author)
+    l = memory.location
+    memories = Memory.objects.all()
+    all_friends = Friend.objects.friends(request.user)
+    return render(request, 'post.html', {'memory': memory, 'author': author, 'image' : memory.image.name[10:], 'memories': memories, 'all_friends': all_friends})
 
 def newpost(request):
     username = request.user.username
     return render(request, 'newpost.html', {"username": username})
+
+def newpost_new(request):
+    username = request.user.username
+    return render(request, 'newpost_new.html', {"username": username})
 
 def newpostsubmit(request):
     if 'title' in request.POST:
@@ -73,6 +82,15 @@ def newpostsubmit(request):
     else:
         message = 'You submitted an empty form.'
     return HttpResponse(message)
+
+def settingssubmit(request):
+    if 'user_id' in request.POST:
+        u = get_object_or_404(User, username=request.POST['user_id'])
+        u.name = request.POST['name']
+        u.username = request.POST['username']
+        u.email = request.POST['email']
+        u.save()
+        return account(request)
 
 def passwordreset(request):
 	return render(request, 'password-reset.html', {})
@@ -140,9 +158,9 @@ def profilemod(request):
             return HttpResponseRedirect('/Saved/')
 
     else:
-        author = get_object_or_404(User, pk=1)
+        author = request.user
         bio = get_object_or_404(UserProfile, username=request.user.username).bio
-        return render(request, 'profile-mod.html', {"bio": bio, "memories": memories, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+        return render(request, 'profile-mod.html', {"user": author, "bio": bio, "memories": memories, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def getUsers(request):
     users = User.objects.all()
@@ -158,8 +176,13 @@ def getMemories(request):
         memorylist.append(x.first_name + ' ' + x.last_name)
     return memorylist
 
+def location(request):
+    location = {{location}}
+    memories = Memory.objects.all()
+    return render(request, "location.html", {"memories": memories})
+
 def myprofile(request):
-    author = get_object_or_404(User, pk=1)
+    author = request.user
     memory = get_object_or_404(Memory, pk=1)
     username = request.user.username
     first_name = request.user.first_name
@@ -172,17 +195,17 @@ def myprofile(request):
     date_created = memory.date_created
     users = User.objects.all()
     memories = Memory.objects.all()
-    return render(request, 'myprofile.html', {"bio": bio, "memories": memories, "first_name" : first_name, "last_name": last_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+    return render(request, 'settings/myprofile.html', {"user": author, "memories": memories, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def account(request):
-    author = get_object_or_404(User, pk=1)
+    author = request.user
     memory = get_object_or_404(Memory, pk=1)
     username = author.username
     first_name = author.first_name
     last_name = author.last_name
     users = User.objects.all()
     memories = Memory.objects.all()
-    return render(request, 'account.html', {"username": username, "first_name": first_name, "last_name": last_name})
+    return render(request, 'settings/account.html', {"user": author})
 
 def general(request):
     author = get_object_or_404(User, pk=1)
@@ -192,10 +215,10 @@ def general(request):
     last_name = author.last_name
     email = author.email
     users = User.objects.all()
-    return render(request, 'general.html', {"username": username, "first_name": first_name, "last_name": last_name, "email": email})
+    return render(request, 'settings/general.html', {"username": username, "first_name": first_name, "last_name": last_name, "email": email})
 
 def delete(request):
     author = get_object_or_404(User, pk=1)
     memory = get_object_or_404(Memory, pk=1)
     username = author.username
-    return render(request, 'delete.html', {"username": username})
+    return render(request, 'settings/delete.html', {"username": username})

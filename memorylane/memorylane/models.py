@@ -9,6 +9,7 @@ class UserProfile(models.Model):
     livesin = models.TextField()
     about = models.TextField()
     memories = models.CharField(max_length=5000)
+    name = models.CharField(max_length=5000)
     
     def __str__(self):
         return self.first_name + " " + self.last_name

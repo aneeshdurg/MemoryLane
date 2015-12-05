@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load staticfiles %}
+{% include 'head.html' %}
+<head>
+  <title>General Settings</title>
+</head>
+
+<body>
+    {% include 'nav.html' %}
+  <div class="main">
+    <div class="settingstitle">
+      General Settings
+    </div>
+    <div class="general">
+    </br>
+        <ul>
+            <hr/>
+            <li>
+              <span>Language: English</span>
+              <div class="edit">
+                <input type="button" value="Edit">
+              </div>
+            </li>
+            <hr/>
+            <li>
+              <span>Country: United States</span>
+              <div class="edit">
+                <input type="button" value="Edit">
+              </div>
+            </li>
+            <hr/>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

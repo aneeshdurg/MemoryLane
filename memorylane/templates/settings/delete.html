@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load staticfiles %}
+{% include 'head.html' %}
+<head>
+  <title>Account Settings</title>
+</head>
+
+<body>
+    {% include 'nav.html' %}
+    <div class="main">
+        <div class="settingstitle">
+            Delete your account.
+        </div>
+        <div class="deletecontinue">
+            Enter your password to delete your account permanently:
+            <div class="enterpassword">
+                <input type="textarea">
+                <input type="button" value="DELETE ACCOUNT PERMANENTLY">
+                <input type="button" value="Cancel">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

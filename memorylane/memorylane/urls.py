@@ -23,13 +23,14 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^signup/', views.signup, name='signup'),
     url(r'^post/(?P<memory_id>[0-9]+)/$', views.post, name="post"),
-    url(r'^passwordreset/', views.passwordreset, name="passwordreset"),
+    url(r'^password-reset/', views.passwordreset, name="passwordreset"),
     url(r'^login/', views.login, name="login"),
-     url(r'^logout/$', views.logout, name='logout'),
+    url(r'^logout/$', views.logout, name='logout'),
     url(r'^friends/', views.friends, name="friends"),
     url(r'^profiletest/(?P<user_id>[0-9]+)/$', views.profiletest, name='profiletest'),
     url(r'^userlist/$', views.userlist, name='userlist'),
     url(r'^newpost/', views.newpost, name='newpost'),
+    url(r'^newpost_new/', views.newpost_new, name='newpost_new'),
     url(r'^newpostsubmit/$', views.newpostsubmit, name='newpostsubmit'),
     url(r'^timeline/$', views.timeline, name='timeline'),
     url(r'^profile-mod/$', views.profilemod, name='profilemod'),
@@ -39,4 +40,6 @@ urlpatterns = [
     url(r'^delete/$', views.delete, name='delete'),
     url(r'^following/$', views.following, name='following'),
     url(r'^follower/$', views.follower, name='follower'),
+    url(r'^post/$', views.post, name='post'),
+    url(r'^settingssubmit/$', views.settingssubmit, name='settingssubmit')
 ]
