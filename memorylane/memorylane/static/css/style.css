@@ -840,6 +840,10 @@ a.signup {
     padding: 0 20px 60px;
 }
 
+.location-memory .title h2 {
+	width: 100%!important;
+}
+
 .panoramaElement #sidebar {
 	padding-top: 20px;
 	width: 100%;
