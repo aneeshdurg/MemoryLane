@@ -29,7 +29,7 @@ def userlist(request):
 	return HttpResponse(output)
 
 def signup(request):
-    if request.user is not None:
+    if request.user.is_authenticated():
         return HttpResponseRedirect('/timeline/')
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -105,7 +105,7 @@ def passwordreset(request):
 	return render(request, 'password-reset.html', {})
 
 def login(request):
-    if request.user is not None:
+    if request.user.is_authenticated():
         return HttpResponseRedirect('/timeline/')
     if request.method == 'POST':
         email = request.POST['email']
@@ -116,15 +116,15 @@ def login(request):
             if user.is_active:
                 a_login(request, user)
         else:
-            return settings(request)        
+            return login(request)        
         # a_login(request, user)
-        return timeline(request)
+        return HttpResponseRedirect('/timeline/')
     
     return render(request, 'login.html', {})
 
 def logout(request):
     a_logout(request)
-    return render(request, 'login.html', {})    
+    return HttpResponseRedirect('/login/')    
 
 def friends(request):
 	return render(request, 'friends.html', {})
