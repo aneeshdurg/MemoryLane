@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as a_login
 from django.contrib.auth import logout as a_logout
+from django.contrib.auth.hashers import check_password
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -24,7 +25,7 @@ def profiletest(request, user_id):
 	return HttpResponse(output)
 
 def userlist(request):
-	lastest_user_list = User.objects.order_by('pk')[:5]
+	lastest_user_list = User.objects.order_by('pk')[:7]
 	output = ', '.join([u.username+' '+u.email for u in lastest_user_list])
 	return HttpResponse(output)
 
@@ -102,7 +103,21 @@ def settingssubmit(request):
         return account(request)
 
 def passwordreset(request):
-	return render(request, 'password-reset.html', {})
+    if request.user.is_authenticated() and request.method == 'POST':
+        oldpass = request.POST['oldPassword']
+        if check_password(oldpass, request.user.password):
+            oldpasscheck = request.POST['oldPasswordCheck']
+            newpass = request.POST['newPassword']
+            if oldpass == oldpasscheck and oldpass != newpass:
+                request.user.set_password(newpass)
+                request.user.save()
+                a_logout(request)
+                return HttpResponseRedirect('/login/')
+            else:
+                return HttpResponseRedirect('/password-reset/')    
+        else:
+            return HttpResponseRedirect('/password-reset/')    
+    return render(request, 'password-reset.html', {})
 
 def login(request):
     if request.user.is_authenticated():
@@ -117,7 +132,6 @@ def login(request):
                 a_login(request, user)
         else:
             return login(request)        
-        # a_login(request, user)
         return HttpResponseRedirect('/timeline/')
     
     return render(request, 'login.html', {})
@@ -229,7 +243,6 @@ def general(request):
     return render(request, 'settings/general.html', {"username": username, "first_name": first_name, "last_name": last_name, "email": email})
 
 def delete(request):
-    author = get_object_or_404(User, pk=1)
-    memory = get_object_or_404(Memory, pk=1)
-    username = author.username
-    return render(request, 'settings/delete.html', {"username": username})
+    if request.user.is_authenticated():
+        request.user.delete()
+    return HttpResponseRedirect('/login/')
