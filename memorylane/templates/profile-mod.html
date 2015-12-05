@@ -26,19 +26,23 @@
 			</div>
 		{% for memory in memories reversed %}
 			<div class="post flex">
-				<a href=/post/{{memory.id}}><div class="panorama" style="background-image: url({{memory.image|cut:'memorylane'}})">
-					<div class="overlay">
-						<p>{{memory.description|truncatechars:250}}</p>
+				<a href=/post/{{memory.id}}>
+					<div class="panorama" style="background-image: url({{memory.image|cut:'memorylane'}})">
+						<div class="overlay">
+							<p>{{memory.description|truncatechars:250}}</p>
+						</div>
+						<div class="title flex">
+							<h2>{{memory.name}}</h2><h2>{{memory.date_created}}</h2>
+						</div>
 					</div>
-					<div class="title flex">
-						<h2>{{memory.name}}</h2><h2>{{memory.date_created}}</h2>
+				</a>
+				<a href=/location/{{memory.location.split|join:"+"}}>
+					<div class="map" style="background-image:url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys')">
+						<div class="location">
+							<h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
+						</div>
 					</div>
-				</div></a>
-				<div class="map" style="background-image:url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys')">
-					<div class="location">
-						<h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
-					</div>
-				</div>
+				</a>
 			</div>
 		{% endfor %}
 		</div>

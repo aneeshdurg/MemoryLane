@@ -24,11 +24,10 @@
     {% include 'nav.html' %}
     <div class="gridContainer memory flex location-page">                         
         <div class="memory-body">
-            <h2 id="more-memories">More memories about {{location}}</h2>    
+            <h2 id="more-memories">Memories about {{location}}</h2>    
             {% with name=memory.name%}
             {% for memory in memories reversed %}
                 {% ifequal memory.location location %}
-                {% ifnotequal memory.name name %}
                     <div class="memory">
                         <div class="author-info">
                             <a href=/profile-mod/>
@@ -49,7 +48,6 @@
                             </a>
                         </div>
                     </div>
-                    {% endifnotequal %}
                 {% endifequal %}
             {% endfor %}
             {% endwith %}
