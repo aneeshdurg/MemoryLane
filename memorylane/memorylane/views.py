@@ -29,6 +29,8 @@ def userlist(request):
 	return HttpResponse(output)
 
 def signup(request):
+    if request.user is not None:
+        return HttpResponseRedirect('/timeline/')
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         username = request.POST['username']
@@ -45,6 +47,13 @@ def signup(request):
                 user.save()
                 profile = UserProfile(username=username, date_created=datetime.now())
                 profile.save()
+                
+                user = get_object_or_404(User, email=email)
+                user = authenticate(username=user.username, password=password)
+                if user is not None:
+                    if user.is_active:
+                        a_login(request, user)
+                
                 return HttpResponseRedirect('/timeline/')
         else:
             return render(request, 'signup.html', {})
@@ -96,6 +105,8 @@ def passwordreset(request):
 	return render(request, 'password-reset.html', {})
 
 def login(request):
+    if request.user is not None:
+        return HttpResponseRedirect('/timeline/')
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
