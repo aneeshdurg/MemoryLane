@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load staticfiles %}
+{% include 'head.html' %}
+<head>
+	<title>New Post</title>
+	<style>
+		.gridContainer > div {
+			width: 47.5%;
+			margin-right: 2.5%;
+			box-sizing: border-box;
+		}
+			.gridContainer > div:last-child {
+				padding-left: 2.5%;
+				margin-right: 0;
+				border-left: 1px solid rgba(10,18,13,0.2);
+			}
+		.preview {
+			width: 100%;
+			height: 200px;
+			background-size: cover;
+			position: relative;
+			color: #ecf0f1;
+			text-shadow: 0 0 4px rgba(0,0,0,0.75);
+			box-shadow: 0 0 10px rgba(0,0,0,0.25);
+		}
+			.preview input {
+				width: 100%;
+				height: 40px;
+				margin-top: 3px;
+				padding: 0 0 5px 5px;
+				background: transparent;
+				font-size: 24px;
+				color: #ecf0f1;
+				text-shadow: 0 0 4px rgba(0,0,0,0.75);
+				border: none;
+				box-sizing: border-box;
+				transition: all 0.25s ease;
+			}
+				.preview:hover input {
+				    font-size: 28px;
+				}
+				.preview input::-webkit-input-placeholder {
+				   color: #ecf0f1;
+				}
+
+				:-moz-placeholder { /* Firefox 18- */
+				   color: #ecf0f1;  
+				}
+
+				::-moz-placeholder {  /* Firefox 19+ */
+				   color: #ecf0f1;  
+				}
+
+				:-ms-input-placeholder {  
+				   color: #ecf0f1;  
+				}
+			.preview .overlay {
+				background-image: url(img/overlay.png);
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				transition: opacity 0.25s ease;
+			}
+				.preview .overlay:first-child {
+					opacity: 0;
+				}
+				.preview:hover .overlay {
+					opacity: 1;
+				}
+			.preview #date {
+				position: absolute;
+				font-size: 24px;
+				top: 5px;
+				right: 5px;
+			}
+		.tags {
+			display: none;
+			padding: 10px 0;
+			text-align: center;
+			border: 1px solid rgba(10,18,13,0.2);
+		}
+		.tag-delete {
+			border: 1px solid rgba(10,18,13,0.2);
+			border-top: none;
+		}
+		.tag-delete > div {
+			width: 50%;
+			text-align: center;
+			transition: box-shadow 0.25s ease;
+		}
+			.tag-delete > div:hover {
+				box-shadow: 0 0 10px rgba(10,18,13,0.2);
+			}
+			.tag-delete > div:first-child {
+				border-right: 1px solid rgba(10,18,13,0.2);
+			}
+		.tag-delete > div i {
+			width: 100%;
+			font-size: 32px;
+			padding: 5px 0;
+		}
+		.tag-delete #tag {
+			border-radius: 0;
+		    border: none;
+		}
+		.location {
+			margin-top: 50px
+		}
+			.location .location-overlay {
+				width: 100%;
+			    height: 40px;
+			    position: absolute;
+			    bottom: 0;
+			    padding-right: 5px;
+			    box-sizing: border-box;
+			    background-image: url('img/location-shadow.png');
+			}
+			.location input {
+				text-align: right;
+			}
+		.edit-area textarea {
+			width: 100%;
+			background-color: rgba(255,255,255,0.4);
+			padding: 5px;
+			font-family: Argh;
+			font-size: 20px;
+			color: rgba(10,18,13,0.5);
+			border: none;
+			border-bottom: 1px solid rgba(10,18,13,0.2);
+			overflow: scroll;
+			transition: box-shadow 0.25s ease;
+			box-sizing: border-box;
+		}
+			.edit-area textarea:hover, .edit-area textarea:focus {
+				box-shadow: 0 0 10px rgba(10,18,13,0.2);
+			}
+			.edit-area textarea:focus {
+				outline: none;
+			}
+
+		/* 
+		 *
+		 * Conflicting CSS Fixes
+		 *
+		*/
+		.fa-trash-o:before {
+			padding-left: 0;
+		}
+		#note_text {
+		    width: 100%;
+		    height: auto;
+		    padding: 3px;
+		    margin-top: 0;
+		    border: none;
+		}
+	</style>
+</head>
+<body>
+	{% include 'nav.html' %}
+	<div class="gridContainer flex">
+		<div class="picture">
+			<div class="preview" style="background-image: url({{memory.image|cut:'memorylane'}});">
+				<div class="overlay"></div>
+				<div class="overlay">
+					<input id="title" name="title" type="text" placeholder="Add New Title">
+					<span id="date">{% now "F jS, Y" %}</span>
+				</div>
+			</div>
+			<div class="tags">
+				<label for="tags">Tags: </label><input name="tags" type="text">
+			</div>
+			<div class="tag-delete flex">
+				<div class="tag">
+					<a href id="tag">
+						<i class="fa fa-tag"></i>
+					</a>
+				</div>
+				<div class="delete">
+					<a href>
+						<i class="fa fa-trash-o"></i>
+					</a>
+				</div>
+			</div>
+			<div class="preview location" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys');">
+				<div class="location-overlay">
+					<input id="pac-input" class="controls" type="text" placeholder="&#xf041; Add a Location">
+				</div>
+			</div>
+		</div>
+		<div class="edit-area">
+			<textarea cols="30" rows="20" id="note_text" name="note_text" placeholder="Today was amazing..."></textarea>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys&libraries=places&callback=initAutocomplete"
+         async defer></script>
+	<script>
+		$(function() {
+			$('#tag').click(function(event) {
+				event.preventDefault();
+				$('.tags').slideToggle();
+			});
+		});
+	</script>
+	<script>
+		function initAutocomplete() {
+		  // Create the search box and link it to the UI element.
+		  var input = document.getElementById('pac-input');
+		  var options = {
+			  componentRestrictions: {country: "us"}
+			 };
+		  autocomplete = new google.maps.places.Autocomplete(input,options);
+		}
+    </script>
+</body>
+</html>

@@ -493,14 +493,6 @@ a.signup {
 	border: 1px solid #ccc;
 }
 
-#title {
-	width: 585px;
-	margin-top: 5px;
-	padding: 3px;
-	border: 1px solid #ccc;
-	line-height: 1.62;
-}
-
 	.fa-trash-o:before {
 		padding-left: 340px;
 	}

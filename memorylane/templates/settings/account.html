@@ -5,32 +5,6 @@
 {% include 'head.html' %}
 <head>
   <title>Account Settings</title>
-  <script>
-    function editName(){
-        document.getElementById("info").style.display="none";
-        document.getElementById("nameSetting").style.display="block";
-        document.getElementById("editName").style.display="none";
-        document.getElementById("saveName").style.display="block";
-    }
-    function editUsername(){
-        document.getElementById("info").style.display="none";
-        document.getElementById("usernameSetting").style.display="block";
-        document.getElementById("editUsername").style.display="none";
-        document.getElementById("saveUsername").style.display="block";
-    }
-    function editEmail(){
-        document.getElementById("info").style.display="none";
-        document.getElementById("emailSetting").style.display="block";
-        document.getElementById("editEmail").style.display="none";
-        document.getElementById("saveEmail").style.display="block";
-    }
-    function editPassword(){
-        document.getElementById("info").style.display="none";
-        document.getElementById("passwordSetting").style.display="block";
-        document.getElementById("editPassword").style.display="none";
-        document.getElementById("savePassword").style.display="block";
-    }
-  </script>
 </head>
 
 <body>
@@ -45,47 +19,30 @@
                 <hr/>
                 <form name="settingsform" action="../settingssubmit/" method="post">
                 <li>
-                    <span>Name: </span><span id="info">{{user.name}}</span>
+                    <span>Name: <input type="text" name="name" value="{{user.name}}"/></span>
                     <div class="edit">
-                        <a href="javascript:editName();"><input id="editName" type="button" value="Edit"></a>
-                    </div>
-                    <div id="saveName" style="display:none" class="save">
-                        <span><input id="nameSetting" type="text" name="name" style="display:none" value="{{user.name}}"/></span>
                         <input type="submit" value="Save">
                     </div>
                 </li>
                 <hr/>
                 <li>
-                    <span>Userame: </span><span id="info">{{user.username}}</span>
+                    <input type="hidden" value="{{user.username}}" name="user_id"/>
+                    <span>Username: <input type="text" value="{{user.username}}" name="username"/></span>
                     <div class="edit">
-                        <a href="javascript:editUsername();"><input id="editUsername" type="button" value="Edit"></a>
-                    </div>
-                    <div id="saveUsername" style="display:none" class="save">
-                        <span><input id="usernameSetting" type="text" name="name" style="display:none" value="{{user.username}}"/></span>
                         <input type="submit" value="Save">
                     </div>
                 </li>
                 <hr/>
                 <li>
-                    <span>Email: </span><span id="info">{{user.email}}</span>
+                    <span>Email: <input type="email" value="{{user.email}}" name="email"/></span>
                     <div class="edit">
-                        <a href="javascript:editEmail();"><input id="editEmail" type="button" value="Edit"></a>
-                    </div>
-                    <div id="saveEmail" style="display:none" class="save">
-                        <span><input id="emailSetting" type="text" name="name" style="display:none" value="{{user.email}}"/></span>
                         <input type="submit" value="Save">
                     </div>
                 </li>
                 <hr/>
                 <li>
-                    <span>Email: </span><span id="info">Changed -- days ago</span>
+                    <span>Password: Changed 8 days ago</span>
                     <div class="edit">
-                        <a href="javascript:editPassword();"><input id="editPassword" type="button" value="Edit"></a>
-                    </div>
-                    <div id="savePassword" style="display:none" class="save">
-                        <span>Enter current password: <input id="passwordVerify" type="text"></span>
-                        </br>
-                        <span>Enter new password: <input id="passwordSetting" type="text" name="name" style="display:none"/></span>
                         <input type="submit" value="Save">
                     </div>
                 </li>

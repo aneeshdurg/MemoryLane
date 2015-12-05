@@ -79,6 +79,12 @@
 			top: 5px;
 			right: 5px;
 		}
+	.tags {
+		display: none;
+		padding: 10px 0;
+		text-align: center;
+		border: 1px solid rgba(10,18,13,0.2);
+	}
 	.tag-delete {
 		border: 1px solid rgba(10,18,13,0.2);
 		border-top: none;
@@ -99,33 +105,25 @@
 		font-size: 32px;
 		padding: 5px 0;
 	}
-	.post-info {
-		margin-top: 50px;
-		display: none!important;
-		-webkit-align-items: center;
-		-moz-align-items: center;
-		-ms-align-items: center;
-		-o-align-items: center;
-		align-items: center;
+	.tag-delete #tag {
+		border-radius: 0;
+	    border: none;
 	}
-	.publish {
-		padding: 20px;
-		width: 50%;
-		background-color: rgba(255,255,255,0.4);
-		box-sizing: border-box;
+	.location {
+		margin-top: 50px
 	}
-	.publish .post-status ul {
-		list-style: none;
-		padding: 0;
-	}
-	.buttonContainer {
-		width: 50%;
-		-webkit-justify-content: space-around;
-		-moz-justify-content: space-around;
-		-ms-justify-content: space-around;
-		-o-justify-content: space-around;
-		justify-content: space-around;
-	}
+		.location .location-overlay {
+			width: 100%;
+		    height: 40px;
+		    position: absolute;
+		    bottom: 0;
+		    padding-right: 5px;
+		    box-sizing: border-box;
+		    background-image: url('img/location-shadow.png');
+		}
+		.location input {
+			text-align: right;
+		}
 	.edit-area textarea {
 		width: 100%;
 		background-color: rgba(255,255,255,0.4);
@@ -135,10 +133,11 @@
 		color: rgba(10,18,13,0.5);
 		border: none;
 		border-bottom: 1px solid rgba(10,18,13,0.2);
+		overflow: scroll;
 		transition: box-shadow 0.25s ease;
 		box-sizing: border-box;
 	}
-		.edit-area textarea:hover {
+		.edit-area textarea:hover, .edit-area textarea:focus {
 			box-shadow: 0 0 10px rgba(10,18,13,0.2);
 		}
 		.edit-area textarea:focus {
@@ -152,6 +151,13 @@
 	*/
 	.fa-trash-o:before {
 		padding-left: 0;
+	}
+	#note_text {
+	    width: 100%;
+	    height: auto;
+	    padding: 3px;
+	    margin-top: 0;
+	    border: none;
 	}
 	</style>
 </head>
@@ -179,13 +185,16 @@
 			<div class="preview" style="background-image: url(img/panorama2.jpg);">
 				<div class="overlay"></div>
 				<div class="overlay">
-					<input type="text" placeholder="Add New Title">
+					<input id="title" name="title" type="text" placeholder="Add New Title">
 					<span id="date">April 20th, 2015</span>
 				</div>
 			</div>
+			<div class="tags">
+				<label for="tags">Tags: </label><input name="tags" type="text">
+			</div>
 			<div class="tag-delete flex">
 				<div class="tag">
-					<a href>
+					<a href id="tag">
 						<i class="fa fa-tag"></i>
 					</a>
 				</div>
@@ -195,25 +204,36 @@
 					</a>
 				</div>
 			</div>
-			<div class="post-info flex">
-				<div class="publish">
-					<h2>Edit</h2>
-					<div class="post-status">
-						<ul>
-							<li>Status: Draft | <a href>Edit</a></li>
-							<li>Visibility: Public | <a href>Edit</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="buttonContainer signup flex">
-					<a href><div>Publish</div></a>
-					<a href><div>Preview</div></a>
+			<div class="preview location" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys');">
+				<div class="location-overlay">
+					<input id="pac-input" class="controls" type="text" placeholder="&#xf041; Add a Location">
 				</div>
 			</div>
 		</div>
 		<div class="edit-area">
-			<textarea name="Memory" cols="30" rows="20" placeholder="Today was amazing..."></textarea>
+			<textarea cols="30" rows="20" id="note_text" name="note_text" placeholder="Today was amazing..."></textarea>
 		</div>
 	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys&libraries=places&callback=initAutocomplete"
+         async defer></script>
+	<script>
+		$(function() {
+			$('#tag').click(function(event) {
+				event.preventDefault();
+				$('.tags').slideToggle();
+			});
+		});
+	</script>
+	<script>
+		function initAutocomplete() {
+		  // Create the search box and link it to the UI element.
+		  var input = document.getElementById('pac-input');
+		  var options = {
+			  componentRestrictions: {country: "us"}
+			 };
+		  autocomplete = new google.maps.places.Autocomplete(input,options);
+		}
+    </script>
 </body>
 </html>

@@ -1,0 +1,1009 @@
+@background_color: #DADFE1;
+@nav_background_color: #e9eced;
+@container_background_color: rgba(255,255,255,0.4);
+
+@dark_font_color: #282828;
+@light_font_color: #ecf0f1;
+
+@font: ~"Argh, Arial";
+@font_awesome: ~"FontAwesome," @font;
+
+.fadeIn() {
+	from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0px); }
+}
+.absolute(@top,@right,@bottom,@left) {
+	position: absolute;
+  	& when not (@top = null) {
+      	top: @top;
+    }
+  	& when not (@right = null) {
+      	right: @right;
+    }
+  	& when not (@bottom = null) {
+      	bottom: @bottom;
+    }
+  	& when not (@left = null) {
+      	left: @left;
+    }
+}
+
+@font-face {
+    font-family: @font;
+    src: url('../Aaargh.ttf');
+}
+
+/*------------------------------------*\
+    #BASE STYLES
+\*------------------------------------*/
+
+body {
+	background-color: @background_color;
+	color: @dark_font_color;
+	width: 100%;
+	font-family: @font;
+	margin: 0;
+}
+
+h1,
+h2,
+h3 {	
+	margin: 0px;
+}
+
+h3 {
+	padding-top: 10px;
+}
+
+a {
+	color: @dark_font_color;
+	text-decoration: none;
+	transition: all 0.25s ease;
+  	
+  	&:hover {
+    	color: #6C7A89;
+    }
+  	&:active {
+		text-decoration: none;
+	}
+}
+
+input {
+	font-family: @font_awesome;
+	font-style: inherit;
+	font-weight: inherit;
+	font-size: 15px;
+	outline: none;
+	vertical-align: middle;
+}
+
+	input[type=submit] {
+		background: #EEEEEE;
+		border: none;
+		cursor: pointer;
+		padding-top: 6px;
+		transition: all 0.25s ease;
+      
+      	&:hover {
+        	background: @background_color;
+        }
+	}
+
+	input[type=file] {
+		background-color: @background_color;
+		padding: initial;
+		border: initial;
+		line-height: initial;
+		box-shadow: none;
+	}
+
+label {
+	margin: 3px 0;
+}
+
+.flex {
+	display: flex!important;
+}
+
+/*------------------------------------*\
+    #NAVIGATION BAR
+\*------------------------------------*/
+
+nav {
+	position: fixed;
+	padding: 0 15px;
+	background-color: @nav_background_color;
+	width: 100%;
+	z-index: 100;
+	box-sizing: border-box;
+}
+
+.username,
+.settings {
+	width: 30%;
+}
+
+.middleLogo {
+	text-align: center;
+	width: 40%;
+}
+
+#middleLogo {
+	height: 40px;
+	margin-top: 15px;
+}
+
+.username {
+	h1 {
+        display: inline-block;
+        padding-top: 17px;
+    }
+
+  	span {
+        display: none;
+    }
+}
+
+.settings {
+	font-size: 32px;
+	padding: 10px 0 0;
+	text-align: right;
+	justify-content: flex-end;
+	box-sizing: border-box;
+}
+
+.search {
+	display: none;
+	border-radius: 20px;
+	margin-right: 10px;
+	position: relative;
+	text-align: right;
+  	
+  	input {
+        width: 100%;
+        margin: 0;
+        padding: 5px;
+        border: 1px solid rgba(215,215,215,0.7);
+        background-color: rgba(215,215,215,1);
+        color: rgb(130,130,130);
+        font-size: 18px;
+        text-align: right;
+        box-sizing: border-box;
+        transition: all 0.15s ease;
+
+        &:focus {
+          box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+    }
+  
+  	.fa-search { 
+        color: rgb(185,185,185);
+        font-size: 18px;
+      	.absolute(13px,3px,null,null);
+    }
+}
+
+/*------------------------------------*\
+    #SIGN UP & LOGIN
+\*------------------------------------*/
+
+a.signup, .slButtons {
+	float: right;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+a.signup {
+	margin: 10px 10px 0;
+
+	&:first-child {
+		margin-left: 0;
+	}
+}
+
+.signup div {
+	background: rgba(0,0,0,0.7);
+	color: @light_font_color;
+	border-radius: 3px;
+	padding: 10px 15px;
+	text-align: center;	
+	transition: all 0.25s ease;
+
+	&:hover {
+		background: rgba(0,0,0,0.6);
+	}
+}
+
+.login {
+	max-width: 90%;
+	margin: 0 auto;
+	text-align: center;
+	clear: both;
+    animation: fadein 1s;
+  	* {
+		display: block;
+		width: 100%;
+	}
+  	.logo {
+        width: 50%;
+        margin: 0 auto;
+        pointer-events: none;
+  	}
+  	.loginContainer {
+        background-color: rgba(255,255,255,0.75);
+        margin-top: 10px;
+        padding: 10px 10px 20px;
+        border-radius: 5px;
+        box-sizing: border-box;
+      	
+      	.field {
+            height: 36px;
+            margin: 10px 0;
+            padding-left: 5px;
+            border-radius: 3px;
+            border-width: 0;
+            text-align: left;
+            box-sizing: border-box;
+            transition: all 0.25s ease;
+          
+          	&:focus {
+                box-shadow: 0 0 2px rgba(0,0,0,0.5);
+            }
+        }
+    }
+  	.loginContainer.passwordReset {
+        font-size: 12px;
+    }
+}
+
+.forgot {
+	font-size: 12px;
+	margin-top: 15px;
+	text-align: center;
+  	
+  	a {
+        width: auto;
+        text-decoration: none;
+        transition: all 0.25s ease;
+      
+      	&:hover {
+            color: #2e2e2e;
+        }
+    }
+}
+
+/*------------------------------------*\
+    #PROFILE PAGE
+\*------------------------------------*/
+
+/* -- Content -- */
+
+.gridContainer {
+	padding: 75px 2% 0;
+	flex-wrap: wrap;
+}
+
+.profile .main, .profile .sidebar {
+	width: 100%;
+	padding: 0 20px;
+	margin-right: 0!important;
+}
+
+.profile .main {
+	padding-top: 20px;
+}
+
+/* -- Profile Info -- */
+
+.profile-info {
+	margin-bottom: 20px;
+	padding: 0 0 20px;
+	position: relative;
+
+	.add-new-memory {
+      	.absolute(null,5px,10px,null);
+    }
+}
+
+.profile-image {
+	display: inline-block;
+	width: 40%;
+	height: 150px;
+	background-size: cover;
+	background-position: center;
+	box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+
+.profile-header {
+	width: 60%;
+	margin-left: 20px;
+	font-size: 12px;
+  
+  	h1, h3 {
+        display: inline-block;
+        padding: 0;	
+    }
+  
+  	.say-something {
+        margin-top: 10px;
+    }
+}
+
+#edit-signature {
+	padding-top: 10px;
+	border-radius: 3px;
+}
+
+/* -- Widgets -- */
+
+.widget {
+	width: 100%;
+	background-color: @container_background_color;
+	box-shadow: 0 0 10px rgba(0,0,0,0.25);
+	padding: 20px;
+	margin: 20px 0;
+	border-radius: 0;
+	box-sizing: border-box;
+  
+  	&:first-child {
+		margin-top: 0;
+	}
+  
+  	h2 {
+        margin-top: 0;
+    }
+}
+
+/* -- About Widget -- */
+
+.about-basics {
+	width: 100%;
+	flex-wrap: wrap;
+  
+  	> div {
+        width: 100%;
+    }
+}
+
+/* -- Friends Widget -- */
+
+.friends {
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: 5px;
+}
+
+.thumb {
+	min-width: 30%;
+    height: 100px;
+    margin: 0 0 10px;
+    padding: 0;
+    background: rgba(255,255,255,0.7);
+    position: relative;
+    text-align: right;
+    overflow: hidden;
+    flex: 0 0 30%;
+  
+  	div {
+        background-size: cover;
+        background-position: center;
+        height: 100%;
+    }
+  
+  	img {
+        width: auto;
+        height: 100%;
+      	.absolute(0,0,0,0);
+    }
+  
+  	.overlay {
+        z-index: 10;
+        opacity: 0.4;
+        width: 100%;
+        transition: opacity 0.3s ease;
+  	}
+  
+  	.name {
+      	.absolute(null,5px,3px,null);
+        color: @light_font_color;
+        z-index: 100;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+    }
+  
+  	&:hover {
+        .overlay, .name {
+            opacity: 0.9;
+        }
+    }
+}
+
+/*------------------------------------*\
+    #NEW POST
+\*------------------------------------*/
+
+.newpost {
+	padding-top: 70px!important;
+}
+
+#form_note textarea {
+	font-size: 13px;
+	line-height: 1.62;
+}
+
+#note_title {
+	width: 582px;
+	margin-top: 5px;
+	padding: 3px;
+	border: 1px solid #ccc;
+	line-height: 1.62;
+
+}
+
+#note_text {
+	width: 582px;
+	height: 400px;
+	padding: 3px;
+	margin-top: 5px;
+	border: 1px solid #ccc;
+	outline: none;
+	resize: vertical;
+}
+
+.upload-photo {
+	height: 100%;
+	display: inline-block;
+}
+
+.upload-section {
+	display: block;
+	position: relative;
+	width: 580px;
+	margin: 3px 0;
+	text-align: center;
+	color: #ccc;
+	border: 3px dashed #eee;
+	background: #fafafa;
+  
+  	p {
+    	line-height: 2;
+    }
+  
+  	.upload-btn {
+        color: #999;
+        z-index: 2;
+        height: 94px;
+        width: 580px;
+      	.absolute(0,null,null,0);
+        font-size:14px;
+        line-height: 120px;
+    }
+}
+
+#tag {
+	border-radius: 3px;
+	font-size: 15px;
+	border: 1px solid #ccc;
+}
+
+#title {
+	width: 585px;
+	margin-top: 5px;
+	padding: 3px;
+	border: 1px solid #ccc;
+	line-height: 1.62;
+}
+
+	.fa-trash-o:before {
+		padding-left: 340px;
+	}
+
+#cancelbutton {
+	margin-left: 405px;
+}
+
+#input-bar {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.photo-selector {
+  	.absolute(250px,null,null,25px);
+	z-index: 10;
+	height: 140px;
+	width: 585px;
+	overflow: hidden;
+	cursor: pointer;
+  
+  	.file-input {
+        position: absolute;
+        z-index: 10;
+        width: 585px;
+        height: 40px;
+        font-size: 50px;
+        cursor: pointer;
+        opacity: 0;
+        padding-top: 100px;
+    }
+
+    .swf-container {
+      	.absolute(0,null,null,0);
+        z-index: 11;
+        cursor: pointer;
+    }
+}
+
+.t1-form {
+	font-size: 12px;
+}
+
+.hidden {
+	display: none;
+}
+
+.t1-label {
+	display: block;
+	margin-bottom: 5px;
+	color: #292f33;
+	cursor: pointer;
+	margin: 0;
+	font-size: 13px;
+	line-height: 20px;
+}
+
+.visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+.tagField {
+	padding: 3px;
+	border-width: 0;
+	text-align: left;
+	margin: 10px 0;
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 2px;
+	box-sizing: border-box;
+	transition: all 0.25s ease;
+}
+
+/*------------------------------------*\
+    #TIMELINE
+\*------------------------------------*/
+
+.main {
+	width: 100%;
+	padding: 20px 20px 20px;
+	box-sizing: border-box;
+}
+
+.author-info {
+	display: none;
+	float: left;
+	height: 100%;
+	padding-right: 20px;
+}
+
+.author-image {
+	width: 70px;
+	height: auto;
+	border: 2px solid transparent;
+	box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+
+.author-name {
+	margin: 5px 0; 
+	text-align: center;
+}
+
+.title {
+	width: 100%;
+	height: 40px;
+	flex-wrap: wrap;
+  
+  	h2 {
+        width: 100%;
+        margin: 0;
+      
+      	&:last-child {
+            font-size: 14px;
+        }
+    }
+}
+
+.panorama {
+	background-size: cover;
+	background-position: center;
+	width: 100%;
+	height: 200px;
+}
+
+/*------------------------------------*\
+    #POST STYLING
+\*------------------------------------*/
+
+.post {
+	padding: 0;
+	margin-bottom: 35px;
+	background-color: @container_background_color;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+	flex-wrap: wrap;
+  
+  	.panorama {
+        height: 220px;
+        position: relative;
+      
+      	.overlay {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            background-image: url(../img/post-overlay.png);
+            opacity: 0;
+            color: @light_font_color;
+            z-index: 10;
+            transition: opacity 0.25s ease;
+          
+          	p {
+                width: 100%;
+                margin: 0;
+                padding: 0 10px;
+              	.absolute(50%,null,null,50%);
+                text-align: center;
+                transform: translateX(-50%) translateY(-50%);
+                box-sizing: border-box;
+            }
+        }
+      
+      	.title {
+            padding: 7px 10px;
+            color: #ecf0f1;
+            background: url(../img/post-shadow.png);
+            text-shadow: 0 0 4px rgba(0,0,0,0.75);
+            box-sizing: border-box;
+            transition: all 0.25s ease;
+        }
+      
+      	&:hover {
+            .overlay {
+              	opacity: 1;
+            }
+          	.title {
+            	opacity: 0;
+            }
+        }
+    }
+  
+  	> a {
+        width: 100%;
+    }
+  
+  	&:hover .map .location {
+		opacity: 0;
+	}
+}
+
+.map {
+	width: 100%;
+    padding: 0;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+
+	.location {
+        width: 100%;
+        height: 100%;
+        padding-right: 5px;
+      	.absolute(null,0,0,null);
+        text-align: right;
+        color: rgba(255,255,255,0.8);
+        text-shadow: 0 0 4px rgba(0,0,0,.9);
+        background-image: url(../img/location-shadow.png);
+        background-size: auto 100%;
+        z-index: 1;
+        box-sizing: border-box;
+        transition: all 0.25s ease;
+      
+      	i {
+            padding-right: 7px;
+        }
+    }
+}
+
+/*------------------------------------*\
+    #SINGLE POST
+\*------------------------------------*/
+
+.container {
+	display: block;
+	width: 100%;
+	height: 25%;
+	margin-left: 21%;	
+}
+
+.panoramaElement {
+	display: inline-block;
+	width: 100%;
+	margin-left: 0;
+	line-height: 0;
+	padding: 15px 20px 20px;	
+	box-sizing: border-box;
+  
+  	#sidebar {
+        padding-top: 20px;
+        width: 100%;
+        right: 8%;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+    }
+
+    .map {
+        width: 100%;
+        height: 200px;
+
+        h2 {
+          margin-bottom: 10px;
+        }
+    }
+
+    .friends {
+      	width: 100%;
+      
+      	.thumb {
+            min-width: 20%;
+            height: 90px;
+            flex: 0 0 20%;
+          
+          	.name {
+              bottom: 8px;
+            }
+        }
+    }
+}
+
+.panoramaResize {
+	width: 100%;
+	height: auto;
+	margin-bottom: 20px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.panoramaHeader {
+	width:100%;
+	margin-bottom: 5px;
+	justify-content: space-between;
+}
+
+.panoramaLeft, .panoramaRight {
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.panoramaLeft img {
+	height: 35px;
+	margin: 5px 10px 0 0;
+	opacity: 0.85;
+	box-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.textBody {
+	font-size: 14px;
+	line-height: 180%;
+}
+
+.textWith{
+	width: 100%;
+	margin-bottom: 15px;
+	font-family: Argh;
+	font-size: 21px;
+	font-weight: 700;
+	line-height: 110%;
+}
+
+.textRemember {
+	margin: 0;
+	font-size: 25px;
+	font-weight: 700;
+	line-height: 110%;
+}
+
+.content {
+	width: 100%;
+	padding: 15px 20px;
+	float: left; 
+    line-height: 130%;
+    background-color: @container_background_color;
+    box-sizing: border-box;
+}
+
+.single-post {
+    margin: 0 3%;
+    padding: 60px 20px;
+}
+
+/*------------------------------------*\
+
+    #TABLET STYLING
+
+\*------------------------------------*/
+
+@media (min-width: 720px) {
+	/*------------------------------------*\
+	    #LOGIN & SIGNUP
+	\*------------------------------------*/
+
+	.login {
+		max-width: 400px;
+		height: 410px;
+		margin: auto;
+      	.absolute(0,0,0,0);
+      
+      	.logo {
+            width: auto;
+            max-width: 80%;
+        }
+	}
+
+	.passwordReset {
+		width: 150%;
+		margin-left: -25%;
+	}
+
+	a.signup, .slButtons {
+		font-size: 16px;
+	}
+
+	/*------------------------------------*\
+	    #NAVIGATION BAR
+	\*------------------------------------*/
+	.username {
+        span {
+          display: block;
+        }
+      	i {
+            display: none;
+        }
+    }
+	.search {
+		display: block;
+	}
+
+	/*------------------------------------*\
+	    #PROFILE PAGE
+	\*------------------------------------*/
+	.profile .sidebar {
+		padding-top: 20px;
+	}
+
+	.profile-image {
+		width: 20%;
+	}
+
+	.profile-header {
+		width: 60%;
+		font-size: 1em;
+	}
+
+	/*------------------------------------*\
+	    #TIMELINE
+	\*------------------------------------*/
+	.main {
+		margin-right: 5%;
+	}
+
+	.author-info {
+		display: inline-block;
+	}
+
+	/*------------------------------------*\
+	    #POST STYLING
+	\*------------------------------------*/
+  	.post {
+    	h2 {
+            font-size: 1em;
+        }
+      	
+      	> a {
+            width: 70%;
+        }
+      
+      	&:hover .map .location {
+			opacity: 1;
+		}
+    }
+	.title {
+		flex-wrap: nowrap;
+      
+      	h2 {
+            width: 50%;
+          
+          	&:last-child {
+                text-align: right;
+                font-size: 1em;
+            }
+        }
+	}
+
+	.map {
+		width: 30%;
+	}
+	/*------------------------------------*\
+	    #SINGLE POST
+	\*------------------------------------*/
+	.content {
+		width: 60%;
+	}
+  	.panoramaElement {
+    	#sidebar {
+            padding: 0 0 0 20px;
+            width: 40%;
+        }
+        .map {
+            height: 300px;
+        }
+    }
+}
+
+/*------------------------------------*\
+
+    #DESKTOP STYLING
+
+\*------------------------------------*/
+
+@media (min-width: 920px) {
+	/*------------------------------------*\
+	    #POST STYLING
+	\*------------------------------------*/
+	.post h2,
+	.title h2:last-child {
+		font-size: 1.5em;
+	}
+
+	/*------------------------------------*\
+	    #PROFILE PAGE
+	\*------------------------------------*/
+
+	.gridContainer {
+		flex-wrap: nowrap;
+	}
+
+  	.profile {
+     	.main {
+            width: 65%;
+            margin-right: 5%;
+        }
+      	.sidebar {
+            width: 30%;
+        }
+    }
+
+	.widget {
+		margin: 20px;
+	}
+
+	/*------------------------------------*\
+	    #SINGLE POST
+	\*------------------------------------*/
+
+	.textBody {
+		font-size: 18px;
+	}
+	.panoramaElement .map {
+		height: 400px;
+    }
+}
+
+/*------------------------------------*\
+    #CSS ANIMATIONS
+\*------------------------------------*/
+
+@-moz-keyframes fadein {.fadeIn;}
+@-webkit-keyframes fadein {.fadeIn;}
+@-ms-keyframes fadein {.fadeIn;}
+@-o-keyframes fadein {.fadeIn;}
+@keyframes fadein {.fadeIn;}

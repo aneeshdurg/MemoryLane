@@ -5,6 +5,8 @@ from .forms import *
 from datetime import datetime
 from .models import Memory
 from .models import UserProfile
+from django.contrib.auth.models import User
+from friendship.models import Friend, Follow
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -54,13 +56,20 @@ def signup(request):
     return render(request, 'signup.html', {})
 
 def post(request, memory_id):
-	memory = get_object_or_404(Memory, pk=memory_id)
-	author = get_object_or_404(User, username=memory.author)
-	return render(request, 'post.html', {'memory': memory, 'author': author, 'image' : memory.image.name[10:]})
+    memory = get_object_or_404(Memory, pk=memory_id)
+    author = get_object_or_404(User, username=memory.author)
+    l = memory.location
+    memories = Memory.objects.all()
+    all_friends = Friend.objects.friends(request.user)
+    return render(request, 'post.html', {'memory': memory, 'author': author, 'image' : memory.image.name[10:], 'memories': memories, 'all_friends': all_friends})
 
 def newpost(request):
     username = request.user.username
     return render(request, 'newpost.html', {"username": username})
+
+def newpost_new(request):
+    username = request.user.username
+    return render(request, 'newpost_new.html', {"username": username})
 
 def newpostsubmit(request):
     if 'title' in request.POST:
@@ -82,7 +91,6 @@ def settingssubmit(request):
         u.email = request.POST['email']
         u.save()
         return account(request)
-
 
 def passwordreset(request):
 	return render(request, 'password-reset.html', {})
@@ -150,7 +158,7 @@ def profilemod(request):
             return HttpResponseRedirect('/Saved/')
 
     else:
-        author = request.user;
+        author = request.user
         bio = get_object_or_404(UserProfile, username=request.user.username).bio
         return render(request, 'profile-mod.html', {"user": author, "bio": bio, "memories": memories, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
@@ -177,6 +185,9 @@ def myprofile(request):
     author = request.user
     memory = get_object_or_404(Memory, pk=1)
     username = request.user.username
+    first_name = request.user.first_name
+    last_name = request.user.last_name
+    bio = request.user.bio
     description = memory.description
     location = memory.location
     name = memory.name
@@ -190,6 +201,8 @@ def account(request):
     author = request.user
     memory = get_object_or_404(Memory, pk=1)
     username = author.username
+    first_name = author.first_name
+    last_name = author.last_name
     users = User.objects.all()
     memories = Memory.objects.all()
     return render(request, 'settings/account.html', {"user": author})

@@ -2,17 +2,35 @@
 <html lang="en">
 {% load staticfiles %}
 {% include 'head.html' %}
+<style>#author-pic {vertical-align: middle;height: 45px;border-radius: 100%;position: relative;top: -2px;margin-right: 5px}
+.location-memory .post {
+    padding: 0;
+    margin-top: 35px;
+    background-color: transparent;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.25);
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.memory-body .h2 {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+</style>
 <body>
     {% include 'nav.html' %}
+    <img src="{{image}}" class="panoramaResize">
     <!-- div to hold all elements of a single timeline post -->
     <div class="single-post">
         <!-- div to hold panaroma shot and top bar(title and date) -->
         <div class = "panoramaElement">
             <div class="panoramaHeader">
                 <p class="panoramaLeft">{{memory.name}}</p>
-                <p class="panoramaRight">{{memory.date_created}}</p>
+                <p class="panoramaRight"><img id="author-pic" src="{% static "img/matthew.jpg" %}" alt="Author">Eric Yamane{{first_name}} {{last_name}} | {{memory.date_created}}</p>
             </div>
-            <img src="{{image}}" class="panoramaResize">
             <div class="memory flex">
                 <div class="memory-body">        
                     <div class="content">
@@ -20,38 +38,36 @@
                         <p class="textBody">
                         {{memory.description}}
                         </p>                        
-                    </div>
+                    </div>                    
                     <div class="location-memory">
-                        <h2> More memories about {{memory.location}}</h1>
+                        <h2>More memories about {{memory.location}}</h2>
+                        {% with location=memory.location %}
+                        {% with name=memory.name%}
                         {% for memory in memories reversed %}
-                            {% ifequal memory.location location %}
-                            <div class="memory">
-                            <!-- div to hold proPic, as well as present name under picture -->
-                                <div class="author-info" >
-                                    <a href=/profile-mod/>
-                                        <img src="{% static "img/matthew.jpg" %}" class="author-image">
-                                        <p class="author-name">{{first_name}}</p>
-                                        <p class="author-name">Author</p>
-                                    </a>
-                                </div>
-                                <div class="post flex">
-                                    <a href=/post/1><div class="panorama" style="background-image: {% static memory.image %}"> 
-                                        <div class="overlay">
-                                            <p>{{memory.description}}</p>
+                                {% ifequal memory.location location %}
+                                {% ifnotequal memory.name name %}
+                                    <div class="post flex">
+                                    <!-- div to hold proPic, as well as present name under picture -->
+                                        <div class="author-info" >
+                                        <a href=/profile-mod/>
+                                            <img src="{% static "img/matthew.jpg" %}" class="author-image">
+                                            <p class="author-name">{{memory.author}}</p>
+                                        </a>
                                         </div>
-                                            <div class="title flex">
-                                                <h2>{{memory.name}}</h2><h2>{{memory.date_created}}</h2>
+                                        <a href=/post/{{memory.id}}>
+                                        <div class="panorama" style="background-image: url({{memory.image|cut:'memorylane'}})">
+                                            <div class="overlay">
+                                                <p>{{memory.description|truncatechars:50}}</p>
                                             </div>
+                                            <div class="title flex">
+                                                <h2>{{memory.date_created}}</h2>
+                                            </div>                                           
                                         </div>
-                                    </a>
-                                    <div class="map" id="map">
-                                        <div class="location">
-                                            <h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
-                                        </div>
+                                        </a>
                                     </div>
-                                </div>
-                            </div>
-                            {% endifequal %}
+                                    {% endifnotequal %}
+                                {% endifequal %}
+
                             <!--background-color: #fff;
                                 border-radius: 6px;
                                 display: inline-block;
@@ -61,15 +77,16 @@
                                 vertical-align: bottom;
                                 z-index: 1-->
                         {% endfor %}
+                        {% endwith %}
+                        {% endwith %}
                     </div>
                 </div>
                 <div id="sidebar" class="flex sticky">
-                    <div class="map" id="map"></div>
-                    <a href=/location/>
+                    <div class="map" style="background-image:url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys')">
                         <div class="location">
                             <h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
                         </div>
-                    </a>
+                    </div>
                     <p class="textWith">with...</p>
                     <div class="group flex friends">
                         <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/preska.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Preska</span></div></a>
@@ -80,7 +97,30 @@
                 </div>
             </div>
         </div>
-        <br>
     </div>
+    <script src="{% static "js/googlemaps.js" %}"></script>
+    <script>
+    $(function(){ // document ready
+        if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
+            $("img.panoramaResize").one("load", function() {
+                var stickyTop = $('.sticky').offset().top; // returns number
+                $(window).resize(function() {
+                    stickyTop = $('.sticky').offset().top;
+                });
+                $(window).scroll(function(){ // scroll event
+                    var windowTop = $(window).scrollTop(); // returns number 
+                    if (stickyTop < windowTop-$('.memory-body').scrollTop()+75 ){
+                        $('.sticky').css({ position: 'fixed', top: '75px', width: '35.125%', right: '6.05%'});
+                    }
+                    else {
+                        $('.sticky').css({ position: 'static', width: '40%'});
+                    }
+                });
+            }).each(function() {
+              if(this.complete) $(this).load();
+            });;
+        }
+    })
+    </script>
 </body>
 </html>
