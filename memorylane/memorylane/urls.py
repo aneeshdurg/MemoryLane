@@ -41,5 +41,6 @@ urlpatterns = [
     url(r'^following/$', views.following, name='following'),
     url(r'^follower/$', views.follower, name='follower'),
     url(r'^post/$', views.post, name='post'),
-    url(r'^settingssubmit/$', views.settingssubmit, name='settingssubmit')
+    url(r'^settingssubmit/$', views.settingssubmit, name='settingssubmit'),
+    url(r'^location/(?P<location>.+)/$', views.location, name="location"),
 ]

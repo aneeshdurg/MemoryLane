@@ -22,26 +22,12 @@
 </style>
 <body>
     {% include 'nav.html' %}
-    <img src="{{image}}" class="panoramaResize">
     <!-- div to hold all elements of a single timeline post -->
     <div class="single-post">
         <!-- div to hold panaroma shot and top bar(title and date) -->
-        <div class = "panoramaElement">
-            <div class="panoramaHeader">
-                <p class="panoramaLeft">{{memory.name}}</p>
-                <p class="panoramaRight"><img id="author-pic" src="{% static "img/matthew.jpg" %}" alt="Author">Eric Yamane{{first_name}} {{last_name}} | {{memory.date_created}}</p>
-            </div>
-            <div class="memory flex">
-                <div class="memory-body">        
-                    <div class="content">
-                        <p class="textRemember">I remember...</p>
-                        <p class="textBody">
-                        {{memory.description}}
-                        </p>                        
-                    </div>                    
+                <div class="memory-body">                         
                     <div class="location-memory">
-                        <h2>More memories about <a href=/location/{{memory.location}}>{{memory.location}}</a></h2>
-                        {% with location=memory.location %}
+                        <h2>More memories about {{location}}</h2>    
                         {% with name=memory.name%}
                         {% for memory in memories reversed %}
                                 {% ifequal memory.location location %}
@@ -67,32 +53,14 @@
                                     </div>
                                     {% endifnotequal %}
                                 {% endifequal %}
-
-                            <!--background-color: #fff;
-                                border-radius: 6px;
-                                display: inline-block;
-                                margin: -45px 2px 0 -3px;
-                                padding: 3px;
-                                position: relative;
-                                vertical-align: bottom;
-                                z-index: 1-->
                         {% endfor %}
                         {% endwith %}
-                        {% endwith %}
                     </div>
-                </div>
                 <div id="sidebar" class="flex sticky">
-                    <div class="map" style="background-image:url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys')">
+                    <div class="map" style="background-image:url('https://maps.googleapis.com/maps/api/staticmap?center={{location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys')">
                         <div class="location">
-                            <h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
+                            <h2><i class="fa fa-map-marker"></i>{{location}}</h2>
                         </div>
-                    </div>
-                    <p class="textWith">with...</p>
-                    <div class="group flex friends">
-                        <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/preska.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Preska</span></div></a>
-                        <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/samara.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Samara</span></div></a>
-                        <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/zak.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Zak</span></div></a>
-                        <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/aneesh.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Aneesh</span></div></a>
                     </div>
                 </div>
             </div>
