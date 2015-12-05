@@ -20,6 +20,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
+    url(r'^$', views.login, name='login'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^signup/', views.signup, name='signup'),
     url(r'^post/(?P<memory_id>[0-9]+)/$', views.post, name="post"),
@@ -41,5 +42,6 @@ urlpatterns = [
     url(r'^following/$', views.following, name='following'),
     url(r'^follower/$', views.follower, name='follower'),
     url(r'^post/$', views.post, name='post'),
-    url(r'^settingssubmit/$', views.settingssubmit, name='settingssubmit')
+    url(r'^settingssubmit/$', views.settingssubmit, name='settingssubmit'),
+    url(r'^location/(?P<location>.+)/$', views.location, name="location"),
 ]

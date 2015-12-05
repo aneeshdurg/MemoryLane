@@ -226,12 +226,9 @@ def getMemories(request):
         memorylist.append(x.first_name + ' ' + x.last_name)
     return memorylist
 
-def location(request):
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect('/login/')
-    location = {{location}}
+def location(request, location):
     memories = Memory.objects.all()
-    return render(request, "location.html", {"memories": memories})
+    return render(request, "location.html", {"memories": memories, "location": location})
 
 def myprofile(request):
     if not request.user.is_authenticated():

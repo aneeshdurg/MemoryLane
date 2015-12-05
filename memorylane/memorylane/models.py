@@ -5,7 +5,7 @@ class UserProfile(models.Model):
     friends = models.CharField(max_length=5000)
     propic = models.CharField(max_length=1000)
     date_created = models.DateField()
-    bio = models.TextField()
+    bio = models.TextField(default="Default bio")
     livesin = models.TextField()
     about = models.TextField()
     memories = models.CharField(max_length=5000)

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+{% include 'head.html' %}
+<style>
+    #more-memories {
+        margin-bottom: 20px;
+    }
+</style>
+<body>
+    {% include 'nav.html' %}
+    <div class="gridContainer flex">                         
+        <div class="main">
+            <h2 id="more-memories">More memories about {{location}}</h2>    
+            {% with name=memory.name%}
+            {% for memory in memories reversed %}
+                {% ifequal memory.location location %}
+                {% ifnotequal memory.name name %}
+                    <div class="memory">
+                        <div class="author-info">
+                            <a href=/profile-mod/>
+                                <img src="{% static "img/matthew.jpg" %}" class="author-image">
+                                <p class="author-name">{{memory.author}}</p>
+                            </a>
+                        </div>
+                        <div class="post flex">
+                            <a href=/post/{{memory.id}}>
+                            <div class="panorama" style="background-image: url({{memory.image|cut:'memorylane'}})">
+                                <div class="overlay">
+                                    <p>{{memory.description|truncatechars:250}}</p>
+                                </div>
+                                <div class="title flex">
+                                    <h2>{{memory.name}}</h2><h2>{{memory.date_created}}</h2>
+                                </div>
+                            </div>
+                            </a>
+                            <div class="map" style="background-image:url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys')">
+                                <div class="location">
+                                    <h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endifnotequal %}
+                {% endifequal %}
+            {% endfor %}
+            {% endwith %}
+        </div>
+    </div>
+    <script src="{% static "js/googlemaps.js" %}"></script>
+    <script>
+    $(function(){ // document ready
+        if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
+            $("img.panoramaResize").one("load", function() {
+                var stickyTop = $('.sticky').offset().top; // returns number
+                $(window).resize(function() {
+                    stickyTop = $('.sticky').offset().top;
+                });
+                $(window).scroll(function(){ // scroll event
+                    var windowTop = $(window).scrollTop(); // returns number 
+                    if (stickyTop < windowTop-$('.memory-body').scrollTop()+75 ){
+                        $('.sticky').css({ position: 'fixed', top: '75px', width: '35.125%', right: '6.05%'});
+                    }
+                    else {
+                        $('.sticky').css({ position: 'static', width: '40%'});
+                    }
+                });
+            }).each(function() {
+              if(this.complete) $(this).load();
+            });;
+        }
+    })
+    </script>
+</body>
+</html>
