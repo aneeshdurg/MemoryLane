@@ -73,11 +73,13 @@
                     </div>
                 </div>
                 <div id="sidebar" class="flex sticky">
-                    <div class="map" style="background-image:url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys')">
-                        <div class="location">
-                            <h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
+                    <a href=/location/{{memory.location.split|join:"+"}}>
+                        <div class="map" style="background-image:url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys')">
+                            <div class="location">
+                                <h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                     <p class="textWith">with...</p>
                     <div class="group flex friends">
                         <a class="thumb" href="/profile-mod/"><div style="background-image: url({% static "img/preska.jpg" %})"><img class="overlay" src="{% static "img/overlay.png" %}"><span class="name">Preska</span></div></a>
