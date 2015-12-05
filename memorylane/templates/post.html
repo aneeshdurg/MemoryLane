@@ -40,7 +40,7 @@
                         </p>                        
                     </div>                    
                     <div class="location-memory">
-                        <h2>More memories about <a href=/location/{{memory.location}}>{{memory.location}}</a></h2>
+                        <h2>More memories about <a href=/location/{{memory.location.split|join:"+"}}>{{memory.location}}</a></h2>
                         {% with location=memory.location %}
                         {% with name=memory.name%}
                         {% for memory in memories reversed %}
@@ -67,15 +67,6 @@
                                     </div>
                                     {% endifnotequal %}
                                 {% endifequal %}
-
-                            <!--background-color: #fff;
-                                border-radius: 6px;
-                                display: inline-block;
-                                margin: -45px 2px 0 -3px;
-                                padding: 3px;
-                                position: relative;
-                                vertical-align: bottom;
-                                z-index: 1-->
                         {% endfor %}
                         {% endwith %}
                         {% endwith %}
