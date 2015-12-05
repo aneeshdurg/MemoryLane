@@ -840,6 +840,10 @@ a.signup {
     padding: 0 20px 60px;
 }
 
+.location-memory .post > a:last-child {
+	width: 80%;
+}
+
 .location-memory .title h2 {
 	width: 100%!important;
 }
