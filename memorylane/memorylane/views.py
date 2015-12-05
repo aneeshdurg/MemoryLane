@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as a_login
 from django.contrib.auth import logout as a_logout
+from django.contrib.auth.hashers import check_password
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -24,11 +25,13 @@ def profiletest(request, user_id):
 	return HttpResponse(output)
 
 def userlist(request):
-	lastest_user_list = User.objects.order_by('pk')[:5]
+	lastest_user_list = User.objects.order_by('pk')[:7]
 	output = ', '.join([u.username+' '+u.email for u in lastest_user_list])
 	return HttpResponse(output)
 
 def signup(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/timeline/')
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         username = request.POST['username']
@@ -45,6 +48,13 @@ def signup(request):
                 user.save()
                 profile = UserProfile(username=username, date_created=datetime.now())
                 profile.save()
+                
+                user = get_object_or_404(User, email=email)
+                user = authenticate(username=user.username, password=password)
+                if user is not None:
+                    if user.is_active:
+                        a_login(request, user)
+                
                 return HttpResponseRedirect('/timeline/')
         else:
             return render(request, 'signup.html', {})
@@ -56,6 +66,8 @@ def signup(request):
     return render(request, 'signup.html', {})
 
 def post(request, memory_id):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
     memory = get_object_or_404(Memory, pk=memory_id)
     author = get_object_or_404(User, username=memory.author)
     l = memory.location
@@ -64,14 +76,20 @@ def post(request, memory_id):
     return render(request, 'post.html', {'memory': memory, 'author': author, 'image' : memory.image.name[10:], 'memories': memories, 'all_friends': all_friends})
 
 def newpost(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
     username = request.user.username
     return render(request, 'newpost.html', {"username": username})
 
 def newpost_new(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
     username = request.user.username
     return render(request, 'newpost_new.html', {"username": username})
 
 def newpostsubmit(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
     if 'title' in request.POST:
         m = Memory(name=request.POST['title'], author=request.user.username, location=request.POST['location'], date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'])
         m.save()
@@ -84,6 +102,8 @@ def newpostsubmit(request):
     return HttpResponse(message)
 
 def settingssubmit(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
     if 'user_id' in request.POST:
         u = get_object_or_404(User, username=request.POST['user_id'])
         u.name = request.POST['name']
@@ -93,9 +113,27 @@ def settingssubmit(request):
         return account(request)
 
 def passwordreset(request):
-	return render(request, 'password-reset.html', {})
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
+    if request.user.is_authenticated() and request.method == 'POST':
+        oldpass = request.POST['oldPassword']
+        if check_password(oldpass, request.user.password):
+            oldpasscheck = request.POST['oldPasswordCheck']
+            newpass = request.POST['newPassword']
+            if oldpass == oldpasscheck and oldpass != newpass:
+                request.user.set_password(newpass)
+                request.user.save()
+                a_logout(request)
+                return HttpResponseRedirect('/login/')
+            else:
+                return HttpResponseRedirect('/password-reset/')    
+        else:
+            return HttpResponseRedirect('/password-reset/')    
+    return render(request, 'password-reset.html', {})
 
 def login(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/timeline/')
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -105,26 +143,33 @@ def login(request):
             if user.is_active:
                 a_login(request, user)
         else:
-            return settings(request)        
-        # a_login(request, user)
-        return timeline(request)
+            return login(request)        
+        return HttpResponseRedirect('/timeline/')
     
     return render(request, 'login.html', {})
 
 def logout(request):
     a_logout(request)
-    return render(request, 'login.html', {})    
+    return HttpResponseRedirect('/login/')    
 
 def friends(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
 	return render(request, 'friends.html', {})
 
 def following(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
     return render(request, 'following.html', {})
 
 def follower(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
     return render(request, 'follower.html', {})
 
 def timeline(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
     author = get_object_or_404(User, pk=1)
     memory = get_object_or_404(Memory, pk=1)
     username = request.user.username
@@ -139,6 +184,8 @@ def timeline(request):
     return render(request, 'timeline.html', {"memories": memories, "username": username})
 
 def profilemod(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
     author = get_object_or_404(User, username=request.user.username)
     memory = get_object_or_404(Memory, pk=1)
     username = request.user.username
@@ -181,6 +228,8 @@ def location(request, location):
     return render(request, "location.html", {"memories": memories, "location": location})
 
 def myprofile(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
     author = request.user
     memory = get_object_or_404(Memory, pk=1)
     username = request.user.username
@@ -197,6 +246,8 @@ def myprofile(request):
     return render(request, 'settings/myprofile.html', {"user": author, "memories": memories, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
 
 def account(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
     author = request.user
     memory = get_object_or_404(Memory, pk=1)
     username = author.username
@@ -207,6 +258,8 @@ def account(request):
     return render(request, 'settings/account.html', {"user": author})
 
 def general(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
     author = get_object_or_404(User, pk=1)
     memory = get_object_or_404(Memory, pk=1)
     username = author.username
@@ -217,7 +270,10 @@ def general(request):
     return render(request, 'settings/general.html', {"username": username, "first_name": first_name, "last_name": last_name, "email": email})
 
 def delete(request):
-    author = get_object_or_404(User, pk=1)
-    memory = get_object_or_404(Memory, pk=1)
-    username = author.username
-    return render(request, 'settings/delete.html', {"username": username})
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/login/')
+    if request.user.is_authenticated() and request.method == 'POST':
+        if check_password(request.POST['password'], request.user.password):
+            request.user.delete()
+            return HttpResponseRedirect('/logout/')   
+    return render(request, 'settings/delete.html', {})
