@@ -44,4 +44,5 @@ urlpatterns = [
     url(r'^post/$', views.post, name='post'),
     url(r'^settingssubmit/$', views.settingssubmit, name='settingssubmit'),
     url(r'^location/(?P<location>.+)/$', views.location, name="location"),
+    url(r'^search/$', views.search, name='search'),
 ]

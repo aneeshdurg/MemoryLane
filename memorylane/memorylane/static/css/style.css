@@ -840,6 +840,10 @@ a.signup {
     padding: 0 20px 60px;
 }
 
+.location-memory .post > a:last-child {
+	width: 80%;
+}
+
 .location-memory .title h2 {
 	width: 100%!important;
 }
@@ -1041,6 +1045,13 @@ ul, li{
 	.post > a {
 		width: 70%;
 	}
+	.post > a:last-child {
+		width: 30%;
+	}
+		.post > a:last-child .map {
+			width: 100%;
+			height: 220px;
+		}
 		.post:hover .map .location {
 			opacity: 1;
 		}

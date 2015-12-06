@@ -36,6 +36,7 @@
             document.getElementById("editBio").style.display="none";
         }
     </script>
+    <style>.settings-profile {padding-top: 0}</style>
 </head>
 <body>
     {% include 'nav.html' %}
@@ -44,7 +45,7 @@
             Profile Settings
         </div>
     </div>
-    <div class="gridContainer flex profile">
+    <div class="gridContainer flex profile settings-profile">
         <div class="main">
             <div class="profile-info flex">
                 <div class="profile-image" style="background-image:url({% static "img/matthew.jpg" %})"></div>
@@ -70,7 +71,7 @@
             <div class="post flex">
                 <a href=/post/1><div class="panorama" style="background-image: url({{memory.image|cut:'memorylane'}})">
                     <div class="overlay">
-                        <p>{{memory.description}}</p>
+                        <p>{{memory.description|truncatechars:250}}</p>
                     </div>
                     <div class="title flex">
                         <h2>{{memory.name}}</h2><h2>{{memory.date_created}}</h2>
@@ -89,12 +90,7 @@
                 <h1>About</h1>
                 <div class="flex">
                     <div class="about-basics flex">
-
                         <div id="livesin" class="livesin">
-                            <div id="original" style.display="block">
-                                <p id="livesin">{{livesin}}</p>
-                                <a href="javascript:changeBioText();"><i class="fa fa-pencil"></i></a>
-                            </div>
                             <div id="editBio" style="display:none">
                                 <form action="newBio" method="post">
                                     <textarea id="bioTextArea" rows="4" cols="25" name="newBio">{{bio}}</textarea>

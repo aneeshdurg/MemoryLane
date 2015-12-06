@@ -102,6 +102,17 @@ def newpostsubmit(request):
         message = 'You submitted an empty form.'
     return HttpResponse(message)
 
+def search(request):
+    location = request.GET[u'q']
+    memories = Memory.objects.filter(location=location)
+    return render(request, "location.html", {"memories": memories, "location": location})
+
+def location(request, location):
+    location = location.replace("+"," ")
+    memories = Memory.objects.filter(location=location)
+    return render(request, "location.html", {"memories": memories, "location": location})
+  
+
 def settingssubmit(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
@@ -189,7 +200,7 @@ def timeline(request):
 def profilemod(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
-    author = get_object_or_404(User, username=request.user.username)
+    author = get_object_or_404(UserProfile, username=request.user.username)
     memory = get_object_or_404(Memory, pk=1)
     username = request.user.username
     first_name = request.user.first_name
@@ -199,7 +210,7 @@ def profilemod(request):
     name = memory.name
     image = memory.image
     date_created = memory.date_created
-    memories = Memory.objects.all()
+    memories = Memory.objects.filter(author=request.user.username)
     if request.method == 'POST':
         bio = get_object_or_404(UserProfile, username=request.user.username).bio
         form = BioForm(request.POST)
@@ -227,7 +238,8 @@ def getMemories(request):
     return memorylist
 
 def location(request, location):
-    memories = Memory.objects.all()
+    location = location.replace("+"," ")
+    memories = Memory.objects.filter(location=location)
     return render(request, "location.html", {"memories": memories, "location": location})
 
 def myprofile(request):

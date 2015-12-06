@@ -4,18 +4,30 @@
 {% include 'head.html' %}
 <style>
     #more-memories {
-        margin-bottom: 20px;
+        margin: 10px 0 30px;
     }
+    .location-page .post > a {
+        width: 100%;
+    }
+    .location-page .sidebar {
+        width: 40%;
+        padding: 20px;
+        margin-top: 50px; 
+        box-sizing: border-box;
+    }
+        .location-page .sidebar .map {
+            width: 100%;
+            height: 400px;
+        }
 </style>
 <body>
     {% include 'nav.html' %}
-    <div class="gridContainer flex">                         
-        <div class="main">
-            <h2 id="more-memories">More memories about {{location}}</h2>    
+    <div class="gridContainer memory flex location-page">                         
+        <div class="memory-body">
+            <h2 id="more-memories">Memories about {{location}}</h2>    
             {% with name=memory.name%}
             {% for memory in memories reversed %}
                 {% ifequal memory.location location %}
-                {% ifnotequal memory.name name %}
                     <div class="memory">
                         <div class="author-info">
                             <a href=/profile-mod/>
@@ -34,40 +46,39 @@
                                 </div>
                             </div>
                             </a>
-                            <div class="map" style="background-image:url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys')">
-                                <div class="location">
-                                    <h2><i class="fa fa-map-marker"></i>{{memory.location}}</h2>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                    {% endifnotequal %}
                 {% endifequal %}
+                {% empty %}
+                <h2>No memories at this location exist yet.</h2>
             {% endfor %}
             {% endwith %}
+        </div>
+        <div id="sidebar" class="sidebar flex sticky">
+            <div class="map" style="background-image:url('https://maps.googleapis.com/maps/api/staticmap?center={{location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys')">
+                <div class="location">
+                    <h2><i class="fa fa-map-marker"></i>{{location}}</h2>
+                </div>
+            </div>
         </div>
     </div>
     <script src="{% static "js/googlemaps.js" %}"></script>
     <script>
     $(function(){ // document ready
         if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
-            $("img.panoramaResize").one("load", function() {
-                var stickyTop = $('.sticky').offset().top; // returns number
-                $(window).resize(function() {
-                    stickyTop = $('.sticky').offset().top;
-                });
-                $(window).scroll(function(){ // scroll event
-                    var windowTop = $(window).scrollTop(); // returns number 
-                    if (stickyTop < windowTop-$('.memory-body').scrollTop()+75 ){
-                        $('.sticky').css({ position: 'fixed', top: '75px', width: '35.125%', right: '6.05%'});
-                    }
-                    else {
-                        $('.sticky').css({ position: 'static', width: '40%'});
-                    }
-                });
-            }).each(function() {
-              if(this.complete) $(this).load();
-            });;
+            var stickyTop = $('.sticky').offset().top; // returns number
+            $(window).resize(function() {
+                stickyTop = $('.sticky').offset().top;
+            });
+            $(window).scroll(function(){ // scroll event
+                var windowTop = $(window).scrollTop(); // returns number 
+                if (stickyTop < windowTop-$('.memory-body').scrollTop()+75 ){
+                    $('.sticky').css({ position: 'fixed', top: '75px', width: '40%', right: '0', "margin-top": '0'});
+                }
+                else {
+                    $('.sticky').css({ position: 'static', width: '40%', "margin-top": '50px'});
+                }
+            });
         }
     })
     </script>
