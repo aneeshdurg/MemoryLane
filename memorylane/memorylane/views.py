@@ -26,7 +26,7 @@ def profiletest(request, user_id):
     return HttpResponse(output)
 
 def userlist(request):
-	lastest_user_list = User.objects.order_by('pk')[:7]
+	lastest_user_list = User.objects.order_by('pk')[:11]
 	output = ', '.join([u.username+' '+u.email for u in lastest_user_list])
 	return HttpResponse(output)
 
@@ -40,11 +40,15 @@ def signup(request):
         user = authenticate(username=username)
         if user is None:
             email = request.POST['email']
+            fname = request.POST['fname']
+            lname = request.POST['lname']
             if form.is_valid():
                 user = User.objects.create_user(
                 username=username,
                 password=password,
-                email=email
+                email=email,
+                first_name=fname,
+                last_name=lname
                 )
                 user.save()
                 profile = UserProfile(username=username, date_created=datetime.now())
@@ -117,13 +121,23 @@ def settingssubmit(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
     if request.method == 'POST':
+        editUser = True
         if 'user_id' in request.POST:
             request.user.username = request.POST['username']
         elif 'email' in request.POST:
             request.user.email = request.POST['email']
-        elif 'name' in request.POST:
-            request.user.first_name=request.POST['name']
-        request.user.save()  
+        elif 'fname' in request.POST:
+            request.user.first_name=request.POST['fname']
+        elif 'lname' in request.POST:
+            request.user.last_name=request.POST['lname']    
+        elif 'livesin' in request.POST:
+            profile = get_object_or_404(UserProfile, username=request.user.username)
+            profile.livesin = request.POST['livesin']
+            profile.save()
+            editUser = False
+        
+        if editUser:    
+            request.user.save()  
     return HttpResponseRedirect('/account/')
 
 def passwordreset(request):
@@ -184,18 +198,9 @@ def follower(request):
 def timeline(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
-    author = get_object_or_404(User, pk=1)
-    memory = get_object_or_404(Memory, pk=1)
-    username = request.user.username
-    first_name = author.first_name
-    description = memory.description
-    location = memory.location
-    name = memory.name
-    image = memory.image
-    date_created = memory.date_created
-    users = User.objects.all()
+    user = request.user
     memories = Memory.objects.all()
-    return render(request, 'timeline.html', {"memories": memories, "username": username})
+    return render(request, 'timeline.html', {"memories": memories, "user": user})
 
 def profilemod(request):
     if not request.user.is_authenticated():
@@ -211,17 +216,9 @@ def profilemod(request):
     image = memory.image
     date_created = memory.date_created
     memories = Memory.objects.filter(author=request.user.username)
-    if request.method == 'POST':
-        bio = get_object_or_404(UserProfile, username=request.user.username).bio
-        form = BioForm(request.POST)
-        bio = form.bioTextArea
-        if form.is_valid():
-            return HttpResponseRedirect('/Saved/')
-
-    else:
-        author = request.user
-        bio = get_object_or_404(UserProfile, username=request.user.username).bio
-        return render(request, 'profile-mod.html', {"user": author, "bio": bio, "memories": memories, "first_name" : first_name, "username": username, "description": description, "name": name, "location": location, "image": image, "date_created": date_created})
+    user = request.user
+    profile = get_object_or_404(UserProfile, username=request.user.username)
+    return render(request, 'profile-mod.html', {"user": user, "memories": memories, "profile": profile})
 
 def getUsers(request):
     users = User.objects.all()
@@ -256,14 +253,9 @@ def myprofile(request):
 def account(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
-    author = request.user
-    memory = get_object_or_404(Memory, pk=1)
-    username = author.username
-    first_name = author.first_name
-    last_name = author.last_name
-    users = User.objects.all()
-    memories = Memory.objects.all()
-    return render(request, 'settings/account.html', {"user": author})
+    user = request.user
+    profile = get_object_or_404(UserProfile, username=request.user.username)
+    return render(request, 'settings/account.html', {"user": user, "profile": profile})
 
 def general(request):
     if not request.user.is_authenticated():
@@ -282,6 +274,12 @@ def delete(request):
         return HttpResponseRedirect('/login/')
     if request.user.is_authenticated() and request.method == 'POST':
         if check_password(request.POST['password'], request.user.password):
+            for m in Memory.objects.all():
+                if m.author == request.user.username:
+                    m.delete()
+            for p in UserProfile.objects.all():
+                if p.username == request.user.username:
+                    p.delete()        
             request.user.delete()
             return HttpResponseRedirect('/logout/')   
     return render(request, 'settings/delete.html', {})
