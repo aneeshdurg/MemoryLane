@@ -199,7 +199,7 @@ def profilemod(request):
     name = memory.name
     image = memory.image
     date_created = memory.date_created
-    memories = Memory.objects.all()
+    memories = Memory.objects.filter(author=request.user.username)
     if request.method == 'POST':
         bio = get_object_or_404(UserProfile, username=request.user.username).bio
         form = BioForm(request.POST)
@@ -227,8 +227,8 @@ def getMemories(request):
     return memorylist
 
 def location(request, location):
-    memories = Memory.objects.all()
     location = location.replace("+"," ")
+    memories = Memory.objects.filter(location=location)
     return render(request, "location.html", {"memories": memories, "location": location})
 
 def myprofile(request):
