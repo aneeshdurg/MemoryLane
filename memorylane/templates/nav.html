@@ -14,9 +14,11 @@
 		</a>
 	</div>
 	<div class="settings flex">
-		<div class="search">
-  			<input placeholder="Search &#xf002;">
-		</div>
+		<form method="get" action=/search/>
+			<div class="search">
+	  			<input placeholder="Search &#xf002;" name="q" id="id_q" value="{{request.GET.q}}">
+			</div>
+		</form>
 		<div class="dropdown">
         	<!-- trigger button -->
         	<i class="fa fa-cog"></i>
