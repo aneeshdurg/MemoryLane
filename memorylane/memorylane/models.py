@@ -5,7 +5,7 @@ class UserProfile(models.Model):
     friends = models.CharField(max_length=5000)
     date_created = models.DateField()
     bio = models.TextField(default="Default bio")
-    livesin = models.TextField()
+    livesin = models.TextField(default="Earth")
     about = models.TextField()
     memories = models.CharField(max_length=5000)
     propic = models.FileField(upload_to="memorylane/static/images/profile")
