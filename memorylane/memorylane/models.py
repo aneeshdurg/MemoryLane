@@ -3,13 +3,12 @@ from django.db import models
 class UserProfile(models.Model):
     username = models.CharField(max_length=5000) 
     friends = models.CharField(max_length=5000)
-    propic = models.CharField(max_length=1000)
     date_created = models.DateField()
     bio = models.TextField(default="Default bio")
     livesin = models.TextField()
     about = models.TextField()
     memories = models.CharField(max_length=5000)
-    name = models.CharField(max_length=5000)
+    propic = models.FileField(upload_to="memorylane/static/images/profile")
     
     def __str__(self):
         return self.first_name + " " + self.last_name

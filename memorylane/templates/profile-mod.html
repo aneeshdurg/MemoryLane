@@ -5,7 +5,7 @@
 {% include 'head.html' %}
 
 <head>
-	<title>{{username}}'s Profile</title>
+	<title>{{user.username}}'s Profile</title>
 </head>
 <body>
 	{% include 'nav.html' %}
@@ -14,10 +14,10 @@
 			<div class="profile-info flex">
 				<div class="profile-image" style="background-image:url({% static "img/matthew.jpg" %})"></div>
 				<div class="profile-header">
-					<a href=/profile-mod/><h1>{{first_name}} {{last_name}}</h1></a><br/>
-					<a href=/newpost/><h3>@{{username}}</h3></a>
+					<a href=/profile-mod/><h1>{{user.first_name}} {{user.last_name}}</h1></a><br/>
+					<a href=/newpost/><h3>@{{user.username}}</h3></a>
 					<div class="bio">
-						<p id="currentBio">{{bio}}</p>
+						<p id="currentBio">{{profile.bio}}</p>
 					</div>
 				</div>
 				<div class="add-new-memory">
@@ -55,17 +55,17 @@
 					<div class="about-basics flex">
 						<div>
 							<h3><i class="fa fa-map-marker"></i> Lives in:</h3>
-							<span>Urbana-Champaign</span>
+							<span>{{profile.livesin}}</span>
 						</div>
 						<div>
 							<h3><i class="fa fa-clock-o"></i> Joined:</h3>
-							<span>{{user.date_created}}</span>
+							<span>{{profile.date_created}}</span>
 						</div>
 					</div>
 				</div>
 				<hr>
 				<div class="about-passage">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora animi dolorem fugiat, similique velit eligendi atque, earum perferendis corporis quibusdam! Nisi animi, ut reiciendis explicabo aperiam sed porro nesciunt, maxime.</p>
+					<p>{{profile.bio}}</p>
 				</div>
 			</div>
 			<div class="widget">

@@ -19,7 +19,16 @@
                 <hr/>
                 <li>
                 <form name="settingsform" action="../settingssubmit/" method="post">
-                    <span>Name: <input type="text" name="name" value="{{user.first_name}}"/></span>
+                    <span>First Name: <input type="text" name="fname" value="{{user.first_name}}"/></span>
+                    <div class="edit">
+                        <input type="submit" value="Save">
+                    </div>
+                </form>
+                </li>
+                <hr/>
+                <li>
+                <form name="settingsform" action="../settingssubmit/" method="post">
+                    <span>Last Name: <input type="text" name="lname" value="{{user.last_name}}"/></span>
                     <div class="edit">
                         <input type="submit" value="Save">
                     </div>
@@ -45,6 +54,16 @@
                 </form>
                 </li>
                 <hr/>
+                <li>
+                    <form name="settingsform" action="../settingssubmit/" method="post">
+                    <span>Location: <input type="text" value="{{profile.livesin}}" name="livesin"/></span>
+                    <div class="edit">
+                        <input type="submit" value="Save">
+                    </div>
+                </form>
+                </li>
+                <hr/>
+                
                 <li>
                     <span><a href=/password-reset/>Click to change password. </a></span>
                 </li>
