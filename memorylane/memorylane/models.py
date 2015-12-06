@@ -19,6 +19,8 @@ class Memory(models.Model):
     location = models.CharField(max_length=100)
     image = models.FileField(upload_to="memorylane/static/images")
     author_image = models.FileField(default="memorylane/static/user-images/Default.png")
+    first_name = models.CharField(max_length=100, default="Memory")
+    last_name = models.CharField(max_length=100, default="Lane")
     description = models.TextField()
     author = models.CharField(max_length=100)
     date_created = models.DateField()

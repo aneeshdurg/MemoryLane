@@ -29,7 +29,7 @@
         <div class = "panoramaElement">
             <div class="panoramaHeader">
                 <p class="panoramaLeft">{{memory.name}}</p>
-                <p class="panoramaRight"><img id="author-pic" src="{{memory.author_image|cut:'memorylane'}}" alt="Author">Eric Yamane{{first_name}} {{last_name}} | {{memory.date_created}}</p>
+                <p class="panoramaRight"><img id="author-pic" src="{{memory.author_image|cut:'memorylane'}}" alt="Author">{{memory.first_name}} {{memory.last_name}} | {{memory.date_created}}</p>
             </div>
             <div class="memory flex">
                 <div class="memory-body">        
@@ -42,10 +42,10 @@
                     <div class="location-memory">
                         <h2>More memories about <a href=/location/{{memory.location.split|join:"+"}}>{{memory.location}}</a></h2>
                         {% with location=memory.location %}
-                        {% with name=memory.name%}
+                        {% with id=memory.id%}
                         {% for memory in memories reversed %}
                                 {% ifequal memory.location location %}
-                                {% ifnotequal memory.name name %}
+                                {% ifnotequal memory.id id %}
                                     <div class="post flex">
                                     <!-- div to hold proPic, as well as present name under picture -->
                                         <div class="author-info" >
