@@ -29,7 +29,7 @@
         <div class = "panoramaElement">
             <div class="panoramaHeader">
                 <p class="panoramaLeft">{{memory.name}}</p>
-                <p class="panoramaRight"><img id="author-pic" src="{% static "img/matthew.jpg" %}" alt="Author">Eric Yamane{{first_name}} {{last_name}} | {{memory.date_created}}</p>
+                <p class="panoramaRight"><img id="author-pic" src="{{memory.author_image|cut:'memorylane'}}" alt="Author">Eric Yamane{{first_name}} {{last_name}} | {{memory.date_created}}</p>
             </div>
             <div class="memory flex">
                 <div class="memory-body">        

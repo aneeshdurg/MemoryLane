@@ -96,7 +96,7 @@ def newpostsubmit(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
     if 'title' in request.POST:
-        m = Memory(name=request.POST['title'], author=request.user.username, location=request.POST['location'], date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'])
+        m = Memory(name=request.POST['title'], author=request.user.username, location=request.POST['location'], date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'], author_image=request.user.image)
         m.save()
         memory = get_object_or_404(Memory, pk=m.id)
         author = get_object_or_404(User, username=memory.author)

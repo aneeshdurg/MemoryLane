@@ -9,7 +9,8 @@ class UserProfile(models.Model):
     about = models.TextField()
     memories = models.CharField(max_length=5000)
     propic = models.FileField(upload_to="memorylane/static/images/profile")
-    
+    image = models.FileField(upload_to="memorylane/static/user-images", default="memorylane/static/user-images/Default.png")
+
     def __str__(self):
         return self.first_name + " " + self.last_name
 
@@ -17,6 +18,7 @@ class Memory(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     image = models.FileField(upload_to="memorylane/static/images")
+    author_image = models.FileField(default="memorylane/static/user-images/Default.png")
     description = models.TextField()
     author = models.CharField(max_length=100)
     date_created = models.DateField()
