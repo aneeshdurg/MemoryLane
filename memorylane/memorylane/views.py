@@ -124,20 +124,18 @@ def settingssubmit(request):
         editUser = True
         if 'user_id' in request.POST:
             request.user.username = request.POST['username']
-        elif 'email' in request.POST:
+        if 'email' in request.POST:
             request.user.email = request.POST['email']
-        elif 'fname' in request.POST:
+        if 'fname' in request.POST:
             request.user.first_name=request.POST['fname']
-        elif 'lname' in request.POST:
+        if 'lname' in request.POST:
             request.user.last_name=request.POST['lname']    
-        elif 'livesin' in request.POST:
+        if 'livesin' in request.POST:
             profile = get_object_or_404(UserProfile, username=request.user.username)
             profile.livesin = request.POST['livesin']
             profile.save()
-            editUser = False
-        
-        if editUser:    
-            request.user.save()  
+           
+        request.user.save()  
     return HttpResponseRedirect('/account/')
 
 def passwordreset(request):
