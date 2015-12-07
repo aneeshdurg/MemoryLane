@@ -49,11 +49,12 @@ public class CameraIntentFragment extends Fragment {
         return view;
     }
 
-
+    public static Uri photoUriPath;
     private void setupCameraIntentHelper() {
         mCameraIntentHelper = new CameraIntentHelper(getActivity(), new CameraIntentHelperCallback() {
             @Override
             public void onPhotoUriFound(Date dateCameraIntentStarted, Uri photoUri, int rotateXDegrees) {
+                photoUriPath = photoUri;
                 messageView.setText(getString(R.string.activity_camera_intent_photo_uri_found) + photoUri.toString());
 
                 Bitmap photo = BitmapHelper.readBitmap(getActivity(), photoUri);

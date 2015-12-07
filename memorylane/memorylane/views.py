@@ -283,3 +283,14 @@ def delete(request):
             request.user.delete()
             return HttpResponseRedirect('/logout/')   
     return render(request, 'settings/delete.html', {})
+
+def imageUpload(request):
+    form = PhotoForm(request.POST, request.FILES)
+    if request.method=='POST':
+        if form.is_valid():
+            image = request.FILES['photo']
+            new_image = Photo(photo=image)
+            new_image.save()
+            response_data=[{"success": "1"}]
+            return HttpResponse(simplejson.dumps(response_data), content_type='application/json')
+    return render(request, 'imageUpload.html', {})
