@@ -18,7 +18,10 @@
             <ul>
                 <hr/>
                 <li>
-                <form name="settingsform" action="../settingssubmit/" method="post">
+                <form name="settingsform" action="../settingssubmit/" method="post"  enctype="multipart/form-data">
+                    <p>{{profile.image}}</p>
+
+
                     <div class="upload">
                         <input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" id="imgInp">
                     </div>

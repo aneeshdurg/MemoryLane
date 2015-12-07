@@ -75,9 +75,10 @@ def post(request, memory_id):
         return HttpResponseRedirect('/login/')
     memory = get_object_or_404(Memory, pk=memory_id)
     author = get_object_or_404(User, username=memory.author)
+    authorProfile = get_object_or_404(UserProfile, username=memory.author)
     memories = Memory.objects.all()
     all_friends = Friend.objects.friends(request.user)
-    return render(request, 'post.html', {'memory': memory, 'author': author, 'image' : memory.image.name[10:], 'memories': memories, 'all_friends': all_friends})
+    return render(request, 'post.html', {'memory': memory, 'author': author, 'authorProfile': authorProfile, 'image' : memory.image.name[10:], 'memories': memories, 'all_friends': all_friends})
 
 def newpost(request):
     if not request.user.is_authenticated():
@@ -126,6 +127,7 @@ def settingssubmit(request):
             profile = get_object_or_404(UserProfile, username=request.user.username)
             profile.image = request.FILES['media']
             profile.save()
+            editUser = False
         elif 'user_id' in request.POST:
             request.user.username = request.POST['username']
         elif 'email' in request.POST:
