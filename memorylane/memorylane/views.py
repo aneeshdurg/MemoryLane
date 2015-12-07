@@ -122,7 +122,11 @@ def settingssubmit(request):
         return HttpResponseRedirect('/login/')
     if request.method == 'POST':
         editUser = True
-        if 'user_id' in request.POST:
+        if 'media' in request.POST:
+            profile = get_object_or_404(UserProfile, username=request.user.username)
+            profile.image = request.FILES['media']
+            profile.save()
+        elif 'user_id' in request.POST:
             request.user.username = request.POST['username']
         elif 'email' in request.POST:
             request.user.email = request.POST['email']
