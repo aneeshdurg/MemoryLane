@@ -67,7 +67,10 @@
 				transition: opacity 0.25s ease;
 			}
 				.preview .overlay:first-child {
-					opacity: 0;
+					opacity: 0.5;
+				}
+				.preview .overlay:last-child {
+					background-image: none;
 				}
 				.preview:hover .overlay {
 					opacity: 1;
@@ -78,44 +81,45 @@
 				top: 5px;
 				right: 5px;
 			}
-		.upload {
+		.upload, .tags, .post-settings {
 			display: none;
 			padding: 10px 0;
 			text-align: center;
 			border: 1px solid rgba(10,18,13,0.2);
 		}
-		.tags {
-			display: none;
-			padding: 10px 0;
-			text-align: center;
-			border: 1px solid rgba(10,18,13,0.2);
-		}
-		.tag-delete {
+		.lower-buttons {
 			border: 1px solid rgba(10,18,13,0.2);
 			border-top: none;
 		}
-		.tag-delete > div {
+		.lower-buttons > div {
 			width: 50%;
 			text-align: center;
 			transition: box-shadow 0.25s ease;
 		}
-			.tag-delete > div:hover {
+			.lower-buttons > div:hover {
 				box-shadow: 0 0 10px rgba(10,18,13,0.2);
 			}
-			.tag-delete > div:first-child {
+			.lower-buttons > div:first-child {
 				border-right: 1px solid rgba(10,18,13,0.2);
 			}
-			.tag-delete > div:last-child {
+			.lower-buttons > div:last-child {
 				border-left: 1px solid rgba(10,18,13,0.2);
 			}
-		.tag-delete > div i {
+		.lower-buttons > div i {
 			width: 100%;
 			font-size: 32px;
 			padding: 5px 0;
 		}
-		.tag-delete #tag {
+		.lower-buttons #tag {
 			border-radius: 0;
 		    border: none;
+		}
+		.lower-buttons #send {
+			width: 100%;
+		    background: transparent;
+		    border: none;
+		    padding: 0;
+		    cursor: pointer;
 		}
 		.location {
 			margin-top: 50px
@@ -171,48 +175,65 @@
 </head>
 <body>
 	{% include 'nav.html' %}
-	<div class="gridContainer flex">
-		<div class="picture">
-			<div class="preview" id="newphoto" style="background-image: url({% static "img/image-placeholder.png" %});">
-				<div class="overlay" style="background-image: url({% static "img/post-overlay.png" %})"></div>
-				<div class="overlay" style="background-image: url({% static "img/post-overlay.png" %})">
-					<input id="title" name="title" type="text" placeholder="Add New Title">
-					<span id="date">{% now "F jS, Y" %}</span>
+	<form method="post" action="/newpostsubmit/" name="newpost" enctype="multipart/form-data">
+		<div class="gridContainer flex">
+			<div class="picture">
+				<div class="preview" id="newphoto" style="background-image: url({% static "img/image-placeholder.png" %});">
+					<div class="overlay" style="background-image: url({% static "img/post-overlay.png" %})"></div>
+					<div class="overlay">
+						<input id="title" name="title" type="text" placeholder="Add New Title">
+						<span id="date">{% now "F jS, Y" %}</span>
+					</div>
+				</div>
+				<div class="tags">
+					<label for="tags">Tags: </label><input name="tags" type="text">
+				</div>
+				<div class="upload">
+					<input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" id="imgInp">
+				</div>
+				<div class="lower-buttons flex">
+					<div class="upload-button">
+						<a href id="upload-button">
+							<i class="fa fa-upload"></i>
+						</a>
+					</div>
+					<div class="tag">
+						<a href id="tag">
+							<i class="fa fa-tag"></i>
+						</a>
+					</div>
+					<div class="delete">
+						<a href>
+							<i class="fa fa-trash-o"></i>
+						</a>
+					</div>
+				</div>
+				<div class="preview location map" id="location-preview" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys');">
+					<div class="location-overlay">
+						<input id="location-input" name="location" type="text" placeholder="&#xf041; Add a Location">
+					</div>
+				</div>
+				<div class="post-settings">
+					<input type="checkbox" value="private"><span>Private Post</span>
+				</div>
+				<div class="lower-buttons flex">
+					<div>
+						<a href id="post-settings-button">
+							<i class="fa fa-cogs"></i>
+						</a>
+					</div>
+					<div class="send-memory">
+						<button id="send">
+							<i class="fa fa-paper-plane"></i>
+						</button>
+					</div>
 				</div>
 			</div>
-			<div class="tags">
-				<label for="tags">Tags: </label><input name="tags" type="text">
-			</div>
-			<div class="upload">
-				<input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" id="imgInp">
-			</div>
-			<div class="tag-delete flex">
-				<div class="upload-button">
-					<a href id="upload-button">
-						<i class="fa fa-upload"></i>
-					</a>
-				</div>
-				<div class="tag">
-					<a href id="tag">
-						<i class="fa fa-tag"></i>
-					</a>
-				</div>
-				<div class="delete">
-					<a href>
-						<i class="fa fa-trash-o"></i>
-					</a>
-				</div>
-			</div>
-			<div class="preview location map" id="location-preview" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys');">
-				<div class="location-overlay">
-					<input id="location-input" type="text" placeholder="&#xf041; Add a Location">
-				</div>
+			<div class="edit-area">
+				<textarea cols="30" rows="20" id="note_text" name="note_text" placeholder="Today was amazing..."></textarea>
 			</div>
 		</div>
-		<div class="edit-area">
-			<textarea cols="30" rows="20" id="note_text" name="note_text" placeholder="Today was amazing..."></textarea>
-		</div>
-	</div>
+	</form>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="{% static "js/googlemaps.js" %}"></script>
 	<script>
@@ -224,6 +245,10 @@
 			$('#upload-button').click(function(event) {
 				event.preventDefault();
 				$('.upload').slideToggle();
+			});
+			$('#post-settings-button').click(function(event) {
+				event.preventDefault();
+				$('.post-settings').slideToggle();
 			});
 			$('#location-input').blur(function(event) {
 				$('#location-preview').css('background-image', "url('https://maps.googleapis.com/maps/api/staticmap?center=" + $('#location-input').val() + "&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys')");
