@@ -29,7 +29,7 @@
         <div class = "panoramaElement">
             <div class="panoramaHeader">
                 <p class="panoramaLeft">{{memory.name}}</p>
-                <p class="panoramaRight"><img id="author-pic" src="{{memory.author_image|cut:'memorylane'}}" alt="Author">Eric Yamane{{first_name}} {{last_name}} | {{memory.date_created}}</p>
+                <p class="panoramaRight"><img id="author-pic" src="{{authorProfile.image|cut:'memorylane'}}" alt="Author">{{author.first_name}} {{author.last_name}} | {{memory.date_created}}</p>
             </div>
             <div class="memory flex">
                 <div class="memory-body">        
@@ -42,31 +42,29 @@
                     <div class="location-memory">
                         <h2>More memories about <a href=/location/{{memory.location.split|join:"+"}}>{{memory.location}}</a></h2>
                         {% with location=memory.location %}
-                        {% with name=memory.name%}
+                        {% with id=memory.id%}
                         {% for memory in memories reversed %}
-                                {% ifequal memory.location location %}
-                                {% ifnotequal memory.name name %}
-                                    <div class="post flex">
-                                    <!-- div to hold proPic, as well as present name under picture -->
-                                        <div class="author-info" >
-                                        <a href=/profile-mod/>
-                                            <img src="{% static "img/matthew.jpg" %}" class="author-image">
-                                            <p class="author-name">{{memory.author}}</p>
-                                        </a>
-                                        </div>
-                                        <a href=/post/{{memory.id}}>
-                                        <div class="panorama" style="background-image: url({{memory.image|cut:'memorylane'}})">
-                                            <div class="overlay">
-                                                <p>{{memory.description|truncatechars:50}}</p>
-                                            </div>
-                                            <div class="title flex">
-                                                <h2>{{memory.date_created}}</h2>
-                                            </div>                                           
-                                        </div>
-                                        </a>
+                            {% ifnotequal memory.id id %}
+                                <div class="post flex">
+                                <!-- div to hold proPic, as well as present name under picture -->
+                                    <div class="author-info" >
+                                    <a href=/profile-mod/>
+                                        <img src="{% static "img/matthew.jpg" %}" class="author-image">
+                                        <p class="author-name">{{memory.author}}</p>
+                                    </a>
                                     </div>
-                                    {% endifnotequal %}
-                                {% endifequal %}
+                                    <a href=/post/{{memory.id}}>
+                                    <div class="panorama" style="background-image: url({{memory.image|cut:'memorylane'}})">
+                                        <div class="overlay">
+                                            <p>{{memory.description|truncatechars:50}}</p>
+                                        </div>
+                                        <div class="title flex">
+                                            <h2>{{memory.date_created}}</h2>
+                                        </div>                                           
+                                    </div>
+                                    </a>
+                                </div>
+                            {% endifnotequal %}
                         {% endfor %}
                         {% endwith %}
                         {% endwith %}
@@ -102,7 +100,7 @@
                 });
                 $(window).scroll(function(){ // scroll event
                     var windowTop = $(window).scrollTop(); // returns number 
-                    if (stickyTop < windowTop-$('.memory-body').scrollTop()+90 ){
+                    if (stickyTop < windowTop-$('.memory-body').scrollTop()+30 ){
                         $('.sticky').css({ position: 'fixed', top: '75px', width: '35.125%', right: '6.05%'});
                     }
                     else {

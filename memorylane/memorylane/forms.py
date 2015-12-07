@@ -30,3 +30,6 @@ class RegistrationForm(forms.Form):
 
 class BioForm(forms.Form):
     bioTextArea = forms.CharField(label='BioTextArea', max_length=100)
+
+class PhotoForm(forms.Form):
+    uploadImage = forms.FileField(label='uploadImage')

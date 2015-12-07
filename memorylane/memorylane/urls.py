@@ -45,4 +45,5 @@ urlpatterns = [
     url(r'^settingssubmit/$', views.settingssubmit, name='settingssubmit'),
     url(r'^location/(?P<location>.+)/$', views.location, name="location"),
     url(r'^search/$', views.search, name='search'),
+    url(r'^imageUpload/$', views.imageUpload, name='imageUpload')
 ]

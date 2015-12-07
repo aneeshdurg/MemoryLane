@@ -27,28 +27,26 @@
             <h2 id="more-memories">Memories about {{location}}</h2>    
             {% with name=memory.name%}
             {% for memory in memories reversed %}
-                {% ifequal memory.location location %}
-                    <div class="memory">
-                        <div class="author-info">
-                            <a href=/profile-mod/>
-                                <img src="{% static "img/matthew.jpg" %}" class="author-image">
-                                <p class="author-name">{{memory.author}}</p>
-                            </a>
-                        </div>
-                        <div class="post flex">
-                            <a href=/post/{{memory.id}}>
-                            <div class="panorama" style="background-image: url({{memory.image|cut:'memorylane'}})">
-                                <div class="overlay">
-                                    <p>{{memory.description|truncatechars:250}}</p>
-                                </div>
-                                <div class="title flex">
-                                    <h2>{{memory.name}}</h2><h2>{{memory.date_created}}</h2>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
+                <div class="memory">
+                    <div class="author-info">
+                        <a href=/profile-mod/>
+                            <img src="{{memory.author_image|cut:'memorylane'}}" class="author-image">
+                            <p class="author-name">{{memory.author}}</p>
+                        </a>
                     </div>
-                {% endifequal %}
+                    <div class="post flex">
+                        <a href=/post/{{memory.id}}>
+                        <div class="panorama" style="background-image: url({{memory.image|cut:'memorylane'}})">
+                            <div class="overlay">
+                                <p>{{memory.description|truncatechars:250}}</p>
+                            </div>
+                            <div class="title flex">
+                                <h2>{{memory.name}}</h2><h2>{{memory.date_created}}</h2>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
                 {% empty %}
                 <h2>No memories at this location exist yet.</h2>
             {% endfor %}

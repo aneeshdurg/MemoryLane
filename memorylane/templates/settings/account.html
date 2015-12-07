@@ -18,6 +18,18 @@
             <ul>
                 <hr/>
                 <li>
+                <form name="settingsform" action="../settingssubmit/" method="post"  enctype="multipart/form-data">
+                    <p>{{profile.image}}</p>
+
+
+                    <div class="upload">
+                        <input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" id="imgInp">
+                    </div>
+                <button type="submit"  value="Submit">Submit</button>
+                </form>
+                </li>
+                <hr/>
+                <li>
                 <form name="settingsform" action="../settingssubmit/" method="post">
                     <span>First Name: <input type="text" name="fname" value="{{user.first_name}}"/></span>
                     <div class="edit">
