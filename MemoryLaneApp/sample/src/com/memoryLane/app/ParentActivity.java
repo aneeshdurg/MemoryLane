@@ -1,4 +1,4 @@
-package de.ecotastic.android.camerautil.sample;
+package com.memoryLane.app;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +10,6 @@ import android.support.v4.app.FragmentTransaction;
 /**
  * Example activity that holds the CameraIntentFragment and forwards onActivityResult events to all
  * child fragments.
- *  
- * @author Ralf Gehrer <ralf@ecotastic.de>
  */
 public class ParentActivity extends FragmentActivity {
     private static final String FRAGMENT_TAG = "FRAGMENT_TAG";

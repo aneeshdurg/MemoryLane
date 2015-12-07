@@ -1,4 +1,4 @@
-package de.ecotastic.android.camerautil.sample;
+package com.memoryLane.app;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,18 +14,16 @@ import android.widget.Toast;
 
 import java.util.Date;
 
-import de.ecotastic.android.camerautil.lib.CameraIntentHelper;
-import de.ecotastic.android.camerautil.lib.CameraIntentHelperCallback;
-import de.ecotastic.android.camerautil.sample.util.BitmapHelper;
+import com.memoryLane.app.cameraUtil.CameraIntentHelper;
+import com.memoryLane.app.cameraUtil.CameraIntentHelperCallback;
+import com.memoryLane.app.util.BitmapHelper;
 
 /**
  * Example ACTIVITY of how to use the CameraIntentHelper to retrieve the location
  * and orientation of the photo taken via camera intent.
- *  
- * @author Ralf Gehrer <ralf@ecotastic.de>
  */
 public class CameraIntentActivity extends FragmentActivity {
-	CameraIntentHelper mCameraIntentHelper;
+    CameraIntentHelper mCameraIntentHelper;
 
     TextView messageView;
 
@@ -33,9 +31,9 @@ public class CameraIntentActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(de.ecotastic.android.camerautil.sample.R.layout.activity_camera_intent);
-        messageView = (TextView) findViewById(de.ecotastic.android.camerautil.sample.R.id.activity_camera_intent_message);
-        Button startCameraButton = (Button) findViewById(de.ecotastic.android.camerautil.sample.R.id.activity_camera_intent_start_camera_button);
+        setContentView(com.memoryLane.app.R.layout.activity_camera_intent);
+        messageView = (TextView) findViewById(com.memoryLane.app.R.id.activity_camera_intent_message);
+        Button startCameraButton = (Button) findViewById(com.memoryLane.app.R.id.activity_camera_intent_start_camera_button);
         startCameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +55,7 @@ public class CameraIntentActivity extends FragmentActivity {
                 Bitmap photo = BitmapHelper.readBitmap(CameraIntentActivity.this, photoUri);
                 if (photo != null) {
                     photo = BitmapHelper.shrinkBitmap(photo, 300, rotateXDegrees);
-                    ImageView imageView = (ImageView) findViewById(de.ecotastic.android.camerautil.sample.R.id.activity_camera_intent_image_view);
+                    ImageView imageView = (ImageView) findViewById(com.memoryLane.app.R.id.activity_camera_intent_image_view);
                     imageView.setImageBitmap(photo);
                 }
             }
@@ -96,20 +94,20 @@ public class CameraIntentActivity extends FragmentActivity {
     }
 
     @Override
-	protected void onSaveInstanceState(Bundle savedInstanceState) {
-		super.onSaveInstanceState(savedInstanceState);
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
         mCameraIntentHelper.onSaveInstanceState(savedInstanceState);
     }
-	
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		super.onRestoreInstanceState(savedInstanceState);
-		mCameraIntentHelper.onRestoreInstanceState(savedInstanceState);
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mCameraIntentHelper.onRestoreInstanceState(savedInstanceState);
     }
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		super.onActivityResult(requestCode, resultCode, intent);
-		mCameraIntentHelper.onActivityResult(requestCode, resultCode, intent);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        mCameraIntentHelper.onActivityResult(requestCode, resultCode, intent);
     }
 }

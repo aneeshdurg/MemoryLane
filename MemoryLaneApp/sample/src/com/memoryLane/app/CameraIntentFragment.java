@@ -1,4 +1,4 @@
-package de.ecotastic.android.camerautil.sample;
+package com.memoryLane.app;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,18 +16,16 @@ import android.widget.Toast;
 
 import java.util.Date;
 
-import de.ecotastic.android.camerautil.lib.CameraIntentHelper;
-import de.ecotastic.android.camerautil.lib.CameraIntentHelperCallback;
-import de.ecotastic.android.camerautil.sample.util.BitmapHelper;
+import com.memoryLane.app.cameraUtil.CameraIntentHelper;
+import com.memoryLane.app.cameraUtil.CameraIntentHelperCallback;
+import com.memoryLane.app.util.BitmapHelper;
 
 /**
  * Example FRAGMENT of how to use the CameraIntentHelper to retrieve the location
  * and orientation of the photo taken via camera intent.
- *  
- * @author Ralf Gehrer <ralf@ecotastic.de>
  */
 public class CameraIntentFragment extends Fragment {
-	CameraIntentHelper mCameraIntentHelper;
+    CameraIntentHelper mCameraIntentHelper;
 
     TextView messageView;
 
@@ -100,8 +98,8 @@ public class CameraIntentFragment extends Fragment {
     }
 
     @Override
-	public void onSaveInstanceState(Bundle savedInstanceState) {
-		super.onSaveInstanceState(savedInstanceState);
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
         mCameraIntentHelper.onSaveInstanceState(savedInstanceState);
     }
 

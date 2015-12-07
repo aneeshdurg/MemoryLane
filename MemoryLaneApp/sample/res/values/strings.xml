@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Android Camera Util</string>
-	
-	<string name="activity_camera_intent_start_camera_button">Take a picture!</string>
-	<string name="activity_camera_intent_image_view_desc">Photo</string>
+
+    <string name="activity_camera_intent_start_camera_button">Take a picture!</string>
+    <string name="activity_camera_intent_image_view_desc">Photo</string>
     <string name="activity_camera_intent_photo_uri_found">Photo uri found: </string>
     <string name="activity_camera_intent_photo_uri_not_found">Photo uri not found!</string>
 
