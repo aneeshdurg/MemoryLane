@@ -16,7 +16,7 @@
 			<div class="memory">
 				<div class="author-info">
 					<a href=/profile-mod/>
-						<img src="{% static "img/matthew.jpg" %}" class="author-image">
+						<img src="{{memory.author_image|cut:'memorylane'}}" class="author-image">
 						<p class="author-name">{{memory.author}}</p>
 					</a>
 				</div>

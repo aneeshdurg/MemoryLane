@@ -20,6 +20,7 @@
 			width: 100%;
 			height: 200px;
 			background-size: cover;
+			background-position: center center;
 			position: relative;
 			color: #ecf0f1;
 			text-shadow: 0 0 4px rgba(0,0,0,0.75);
@@ -77,6 +78,12 @@
 				top: 5px;
 				right: 5px;
 			}
+		.upload {
+			display: none;
+			padding: 10px 0;
+			text-align: center;
+			border: 1px solid rgba(10,18,13,0.2);
+		}
 		.tags {
 			display: none;
 			padding: 10px 0;
@@ -97,6 +104,9 @@
 			}
 			.tag-delete > div:first-child {
 				border-right: 1px solid rgba(10,18,13,0.2);
+			}
+			.tag-delete > div:last-child {
+				border-left: 1px solid rgba(10,18,13,0.2);
 			}
 		.tag-delete > div i {
 			width: 100%;
@@ -163,9 +173,9 @@
 	{% include 'nav.html' %}
 	<div class="gridContainer flex">
 		<div class="picture">
-			<div class="preview" style="background-image: url({{memory.image|cut:'memorylane'}});">
-				<div class="overlay"></div>
-				<div class="overlay">
+			<div class="preview" id="newphoto" style="background-image: url({% static "img/image-placeholder.png" %});">
+				<div class="overlay" style="background-image: url({% static "img/post-overlay.png" %})"></div>
+				<div class="overlay" style="background-image: url({% static "img/post-overlay.png" %})">
 					<input id="title" name="title" type="text" placeholder="Add New Title">
 					<span id="date">{% now "F jS, Y" %}</span>
 				</div>
@@ -173,7 +183,15 @@
 			<div class="tags">
 				<label for="tags">Tags: </label><input name="tags" type="text">
 			</div>
+			<div class="upload">
+				<input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" id="imgInp">
+			</div>
 			<div class="tag-delete flex">
+				<div class="upload-button">
+					<a href id="upload-button">
+						<i class="fa fa-upload"></i>
+					</a>
+				</div>
 				<div class="tag">
 					<a href id="tag">
 						<i class="fa fa-tag"></i>
@@ -185,9 +203,9 @@
 					</a>
 				</div>
 			</div>
-			<div class="preview location" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys');">
+			<div class="preview location map" id="location-preview" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?center={{memory.location}}&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys');">
 				<div class="location-overlay">
-					<input id="pac-input" class="controls" type="text" placeholder="&#xf041; Add a Location">
+					<input id="location-input" type="text" placeholder="&#xf041; Add a Location">
 				</div>
 			</div>
 		</div>
@@ -196,25 +214,62 @@
 		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys&libraries=places&callback=initAutocomplete"
-         async defer></script>
+	<script src="{% static "js/googlemaps.js" %}"></script>
 	<script>
 		$(function() {
 			$('#tag').click(function(event) {
 				event.preventDefault();
 				$('.tags').slideToggle();
 			});
+			$('#upload-button').click(function(event) {
+				event.preventDefault();
+				$('.upload').slideToggle();
+			});
+			$('#location-input').blur(function(event) {
+				$('#location-preview').css('background-image', "url('https://maps.googleapis.com/maps/api/staticmap?center=" + $('#location-input').val() + "&zoom=10&size=400x400&key=AIzaSyBT_8Pt--iQ8S1z5cYol9cNbrsnA8Sirys')");
+				var url = $('#location-preview').css("background-image");
+		        // Chrome automatically injects a " at the end of a url in a background-image
+		        // value. We compensate by checking if that extra " was injected or not, and
+		        // if not, then we add one in
+		        if (url.charAt(url.length-2) !== '"') {
+		            var revisedurl = url.substring(0,4) + '"' + url.substring(4, url.length - 1) + '&' + get_static_style(styles) + '")';
+		        }
+		        else {
+		            var revisedurl = url.substring(0, url.length - 2) + '&' + get_static_style(styles) + '")';
+		        }
+		        if (revisedurl.charAt(5) === '"') {
+		            revisedurl = revisedurl.substring(0,5) + revisedurl.substring(6,revisedurl.length);
+		        }
+				$('#location-preview').css("background-image", revisedurl);
+			});
 		});
 	</script>
 	<script>
-		function initAutocomplete() {
-		  // Create the search box and link it to the UI element.
-		  var input = document.getElementById('pac-input');
-		  var options = {
-			  componentRestrictions: {country: "us"}
-			 };
-		  autocomplete = new google.maps.places.Autocomplete(input,options);
+		function readURL(input) {
+	    	if (input.files && input.files[0]) {
+	        	var reader = new FileReader();
+	        	reader.onload = function (e) {
+	            	$('#newphoto').css('background-image', "url(" + e.target.result + ")");
+	        	}
+	        	reader.readAsDataURL(input.files[0]);
+	    	}
+	    	else {
+	    		var img = input.value;
+	    			$('#newphoto').css('background-image', img);
+	    	}
 		}
-    </script>
+		$("#imgInp").change(function(){
+		    	readURL(this);   	
+			});
+	
+		function clearFileInput(id) { 
+			var control = $("#imgInp");
+			control.replaceWith( control = control.clone( true ) );
+		};
+		$("#trash").click(function() {
+			clearFileInput("imgInp");
+			$('#newphoto').attr('src', "{% static "img/transparent.png" %}");
+		});
+	</script>
 </body>
 </html>

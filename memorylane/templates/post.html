@@ -29,7 +29,7 @@
         <div class = "panoramaElement">
             <div class="panoramaHeader">
                 <p class="panoramaLeft">{{memory.name}}</p>
-                <p class="panoramaRight"><img id="author-pic" src="{{memory.author_image|cut:'memorylane'}}" alt="Author">{{memory.first_name}} {{memory.last_name}} | {{memory.date_created}}</p>
+                <p class="panoramaRight"><img id="author-pic" src="{{memory.author_image|cut:'memorylane'}}" alt="Author">{{author.first_name}} {{author.last_name}} | {{memory.date_created}}</p>
             </div>
             <div class="memory flex">
                 <div class="memory-body">        
@@ -102,7 +102,7 @@
                 });
                 $(window).scroll(function(){ // scroll event
                     var windowTop = $(window).scrollTop(); // returns number 
-                    if (stickyTop < windowTop-$('.memory-body').scrollTop()+90 ){
+                    if (stickyTop < windowTop-$('.memory-body').scrollTop()+30 ){
                         $('.sticky').css({ position: 'fixed', top: '75px', width: '35.125%', right: '6.05%'});
                     }
                     else {
