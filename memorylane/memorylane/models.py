@@ -27,3 +27,12 @@ class Memory(models.Model):
 
     def __str__(self):
     	return self.name
+
+class Photo(models.Model):
+    user = models.CharField(max_length=5000)
+    photo = models.FileField(upload_to='memorylane/static/images')
+    uploaded = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return '%s' % self.title
