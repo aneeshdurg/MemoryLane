@@ -44,29 +44,27 @@
                         {% with location=memory.location %}
                         {% with id=memory.id%}
                         {% for memory in memories reversed %}
-                                {% ifequal memory.location location %}
-                                {% ifnotequal memory.id id %}
-                                    <div class="post flex">
-                                    <!-- div to hold proPic, as well as present name under picture -->
-                                        <div class="author-info" >
-                                        <a href=/profile-mod/>
-                                            <img src="{% static "img/matthew.jpg" %}" class="author-image">
-                                            <p class="author-name">{{memory.author}}</p>
-                                        </a>
-                                        </div>
-                                        <a href=/post/{{memory.id}}>
-                                        <div class="panorama" style="background-image: url({{memory.image|cut:'memorylane'}})">
-                                            <div class="overlay">
-                                                <p>{{memory.description|truncatechars:50}}</p>
-                                            </div>
-                                            <div class="title flex">
-                                                <h2>{{memory.date_created}}</h2>
-                                            </div>                                           
-                                        </div>
-                                        </a>
+                            {% ifnotequal memory.id id %}
+                                <div class="post flex">
+                                <!-- div to hold proPic, as well as present name under picture -->
+                                    <div class="author-info" >
+                                    <a href=/profile-mod/>
+                                        <img src="{% static "img/matthew.jpg" %}" class="author-image">
+                                        <p class="author-name">{{memory.author}}</p>
+                                    </a>
                                     </div>
-                                    {% endifnotequal %}
-                                {% endifequal %}
+                                    <a href=/post/{{memory.id}}>
+                                    <div class="panorama" style="background-image: url({{memory.image|cut:'memorylane'}})">
+                                        <div class="overlay">
+                                            <p>{{memory.description|truncatechars:50}}</p>
+                                        </div>
+                                        <div class="title flex">
+                                            <h2>{{memory.date_created}}</h2>
+                                        </div>                                           
+                                    </div>
+                                    </a>
+                                </div>
+                            {% endifnotequal %}
                         {% endfor %}
                         {% endwith %}
                         {% endwith %}

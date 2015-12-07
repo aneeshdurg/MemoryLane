@@ -18,6 +18,8 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 
+import googlemaps
+
 def profiletest(request, user_id):
     u = User.objects.get(pk=user_id)
     output = ("<h1>You're looking at user %s.</h1>" % request.user.username)
@@ -76,7 +78,12 @@ def post(request, memory_id):
     memory = get_object_or_404(Memory, pk=memory_id)
     author = get_object_or_404(User, username=memory.author)
     authorProfile = get_object_or_404(UserProfile, username=memory.author)
-    memories = Memory.objects.all()
+    location = memory.location
+    gmaps = googlemaps.Client(key="AIzaSyCdgUowprALYpEowr3eIYlKq_8M0ldb6-I")
+    geocode_result = gmaps.geocode(location)
+    lat = geocode_result[0]['geometry']['bounds']['northeast']['lat']
+    lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
+    memories = Memory.objects.filter(lat=lat).filter(lng=lng)
     all_friends = Friend.objects.friends(request.user)
     return render(request, 'post.html', {'memory': memory, 'author': author, 'authorProfile': authorProfile, 'image' : memory.image.name[10:], 'memories': memories, 'all_friends': all_friends})
 
@@ -96,8 +103,13 @@ def newpostsubmit(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
     if 'title' in request.POST:
+        location=request.POST['location']
+        gmaps = googlemaps.Client(key="AIzaSyCdgUowprALYpEowr3eIYlKq_8M0ldb6-I")
+        geocode_result = gmaps.geocode(location)
+        lat = geocode_result[0]['geometry']['bounds']['northeast']['lat']
+        lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
         profile = get_object_or_404(UserProfile, username=request.user.username)
-        m = Memory(name=request.POST['title'], author=request.user.username, first_name=request.user.first_name, last_name=request.user.last_name, location=request.POST['location'], date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'], author_image=profile.image)
+        m = Memory(name=request.POST['title'], author=request.user.username, first_name=request.user.first_name, last_name=request.user.last_name, location=request.POST['location'], lat=lat, lng=lng, date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'], author_image=profile.image)
         m.save()
         memory = get_object_or_404(Memory, pk=m.id)
         author = get_object_or_404(User, username=memory.author)
@@ -109,14 +121,21 @@ def newpostsubmit(request):
 
 def search(request):
     location = request.GET[u'q']
-    memories = Memory.objects.filter(location=location)
+    gmaps = googlemaps.Client(key="AIzaSyCdgUowprALYpEowr3eIYlKq_8M0ldb6-I")
+    geocode_result = gmaps.geocode(location)
+    lat = geocode_result[0]['geometry']['bounds']['northeast']['lat']
+    lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
+    memories = Memory.objects.filter(lat=lat).filter(lng=lng)
     return render(request, "location.html", {"memories": memories, "location": location})
 
 def location(request, location):
     location = location.replace("+"," ")
-    memories = Memory.objects.filter(location=location)
-    return render(request, "location.html", {"memories": memories, "location": location})
-  
+    gmaps = googlemaps.Client(key="AIzaSyCdgUowprALYpEowr3eIYlKq_8M0ldb6-I")
+    geocode_result = gmaps.geocode(location)
+    lat = geocode_result[0]['geometry']['bounds']['northeast']['lat']
+    lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
+    memories = Memory.objects.filter(lat=lat).filter(lng=lng)
+    return render(request, "location.html", {"memories": memories, "location": location, "lat": lat, "lng": lng})
 
 def settingssubmit(request):
     if not request.user.is_authenticated():
@@ -239,11 +258,6 @@ def getMemories(request):
     for x in memories:
         memorylist.append(x.first_name + ' ' + x.last_name)
     return memorylist
-
-def location(request, location):
-    location = location.replace("+"," ")
-    memories = Memory.objects.filter(location=location)
-    return render(request, "location.html", {"memories": memories, "location": location})
 
 def myprofile(request):
     if not request.user.is_authenticated():
