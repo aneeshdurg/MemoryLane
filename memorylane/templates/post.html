@@ -100,7 +100,7 @@
                 });
                 $(window).scroll(function(){ // scroll event
                     var windowTop = $(window).scrollTop(); // returns number 
-                    if (stickyTop < windowTop-$('.memory-body').scrollTop()+30 ){
+                    if (stickyTop < windowTop-$('.memory-body').scrollTop() ){
                         $('.sticky').css({ position: 'fixed', top: '75px', width: '35.125%', right: '6.05%'});
                     }
                     else {
