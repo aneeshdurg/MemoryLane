@@ -86,8 +86,8 @@ def post(request, memory_id):
     memories = Memory.objects.filter(lat=lat).filter(lng=lng)
     authorProfileImages=[]
     for m in memories:
-        authorProfile = get_object_or_404(UserProfile, username=m.author)
-        authorProfileImages.append(authorProfile.image)
+        a = get_object_or_404(UserProfile, username=m.author)
+        authorProfileImages.append(a.image)
     link=zip(memories, authorProfileImages)
     all_friends = Friend.objects.friends(request.user)
     return render(request, 'post.html', {'memory': memory, 'author': author, 'authorProfile': authorProfile, 'image' : memory.image.name[10:], 'memories': memories, 'all_friends': all_friends, 'link': link})
