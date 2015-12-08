@@ -12,11 +12,11 @@
 		<!-- div to hold all elements of a single timeline post -->
 	<div class="gridContainer flex">
 		<div class="main">
-		{% for memory in memories reversed %}
+		{% for memory, authorProfileImage in link reversed %}
 			<div class="memory">
 				<div class="author-info">
 					<a href=/profile-mod/>
-						<img src="{{memory.author_image|cut:'memorylane'}}" class="author-image">
+						<img src="{{authorProfileImage|cut:'memorylane'}}" class="author-image">
 						<p class="author-name">{{memory.author}}</p>
 					</a>
 				</div>

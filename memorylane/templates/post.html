@@ -43,13 +43,13 @@
                         <h2>More memories about <a href=/location/{{memory.location.split|join:"+"}}>{{memory.location}}</a></h2>
                         {% with location=memory.location %}
                         {% with id=memory.id%}
-                        {% for memory in memories reversed %}
+                        {% for memory, authorProfileImage in link reversed %}
                             {% ifnotequal memory.id id %}
                                 <div class="post flex">
                                 <!-- div to hold proPic, as well as present name under picture -->
                                     <div class="author-info" >
                                     <a href=/profile-mod/>
-                                        <img src="{{memory.author_image|cut:'memorylane'}}" class="author-image">
+                                        <img src="{{authorProfileImage|cut:'memorylane'}}" class="author-image">
                                         <p class="author-name">{{memory.author}}</p>
                                     </a>
                                     </div>

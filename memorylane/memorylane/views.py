@@ -84,8 +84,13 @@ def post(request, memory_id):
     lat = geocode_result[0]['geometry']['bounds']['northeast']['lat']
     lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
     memories = Memory.objects.filter(lat=lat).filter(lng=lng)
+    authorProfileImages=[]
+    for memory in memories:
+        authorProfile = get_object_or_404(UserProfile, username=memory.author)
+        authorProfileImages.append(authorProfile.image)
+    link=zip(memories, authorProfileImages)
     all_friends = Friend.objects.friends(request.user)
-    return render(request, 'post.html', {'memory': memory, 'author': author, 'authorProfile': authorProfile, 'image' : memory.image.name[10:], 'memories': memories, 'all_friends': all_friends})
+    return render(request, 'post.html', {'memory': memory, 'author': author, 'authorProfile': authorProfile, 'image' : memory.image.name[10:], 'memories': memories, 'all_friends': all_friends, 'link': link})
 
 def newpost(request):
     if not request.user.is_authenticated():
@@ -218,12 +223,12 @@ def timeline(request):
         return HttpResponseRedirect('/login/')
     user = request.user
     memories = Memory.objects.all()
-    #authorProfiles=[]
-    #for memory in memories:
-       # authorProfile = get_object_or_404(UserProfile, username=memory.author)
-       # authorProfiles.update(authorProfile)
-    #link=zip(memories, authorProfiles)
-    return render(request, 'timeline.html', {"memories": memories, "user": user})
+    authorProfileImages=[]
+    for memory in memories:
+        authorProfile = get_object_or_404(UserProfile, username=memory.author)
+        authorProfileImages.append(authorProfile.image)
+    link=zip(memories, authorProfileImages)
+    return render(request, 'timeline.html', {"memories": memories, "user": user, "link": link})
 
 def profilemod(request):
     if not request.user.is_authenticated():
