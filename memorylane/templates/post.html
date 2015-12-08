@@ -21,36 +21,7 @@
 }
 </style>
 <body>
-    <nav class="flex">
-        <div class="username">
-            <a href=/profile-mod/{{profile.id}}>
-                <h1><i class="fa fa-user"></i> <span>{{profile.username}}</span></h1>
-            </a>
-        </div>
-        <div class="middleLogo">
-            <a href=/timeline/>
-                <img src="{% static "img/ml-mod.png" %}" alt="logo" id="middleLogo">
-            </a>
-        </div>
-        <div class="settings flex">
-                <div class="search">
-                    <form method="get" action=/search/>
-                        <input placeholder="Search &#xf002;" name="q" id="id_q" value="{{request.GET.q}}">
-                    </form>
-                </div>
-            <div class="dropdown">
-                <!-- trigger button -->
-                <i class="fa fa-cog"></i>
-                <!-- dropdown menu -->
-                <ul class="dropdown-menu">
-                    <li><a href=/myprofile/>MyProfile</a></li>
-                    <li><a href=/account/>Account</a></li>
-                    <li><a href=/general/>General</a></li>
-                    <li><a href=/logout/>Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    {% include 'nav.html' %}
     <img src="{{image}}" class="panoramaResize">
     <!-- div to hold all elements of a single timeline post -->
     <div class="single-post">

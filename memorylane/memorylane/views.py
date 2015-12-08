@@ -154,6 +154,8 @@ def location(request, location):
     return render(request, "location.html", {"memories": memories, "location": location, "lat": lat, "lng": lng, "profile": profile, "link": link})
 
 def settingssubmit(request):
+    profile = get_object_or_404(UserProfile, username=request.user.username)
+    number=profile.id
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
     if request.method == 'POST':
@@ -168,7 +170,7 @@ def settingssubmit(request):
             profile.bio = request.POST['bio']
             profile.save()    
             request.user.save()  
-        return HttpResponseRedirect('/profile-mod/')
+        return profilemod(request, number)
     else:
         message = 'Please enter the location'
     return HttpResponse(message), HttpResponseRedirect('/account/')
