@@ -128,13 +128,8 @@ def newpostsubmit(request):
     return HttpResponse(message)
 
 def search(request):
-    location = request.GET[u'q']
-    gmaps = googlemaps.Client(key="AIzaSyCdgUowprALYpEowr3eIYlKq_8M0ldb6-I")
-    geocode_result = gmaps.geocode(location)
-    lat = geocode_result[0]['geometry']['bounds']['northeast']['lat']
-    lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
-    memories = Memory.objects.filter(lat=lat).filter(lng=lng)
-    return render(request, "location.html", {"memories": memories, "location": location})
+    l = request.GET[u'q']
+    return location(request, l)
 
 def location(request, location):
     location = location.replace("+"," ")
