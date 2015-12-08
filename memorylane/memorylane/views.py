@@ -87,11 +87,14 @@ def post(request, memory_id):
     memories = Memory.objects.filter(lat=lat).filter(lng=lng)
     authorProfileImages=[]
     authorProfiles=[]
+    authors=[]
     for m in memories:
+        aa = get_object_or_404(User, username=m.author)
         a = get_object_or_404(UserProfile, username=m.author)
         authorProfileImages.append(a.image)
         authorProfiles.append(a)
-    link=zip(memories, authorProfileImages, authorProfiles)
+        authors.append(aa)
+    link=zip(memories, authorProfileImages, authorProfiles, authors)
     all_friends = Friend.objects.friends(request.user)
     return render(request, 'post.html', {'memory': memory, 'author': author, 'authorProfile': authorProfile, 'image' : memory.image.name[10:], 'memories': memories, 'all_friends': all_friends, 'link': link, 'profile': profile})
 
@@ -140,12 +143,15 @@ def location(request, location):
     lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
     authorProfileImages=[]
     authorProfiles=[]
+    authors=[]
     memories = Memory.objects.filter(lat=lat).filter(lng=lng)
     for m in memories:
+        aa=get_object_or_404(User, username=m.author)
         a = get_object_or_404(UserProfile, username=m.author)
         authorProfileImages.append(a.image)
         authorProfiles.append(a)
-    link=zip(memories, authorProfileImages, authorProfiles)
+        authors.append(aa)
+    link=zip(memories, authorProfileImages, authorProfiles, authors)
     return render(request, "location.html", {"memories": memories, "location": location, "lat": lat, "lng": lng, "profile": profile, "link": link})
 
 def settingssubmit(request):
@@ -234,11 +240,14 @@ def timeline(request):
     memories = Memory.objects.all()
     authorProfileImages=[]
     authorProfiles=[]
+    authors=[]
     for memory in memories:
+        author = get_object_or_404(User, username=memory.author)
         authorProfile = get_object_or_404(UserProfile, username=memory.author)
         authorProfiles.append(authorProfile)
         authorProfileImages.append(authorProfile.image)
-    link=zip(memories, authorProfileImages, authorProfiles)
+        authors.append(author)
+    link=zip(memories, authorProfileImages, authorProfiles, authors)
     return render(request, 'timeline.html', {"memories": memories, "user": user, "link": link, "profile": profile })
 
 def profilemod(request, authorProfile_id):
