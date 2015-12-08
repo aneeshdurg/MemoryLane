@@ -85,8 +85,8 @@ def post(request, memory_id):
     lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
     memories = Memory.objects.filter(lat=lat).filter(lng=lng)
     authorProfileImages=[]
-    for memory in memories:
-        authorProfile = get_object_or_404(UserProfile, username=memory.author)
+    for m in memories:
+        authorProfile = get_object_or_404(UserProfile, username=m.author)
         authorProfileImages.append(authorProfile.image)
     link=zip(memories, authorProfileImages)
     all_friends = Friend.objects.friends(request.user)
