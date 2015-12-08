@@ -160,7 +160,11 @@ def settingssubmit(request):
             profile.livesin = request.POST['livesin']
             profile.save()
             editUser = False
-        
+        elif 'bio' in request.POST:
+            profile = get_object_or_404(UserProfile, username=request.user.username)
+            profile.bio = request.POST['bio']
+            profile.save()    
+            editUser = False
         if editUser:    
             request.user.save()  
     return HttpResponseRedirect('/account/')
@@ -265,9 +269,6 @@ def myprofile(request):
     profile = get_object_or_404(UserProfile, username=request.user.username)
     users = User.objects.all()
     memories = Memory.objects.filter(author=request.user.username)
-    if request.method == 'POST':
-        profile.bio = request.POST['newBio']
-        profile.save()
     return render(request, 'settings/myprofile.html', {"memories": memories, "profile": profile, "user":request.user})
 
 def account(request):

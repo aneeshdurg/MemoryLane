@@ -75,7 +75,15 @@
                 </form>
                 </li>
                 <hr/>
-                
+                <li>
+                    <form name="settingsform" action="../settingssubmit/" method="post">
+                    <span>Bio: <input type="text" value="{{profile.bio}}" name="bio"/></span>
+                    <div class="edit">
+                        <input type="submit" value="Save">
+                    </div>
+                </form>
+                </li>
+                <hr/>
                 <li>
                     <span><a href=/password-reset/>Click to change password. </a></span>
                 </li>
