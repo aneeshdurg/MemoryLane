@@ -19,70 +19,16 @@
                 <hr/>
                 <li>
                 <form name="settingsform" action="../settingssubmit/" method="post"  enctype="multipart/form-data">
-                    <p>{{profile.image}}</p>
-
-
-                    <div class="upload">
-                        <input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" id="imgInp">
-                    </div>
-                <button type="submit"  value="Submit">Submit</button>
-                </form>
-                </li>
-                <hr/>
-                <li>
-                <form name="settingsform" action="../settingssubmit/" method="post">
-                    <span>First Name: <input type="text" name="fname" value="{{user.first_name}}"/></span>
-                    <div class="edit">
-                        <input type="submit" value="Save">
-                    </div>
-                </form>
-                </li>
-                <hr/>
-                <li>
-                <form name="settingsform" action="../settingssubmit/" method="post">
-                    <span>Last Name: <input type="text" name="lname" value="{{user.last_name}}"/></span>
-                    <div class="edit">
-                        <input type="submit" value="Save">
-                    </div>
-                </form>
-                </li>
-                <hr/>
-                <li>
-                    <form name="settingsform" action="../settingssubmit/" method="post">
-                    <input type="hidden" value="{{user.username}}" name="user_id"/>
-                    <span>Username: <input type="text" value="{{user.username}}" name="username"/></span>
-                    <div class="edit">
-                        <input type="submit" value="Save">
-                    </div>
-                </form>
-                </li>
-                <hr/>
-                <li>
-                    <form name="settingsform" action="../settingssubmit/" method="post">
-                    <span>Email: <input type="email" value="{{user.email}}" name="email"/></span>
-                    <div class="edit">
-                        <input type="submit" value="Save">
-                    </div>
-                </form>
-                </li>
-                <hr/>
-                <li>
-                    <form name="settingsform" action="../settingssubmit/" method="post">
+                    <input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" id="imgInp">
                     <span>Location: <input type="text" value="{{profile.livesin}}" name="livesin"/></span>
-                    <div class="edit">
-                        <input type="submit" value="Save">
-                    </div>
-                </form>
-                </li>
-                <hr/>
-                <li>
-                    <form name="settingsform" action="../settingssubmit/" method="post">
+                    <span>First Name: <input type="text" name="fname" value="{{user.first_name}}"/></span>
+                    <span>Last Name: <input type="text" name="lname" value="{{user.last_name}}"/></span>
+                     <input type="hidden" value="{{user.username}}" name="user_id"/>
+                    <span>Username: <input type="text" value="{{user.username}}" name="username"/></span>
+                    <span>Email: <input type="email" value="{{user.email}}" name="email"/></span>
                     <span>Bio: <input type="text" value="{{profile.bio}}" name="bio"/></span>
-                    <div class="edit">
-                        <input type="submit" value="Save">
-                    </div>
+                    <button type="submit"  value="Submit">Submit</button>
                 </form>
-                </li>
                 <hr/>
                 <li>
                     <span><a href=/password-reset/>Click to change password. </a></span>

@@ -109,7 +109,8 @@ def newpostsubmit(request):
         lat = geocode_result[0]['geometry']['bounds']['northeast']['lat']
         lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
         profile = get_object_or_404(UserProfile, username=request.user.username)
-        m = Memory(name=request.POST['title'], author=request.user.username, first_name=request.user.first_name, last_name=request.user.last_name, location=request.POST['location'], lat=lat, lng=lng, date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'], author_image=profile.image)
+        authorProfile = get_object_or_404(UserProfile, username=memory.author)
+        m = Memory(name=request.POST['title'], author=request.user.username, first_name=request.user.first_name, last_name=request.user.last_name, location=request.POST['location'], lat=lat, lng=lng, date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'], author_image=authorProfile.image)
         m.save()
         memory = get_object_or_404(Memory, pk=m.id)
         author = get_object_or_404(User, username=memory.author)
@@ -141,33 +142,22 @@ def settingssubmit(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
     if request.method == 'POST':
-        editUser = True
-        if 'media' in request.POST:
+        if 'livesin' in request.POST:
             profile = get_object_or_404(UserProfile, username=request.user.username)
             profile.image = request.FILES['media']
-            profile.save()
-            editUser = False
-        elif 'user_id' in request.POST:
-            request.user.username = request.POST['username']
-        elif 'email' in request.POST:
-            request.user.email = request.POST['email']
-        elif 'fname' in request.POST:
-            request.user.first_name=request.POST['fname']
-        elif 'lname' in request.POST:
-            request.user.last_name=request.POST['lname']    
-        elif 'livesin' in request.POST:
-            profile = get_object_or_404(UserProfile, username=request.user.username)
             profile.livesin = request.POST['livesin']
-            profile.save()
-            editUser = False
-        elif 'bio' in request.POST:
-            profile = get_object_or_404(UserProfile, username=request.user.username)
+            request.user.username = request.POST['username']
+            request.user.email = request.POST['email']
+            request.user.first_name=request.POST['fname']
+            request.user.last_name=request.POST['lname']    
             profile.bio = request.POST['bio']
             profile.save()    
-            editUser = False
-        if editUser:    
             request.user.save()  
-    return HttpResponseRedirect('/account/')
+        return HttpResponseRedirect('/profile-mod/')
+    else:
+        message = 'Please enter the location'
+    return HttpResponse(message), HttpResponseRedirect('/account/')
+
 
 def passwordreset(request):
     if not request.user.is_authenticated():
@@ -229,25 +219,24 @@ def timeline(request):
         return HttpResponseRedirect('/login/')
     user = request.user
     memories = Memory.objects.all()
+    #authorProfiles=[]
+    #for memory in memories:
+       # authorProfile = get_object_or_404(UserProfile, username=memory.author)
+       # authorProfiles.update(authorProfile)
+    #link=zip(memories, authorProfiles)
     return render(request, 'timeline.html', {"memories": memories, "user": user})
 
 def profilemod(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
     author = get_object_or_404(UserProfile, username=request.user.username)
-    memory = get_object_or_404(Memory, pk=1)
     username = request.user.username
     first_name = request.user.first_name
     last_name = request.user.last_name
-    description = memory.description
-    location = memory.location
-    name = memory.name
-    image = memory.image
-    date_created = memory.date_created
     memories = Memory.objects.filter(author=request.user.username)
     user = request.user
     profile = get_object_or_404(UserProfile, username=request.user.username)
-    return render(request, 'profile-mod.html', {"user": user, "memories": memories, "profile": profile})
+    return render(request, 'profile-mod.html', {"user": user, "memories": memories, "profile": profile })
 
 def getUsers(request):
     users = User.objects.all()
