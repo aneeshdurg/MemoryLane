@@ -55,15 +55,9 @@
                     <div id="bio" class="bio">
                         <div id="original" style.display="block">
                             <p id="currentBio">{{profile.bio}}</p>
-                            <a href="javascript:changeBioText();"><i class="fa fa-pencil"></i></a>
+                            
                         </div>
-                        <div id="editBio" style="display:none">
-                            <form action="/myprofile/" method="post">
-                                <textarea id="bioTextArea" rows="4" cols="25" name="newBio">{{profile.bio}}</textarea>
-                                <input type="submit" value="Save" onclick="saveBio()">
-                                <input type="button" value="Cancel" onclick="cancelBio()">
-                            </form>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
