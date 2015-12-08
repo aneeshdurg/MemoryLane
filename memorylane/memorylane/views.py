@@ -109,8 +109,7 @@ def newpostsubmit(request):
         lat = geocode_result[0]['geometry']['bounds']['northeast']['lat']
         lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
         profile = get_object_or_404(UserProfile, username=request.user.username)
-        authorProfile = get_object_or_404(UserProfile, username=memory.author)
-        m = Memory(name=request.POST['title'], author=request.user.username, first_name=request.user.first_name, last_name=request.user.last_name, location=request.POST['location'], lat=lat, lng=lng, date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'], author_image=authorProfile.image)
+        m = Memory(name=request.POST['title'], author=request.user.username, first_name=request.user.first_name, last_name=request.user.last_name, location=request.POST['location'], lat=lat, lng=lng, date_created=datetime.now(), description=request.POST['note_text'], image=request.FILES['media'], author_image=profile.image)
         m.save()
         memory = get_object_or_404(Memory, pk=m.id)
         author = get_object_or_404(User, username=memory.author)
