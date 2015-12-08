@@ -32,6 +32,8 @@ public class CameraIntentActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(com.memoryLane.app.R.layout.activity_camera_intent);
+        ImageView imgView = (ImageView) findViewById(R.id.imageView);
+        imgView.setImageResource(R.drawable.logo);
         messageView = (TextView) findViewById(com.memoryLane.app.R.id.activity_camera_intent_message);
         Button startCameraButton = (Button) findViewById(com.memoryLane.app.R.id.activity_camera_intent_start_camera_button);
         startCameraButton.setOnClickListener(new View.OnClickListener() {
@@ -110,5 +112,9 @@ public class CameraIntentActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         mCameraIntentHelper.onActivityResult(requestCode, resultCode, intent);
+
+        Uri uriUrl = Uri.parse("http://test.com");
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
     }
 }
