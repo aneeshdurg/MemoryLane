@@ -5,6 +5,86 @@
 {% include 'head.html' %}
 <head>
   <title>Account Settings</title>
+  <style>
+    .section-divider { 
+        margin: 20px 0;
+    }
+    .settingstitle {
+        margin-bottom: 20px;
+    }
+    .settings-container > div {
+        width: 50%;
+        border-right: 1px solid rgba(0,0,0,0.5);
+        box-sizing: border-box;
+    }
+        .settings-container > div:first-child {
+            padding-right: 50px;
+        }
+        .settings-container > div:last-child {
+            padding-left: 50px;
+            border-right: none;
+        }
+        .settings-container > div > p {
+            width: 100%;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .settings-container input[type="text"], .settings-container input[type="email"] {
+            font-size: 32px;
+            background: transparent;
+            border: none;
+            max-width: 100%;
+            padding: 0 0 5px;
+            transition: all 0.25s ease;
+        }
+            .settings-container input[type="email"] {
+                font-size: 24px;
+            }
+            .settings-container input[type="text"]:hover, .settings-container input[type="email"]:hover {
+                box-shadow: 0 1px 0px rgba(0,0,0,0.3);
+                border-radius: 3px;
+            }
+    .primary-inputs {
+        padding-left: 10px;
+        box-sizing: border-box;
+    }
+    .primary-info > div:last-child {
+        width: 50%;
+    }
+    .preview {
+        background-size: cover;
+        width: 200px;
+        height: 200px;
+    }
+    input#fname {
+        font-size: 48px;
+    }
+    .settings-container > div > .secondary-info > .flex {
+        margin-top: 20px;
+        font-size: 24px;
+    }
+    .settings-container > div > .secondary-info > .flex input {
+        width: 100%;
+        margin-left: 10px;
+    }
+    #settings-submit {
+        margin-top: 50px;
+        background: rgba(215,215,215,1);
+        border: 1px solid rgba(0,0,0,0.2);
+        border-radius: 3px;
+        font-family: Argh, Arial;
+        padding: 10px 20px;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+        #settings-submit:hover {
+            box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+    .delete-reset {
+        margin-top: 50px;
+    }
+  </style>
 </head>
 
 <body>
@@ -14,29 +94,35 @@
             Account Settings
         </div>
         <div class="general">
-        </br>
-            <ul>
-                <hr/>
-                <li>
                 <form name="settingsform" action="../settingssubmit/" method="post"  enctype="multipart/form-data">
-                    <input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" id="imgInp">
-                    <span>Location: <input type="text" value="{{profile.livesin}}" name="livesin"/></span>
-                    <span>First Name: <input type="text" name="fname" value="{{user.first_name}}"/></span>
-                    <span>Last Name: <input type="text" name="lname" value="{{user.last_name}}"/></span>
-                     <input type="hidden" value="{{user.username}}" name="user_id"/>
-                    <span>Username: <input type="text" value="{{user.username}}" name="username"/></span>
-                    <span>Email: <input type="email" value="{{user.email}}" name="email"/></span>
-                    <span>Bio: <input type="text" value="{{profile.bio}}" name="bio"/></span>
-                    <button type="submit"  value="Submit">Submit</button>
+                    <div class="flex settings-container">
+                        <div>
+                            <div class="primary-info flex">
+                                <div class="preview" style="background-image:url({{profile.image|cut:'memorylane'}})"></div>
+                                <div class="primary-inputs">
+                                    <input id="fname" type="text" name="fname" value="{{user.first_name}}" placeholder="First" />
+                                    <input type="text" name="lname" value="{{user.last_name}}" placeholder="Last" />
+                                    <hr class="section-divider">
+                                    <h3>Edit Profile Picture</h3>
+                                    <input type="file" name="media" accept="image/gif, image/jpeg, image/jpg, image/png" class="file-input js-tooltip" id="imgInp">
+                                    <input type="hidden" value="{{user.username}}" name="user_id"/>
+                                </div>
+                            </div>
+                            <div class="secondary-info">
+                                <div class="flex"><span>Username: </span><input type="text" value="{{user.username}}" name="username"/></div>
+                                <div class="flex"><span>Email: </span><input type="email" value="{{user.email}}" name="email"/></div>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Bio: <input type="text" value="{{profile.bio}}" name="bio"/></p>
+                            <p>Location: <input type="text" value="{{profile.livesin}}" name="livesin"/></p>
+                            <button id="settings-submit" type="submit"  value="Submit">Submit</button>
+                        </div>
+                    </div>
                 </form>
-                <hr/>
-                <li>
-                    <span><a href=/password-reset/>Click to change password. </a></span>
-                </li>
-                <hr/>
-            </ul>
-            <div class="deleteacc">
-                <a href=/delete/>Click here to delete your account.</a>
+            <div class="delete-reset">
+                <p><a href=/password-reset/>Click to change password.</a></p>
+                <p><a href=/delete/>Click here to delete your account.</a></p>
             </div>
         </div>
     </div>

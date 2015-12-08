@@ -5,7 +5,7 @@
 {% include 'head.html' %}
 
 <head>
-	<title>{{user.username}}'s Profile</title>
+	<title>{{profile.username}}'s Profile</title>
 </head>
 <body>
     {% include 'nav.html' %}
@@ -14,7 +14,7 @@
 			<div class="profile-info flex">
 				<div class="profile-image" style="background-image:url({{author.image|cut:'memorylane'}})"></div>
 				<div class="profile-header">
-					<a href=/profile-mod/><h1>{{author.first_name}} {{author.last_name}}</h1></a><br/>
+					<h1>{{user.first_name}} {{user.last_name}}</h1><br/>
 					<a href=/newpost_new/><h3>@{{author.username}}</h3></a>
 					<div class="bio">
 						<p id="currentBio">{{author.bio}}</p>
