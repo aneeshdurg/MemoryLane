@@ -150,7 +150,7 @@ def location(request, location):
 
 def settingssubmit(request):
     profile = get_object_or_404(UserProfile, username=request.user.username)
-    number=profile.id
+    number=request.user.id
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
     if request.method == 'POST':
@@ -244,8 +244,8 @@ def timeline(request):
 def profilemod(request, authorProfile_id):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
-    user = get_object_or_404(User, pk=authorProfile_id)
-    author = get_object_or_404(UserProfile, pk=authorProfile_id)
+    user = get_object_or_404(User, id=authorProfile_id)
+    author = get_object_or_404(UserProfile, username=user.username)
     username = request.user.username
     first_name = user.first_name
     last_name = user.last_name
