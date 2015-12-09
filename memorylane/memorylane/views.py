@@ -78,6 +78,7 @@ def post(request, memory_id):
     memory = get_object_or_404(Memory, pk=memory_id)
     author = get_object_or_404(User, username=memory.author)
     authorProfile = get_object_or_404(UserProfile, username=memory.author)
+    profile = get_object_or_404(UserProfile, username=request.user.username)
     location = memory.location
     gmaps = googlemaps.Client(key="AIzaSyCdgUowprALYpEowr3eIYlKq_8M0ldb6-I")
     geocode_result = gmaps.geocode(location)
@@ -85,12 +86,17 @@ def post(request, memory_id):
     lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
     memories = Memory.objects.filter(lat=lat).filter(lng=lng)
     authorProfileImages=[]
+    authorProfiles=[]
+    authors=[]
     for m in memories:
-        authorProfile = get_object_or_404(UserProfile, username=m.author)
-        authorProfileImages.append(authorProfile.image)
-    link=zip(memories, authorProfileImages)
+        aa = get_object_or_404(User, username=m.author)
+        a = get_object_or_404(UserProfile, username=m.author)
+        authorProfileImages.append(a.image)
+        authorProfiles.append(a)
+        authors.append(aa)
+    link=zip(memories, authorProfileImages, authorProfiles, authors)
     all_friends = Friend.objects.friends(request.user)
-    return render(request, 'post.html', {'memory': memory, 'author': author, 'authorProfile': authorProfile, 'image' : memory.image.name[10:], 'memories': memories, 'all_friends': all_friends, 'link': link})
+    return render(request, 'post.html', {'memory': memory, 'author': author, 'authorProfile': authorProfile, 'image' : memory.image.name[10:], 'memories': memories, 'all_friends': all_friends, 'link': link, 'profile': profile})
 
 def newpost(request):
     if not request.user.is_authenticated():
@@ -102,7 +108,8 @@ def newpost_new(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
     username = request.user.username
-    return render(request, 'newpost_new.html', {"username": username})
+    profile = get_object_or_404(UserProfile, username=request.user.username)
+    return render(request, 'newpost_new.html', {"username": username, "profile": profile})
 
 def newpostsubmit(request):
     if not request.user.is_authenticated():
@@ -125,24 +132,32 @@ def newpostsubmit(request):
     return HttpResponse(message)
 
 def search(request):
-    location = request.GET[u'q']
-    gmaps = googlemaps.Client(key="AIzaSyCdgUowprALYpEowr3eIYlKq_8M0ldb6-I")
-    geocode_result = gmaps.geocode(location)
-    lat = geocode_result[0]['geometry']['bounds']['northeast']['lat']
-    lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
-    memories = Memory.objects.filter(lat=lat).filter(lng=lng)
-    return render(request, "location.html", {"memories": memories, "location": location})
+    l = request.GET[u'q']
+    return location(request, l)
 
 def location(request, location):
     location = location.replace("+"," ")
+    profile = get_object_or_404(UserProfile, username=request.user.username)
     gmaps = googlemaps.Client(key="AIzaSyCdgUowprALYpEowr3eIYlKq_8M0ldb6-I")
     geocode_result = gmaps.geocode(location)
     lat = geocode_result[0]['geometry']['bounds']['northeast']['lat']
     lng = geocode_result[0]['geometry']['bounds']['northeast']['lng']
+    authorProfileImages=[]
+    authorProfiles=[]
+    authors=[]
     memories = Memory.objects.filter(lat=lat).filter(lng=lng)
-    return render(request, "location.html", {"memories": memories, "location": location, "lat": lat, "lng": lng})
+    for m in memories:
+        aa=get_object_or_404(User, username=m.author)
+        a = get_object_or_404(UserProfile, username=m.author)
+        authorProfileImages.append(a.image)
+        authorProfiles.append(a)
+        authors.append(aa)
+    link=zip(memories, authorProfileImages, authorProfiles, authors)
+    return render(request, "location.html", {"memories": memories, "location": location, "lat": lat, "lng": lng, "profile": profile, "link": link})
 
 def settingssubmit(request):
+    profile = get_object_or_404(UserProfile, username=request.user.username)
+    number=request.user.id
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
     if request.method == 'POST':
@@ -157,7 +172,7 @@ def settingssubmit(request):
             profile.bio = request.POST['bio']
             profile.save()    
             request.user.save()  
-        return HttpResponseRedirect('/profile-mod/')
+        return profilemod(request, number)
     else:
         message = 'Please enter the location'
     return HttpResponse(message), HttpResponseRedirect('/account/')
@@ -222,25 +237,32 @@ def timeline(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
     user = request.user
+    profile = get_object_or_404(UserProfile, username=request.user.username)
     memories = Memory.objects.all()
     authorProfileImages=[]
+    authorProfiles=[]
+    authors=[]
     for memory in memories:
+        author = get_object_or_404(User, username=memory.author)
         authorProfile = get_object_or_404(UserProfile, username=memory.author)
+        authorProfiles.append(authorProfile)
         authorProfileImages.append(authorProfile.image)
-    link=zip(memories, authorProfileImages)
-    return render(request, 'timeline.html', {"memories": memories, "user": user, "link": link})
+        authors.append(author)
+    link=zip(memories, authorProfileImages, authorProfiles, authors)
+    return render(request, 'timeline.html', {"memories": memories, "user": user, "link": link, "profile": profile })
 
-def profilemod(request):
+def profilemod(request, authorProfile_id):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
-    author = get_object_or_404(UserProfile, username=request.user.username)
+    user = get_object_or_404(User, id=authorProfile_id)
+    author = get_object_or_404(UserProfile, username=user.username)
     username = request.user.username
-    first_name = request.user.first_name
-    last_name = request.user.last_name
-    memories = Memory.objects.filter(author=request.user.username)
-    user = request.user
+    first_name = user.first_name
+    last_name = user.last_name
+    memories = Memory.objects.filter(author=author.username)
+    #user = request.user
     profile = get_object_or_404(UserProfile, username=request.user.username)
-    return render(request, 'profile-mod.html', {"user": user, "memories": memories, "profile": profile })
+    return render(request, 'profile-mod.html', {"user": user, "memories": memories, "profile": profile,"author": author })
 
 def getUsers(request):
     users = User.objects.all()

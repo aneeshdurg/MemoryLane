@@ -5,19 +5,19 @@
 {% include 'head.html' %}
 
 <head>
-	<title>{{user.username}}'s Profile</title>
+	<title>{{profile.username}}'s Profile</title>
 </head>
 <body>
-	{% include 'nav.html' %}
+    {% include 'nav.html' %}
 	<div class="gridContainer flex profile">
 		<div class="main">
 			<div class="profile-info flex">
-				<div class="profile-image" style="background-image:url({{profile.image|cut:'memorylane'}})"></div>
+				<div class="profile-image" style="background-image:url({{author.image|cut:'memorylane'}})"></div>
 				<div class="profile-header">
-					<a href=/profile-mod/><h1>{{user.first_name}} {{user.last_name}}</h1></a><br/>
-					<a href=/newpost/><h3>@{{user.username}}</h3></a>
+					<h1>{{user.first_name}} {{user.last_name}}</h1><br/>
+					<a href=/newpost_new/><h3>@{{author.username}}</h3></a>
 					<div class="bio">
-						<p id="currentBio">{{profile.bio}}</p>
+						<p id="currentBio">{{author.bio}}</p>
 					</div>
 				</div>
 				<div class="add-new-memory">

@@ -8,14 +8,14 @@
 </head>
 
 <body>
-	{% include 'nav.html' %}
+    {% include 'nav.html' %}
 		<!-- div to hold all elements of a single timeline post -->
 	<div class="gridContainer flex">
 		<div class="main">
-		{% for memory, authorProfileImage in link reversed %}
+		{% for memory, authorProfileImage, authorProfile, author in link reversed %}
 			<div class="memory">
 				<div class="author-info">
-					<a href=/profile-mod/>
+					<a href=/profile-mod/{{author.id}}>
 						<img src="{{authorProfileImage|cut:'memorylane'}}" class="author-image">
 						<p class="author-name">{{memory.author}}</p>
 					</a>

@@ -26,11 +26,11 @@
         <div class="memory-body">
             <h2 id="more-memories">Memories about {{location}}</h2>    
             {% with name=memory.name%}
-            {% for memory in memories reversed %}
+            {% for memory, authorProfileImage, authorProfile, aa in link reversed %}
                 <div class="memory">
                     <div class="author-info">
-                        <a href=/profile-mod/>
-                            <img src="{{memory.author_image|cut:'memorylane'}}" class="author-image">
+                        <a href=/profile-mod/{{aa.id}}>
+                            <img src="{{authorProfileImage|cut:'memorylane'}}" class="author-image">
                             <p class="author-name">{{memory.author}}</p>
                         </a>
                     </div>
