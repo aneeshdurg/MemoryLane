@@ -108,7 +108,8 @@ def newpost_new(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login/')
     username = request.user.username
-    return render(request, 'newpost_new.html', {"username": username})
+    profile = get_object_or_404(UserProfile, username=request.user.username)
+    return render(request, 'newpost_new.html', {"username": username, "profile": profile})
 
 def newpostsubmit(request):
     if not request.user.is_authenticated():
